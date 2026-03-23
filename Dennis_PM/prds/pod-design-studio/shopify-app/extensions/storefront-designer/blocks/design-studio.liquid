@@ -1,0 +1,459 @@
+{%- comment -%}
+  POD Design Studio - Storefront Block
+  
+  This block adds a customizable design studio to product pages.
+  Merchants can add this block via the theme editor.
+  
+  Usage:
+  1. Go to Online Store > Themes > Customize
+  2. Navigate to a product page
+  3. Add "POD Design Studio" block to the product section
+{%- endcomment -%}
+
+{%- liquid
+  # Get product design configuration from metafields
+  assign design_config = product.metafields.pod_design.configuration.value
+  
+  # Check if design is enabled for this product
+  assign design_enabled = false
+  if design_config and design_config.enabled
+    assign design_enabled = true
+  endif
+  
+  # Parse configuration
+  assign product_type = design_config.productType | default: 'tshirt'
+  assign print_areas = design_config.printAreas | default: '[]'
+  assign colors = design_config.colors | default: '[]'
+  assign sizes = design_config.sizes | default: '[]'
+  assign customization_fee = design_config.customizationFee | default: 5.00
+-%}
+
+{%- if design_enabled -%}
+  <div id="pod-design-studio" class="pod-design-studio" data-product-id="{{ product.id }}">
+    <div class="pod-design-studio__container">
+      
+      {%- comment -%} Header {%- endcomment -%}
+      <div class="pod-design-studio__header">
+        <h2 class="pod-design-studio__title">{{ block.settings.title | default: 'Customize Your Design' }}</h2>
+        <p class="pod-design-studio__subtitle">Upload your artwork or add text to create a unique {{ product.title }}</p>
+      </div>
+      
+      {%- comment -%} Main Design Area {%- endcomment -%}
+      <div class="pod-design-studio__main">
+        
+        {%- comment -%} Canvas Area {%- endcomment -%}
+        <div class="pod-design-studio__canvas-wrapper">
+          <div class="pod-design-studio__canvas-container">
+            <canvas id="pod-canvas" class="pod-design-studio__canvas"></canvas>
+            
+            {%- comment -%} Product Mockup Overlay {%- endcomment -%}
+            <div class="pod-design-studio__mockup">
+              {%- if product.featured_image -%}
+                <img 
+                  src="{{ product.featured_image | image_url: width: 600 }}" 
+                  alt="{{ product.title }}"
+                  class="pod-design-studio__mockup-image"
+                  id="pod-mockup-image"
+                >
+              {%- else -%}
+                <div class="pod-design-studio__mockup-placeholder">
+                  {{ 'product-1' | placeholder_svg_tag }}
+                </div>
+              {%- endif -%}
+            </div>
+            
+            {%- comment -%} Print Area Guides {%- endcomment -%}
+            <div class="pod-design-studio__guides" id="pod-guides">
+              {%- for area in print_areas -%}
+                {%- if area.enabled -%}
+                  <div 
+                    class="pod-design-studio__guide-area"
+                    data-area-id="{{ area.id }}"
+                    style="left: {{ area.x }}px; top: {{ area.y }}px; width: {{ area.width }}px; height: {{ area.height }}px;"
+                  >
+                    <span class="pod-design-studio__guide-label">{{ area.name }}</span>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+          
+          {%- comment -%} Canvas Toolbar {%- endcomment -%}
+          <div class="pod-design-studio__toolbar">
+            <button type="button" class="pod-design-studio__tool-btn" data-tool="select" title="Select">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/>
+              </svg>
+            </button>
+            <button type="button" class="pod-design-studio__tool-btn" data-tool="move" title="Move">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 9l-3 3 3 3M9 5l3-3 3 3M19 9l3 3-3 3M9 19l3 3 3-3"/>
+              </svg>
+            </button>
+            <button type="button" class="pod-design-studio__tool-btn" data-tool="zoom-in" title="Zoom In">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/>
+              </svg>
+            </button>
+            <button type="button" class="pod-design-studio__tool-btn" data-tool="zoom-out" title="Zoom Out">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M8 11h6"/>
+              </svg>
+            </button>
+            <div class="pod-design-studio__toolbar-divider"></div>
+            <button type="button" class="pod-design-studio__tool-btn" data-tool="undo" title="Undo">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 7v6h6M3 13l9-9 9 9"/>
+              </svg>
+            </button>
+            <button type="button" class="pod-design-studio__tool-btn" data-tool="redo" title="Redo">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 7v6h-6M21 13l-9-9-9 9"/>
+              </svg>
+            </button>
+            <button type="button" class="pod-design-studio__tool-btn pod-design-studio__tool-btn--danger" data-tool="delete" title="Delete">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        {%- comment -%} Sidebar Controls {%- endcomment -%}
+        <div class="pod-design-studio__sidebar">
+          
+          {%- comment -%} Tabs {%- endcomment -%}
+          <div class="pod-design-studio__tabs">
+            <button type="button" class="pod-design-studio__tab active" data-tab="upload">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+              </svg>
+              Upload
+            </button>
+            <button type="button" class="pod-design-studio__tab" data-tab="text">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 7V4h16v3M9 20h6M12 4v16"/>
+              </svg>
+              Text
+            </button>
+            <button type="button" class="pod-design-studio__tab" data-tab="layers">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/>
+              </svg>
+              Layers
+            </button>
+          </div>
+          
+          {%- comment -%} Tab Content: Upload {%- endcomment -%}
+          <div class="pod-design-studio__tab-content active" data-tab-content="upload">
+            <div class="pod-design-studio__upload-zone" id="pod-upload-zone">
+              <input 
+                type="file" 
+                id="pod-file-input" 
+                class="pod-design-studio__file-input"
+                accept="image/png,image/jpeg,image/svg+xml"
+                multiple
+              >
+              <div class="pod-design-studio__upload-content">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+                <p class="pod-design-studio__upload-text">
+                  <strong>Click to upload</strong> or drag and drop
+                </p>
+                <p class="pod-design-studio__upload-hint">
+                  PNG, JPG, SVG up to 20MB
+                </p>
+              </div>
+            </div>
+            
+            <div class="pod-design-studio__specs">
+              <h4>Print Specifications</h4>
+              <ul>
+                <li>Min resolution: <strong>150 DPI</strong> (300 recommended)</li>
+                <li>Max file size: <strong>20MB</strong></li>
+                <li>Format: <strong>PNG 300dpi + PDF</strong></li>
+                <li>Technology: <strong>DTG Direct-to-Garment</strong></li>
+              </ul>
+            </div>
+          </div>
+          
+          {%- comment -%} Tab Content: Text {%- endcomment -%}
+          <div class="pod-design-studio__tab-content" data-tab-content="text">
+            <div class="pod-design-studio__text-controls">
+              <div class="pod-design-studio__form-group">
+                <label>Text Content</label>
+                <textarea 
+                  id="pod-text-content" 
+                  class="pod-design-studio__textarea"
+                  placeholder="Enter your text here..."
+                  rows="3"
+                ></textarea>
+              </div>
+              
+              <div class="pod-design-studio__form-group">
+                <label>Font Family</label>
+                <select id="pod-font-family" class="pod-design-studio__select">
+                  <option value="Arial">Arial</option>
+                  <option value="Helvetica">Helvetica</option>
+                  <option value="Times New Roman">Times New Roman</option>
+                  <option value="Georgia">Georgia</option>
+                  <option value="Verdana">Verdana</option>
+                  <option value="Impact">Impact</option>
+                  <option value="Comic Sans MS">Comic Sans MS</option>
+                </select>
+              </div>
+              
+              <div class="pod-design-studio__form-row">
+                <div class="pod-design-studio__form-group">
+                  <label>Font Size</label>
+                  <input 
+                    type="number" 
+                    id="pod-font-size" 
+                    class="pod-design-studio__input"
+                    value="24"
+                    min="8"
+                    max="200"
+                  >
+                </div>
+                <div class="pod-design-studio__form-group">
+                  <label>Color</label>
+                  <input 
+                    type="color" 
+                    id="pod-text-color" 
+                    class="pod-design-studio__color-input"
+                    value="#000000"
+                  >
+                </div>
+              </div>
+              
+              <div class="pod-design-studio__form-group">
+                <label>Text Style</label>
+                <div class="pod-design-studio__button-group">
+                  <button type="button" class="pod-design-studio__style-btn active" data-style="bold">
+                    <strong>B</strong>
+                  </button>
+                  <button type="button" class="pod-design-studio__style-btn" data-style="italic">
+                    <em>I</em>
+                  </button>
+                  <button type="button" class="pod-design-studio__style-btn" data-style="underline">
+                    <u>U</u>
+                  </button>
+                </div>
+              </div>
+              
+              <button type="button" class="pod-design-studio__btn pod-design-studio__btn--primary" id="pod-add-text">
+                Add Text
+              </button>
+            </div>
+          </div>
+          
+          {%- comment -%} Tab Content: Layers {%- endcomment -%}
+          <div class="pod-design-studio__tab-content" data-tab-content="layers">
+            <div class="pod-design-studio__layers-list" id="pod-layers-list">
+              <p class="pod-design-studio__empty-state">No layers yet. Add images or text to get started.</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      {%- comment -%} Product Options {%- endcomment -%}
+      <div class="pod-design-studio__options">
+        <h3>Product Options</h3>
+        
+        {%- comment -%} Color Selection {%- endcomment -%}
+        <div class="pod-design-studio__option-group">
+          <label class="pod-design-studio__option-label">Color</label>
+          <div class="pod-design-studio__color-options">
+            {%- for color in colors -%}
+              {%- if color.available -%}
+                <button 
+                  type="button"
+                  class="pod-design-studio__color-btn{% if forloop.first %} active{% endif %}"
+                  data-color="{{ color.hex }}"
+                  data-color-name="{{ color.name }}"
+                  style="background-color: {{ color.hex }};{% if color.hex == '#ffffff' %} border-color: #ddd;{% endif %}"
+                  title="{{ color.name }}"
+                >
+                  <span class="pod-design-studio__color-check">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{% if color.hex == '#ffffff' %}#333{% else %}white{% endif %}" stroke-width="3">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                  </span>
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+        
+        {%- comment -%} Size Selection {%- endcomment -%}
+        <div class="pod-design-studio__option-group">
+          <label class="pod-design-studio__option-label">Size</label>
+          <div class="pod-design-studio__size-options">
+            {%- for size in sizes -%}
+              <button 
+                type="button"
+                class="pod-design-studio__size-btn{% if size == 'M' %} active{% endif %}"
+                data-size="{{ size }}"
+              >
+                {{ size }}
+              </button>
+            {%- endfor -%}
+          </div>
+        </div>
+        
+        {%- comment -%} Quantity {%- endcomment -%}
+        <div class="pod-design-studio__option-group">
+          <label class="pod-design-studio__option-label">Quantity</label>
+          <div class="pod-design-studio__quantity">
+            <button type="button" class="pod-design-studio__qty-btn" data-action="decrease">-</button>
+            <input 
+              type="number" 
+              class="pod-design-studio__qty-input" 
+              value="1" 
+              min="1"
+              max="100"
+              id="pod-quantity"
+            >
+            <button type="button" class="pod-design-studio__qty-btn" data-action="increase">+</button>
+          </div>
+        </div>
+        
+        {%- comment -%} Pricing {%- endcomment -%}
+        <div class="pod-design-studio__pricing">
+          <div class="pod-design-studio__price-row">
+            <span>Base Price</span>
+            <span>{{ product.price | money }}</span>
+          </div>
+          <div class="pod-design-studio__price-row">
+            <span>Customization Fee</span>
+            <span>{{ customization_fee | money }}</span>
+          </div>
+          <div class="pod-design-studio__price-total">
+            <span>Total</span>
+            <span id="pod-total-price" data-base-price="{{ product.price }}" data-fee="{{ customization_fee }}">
+              {{ product.price | plus: customization_fee | money }}
+            </span>
+          </div>
+        </div>
+        
+        {%- comment -%} Add to Cart {%- endcomment -%}
+        <button 
+          type="button" 
+          class="pod-design-studio__add-to-cart"
+          id="pod-add-to-cart"
+          data-product-id="{{ product.id }}"
+          data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+        >
+          <span class="pod-design-studio__cart-text">Add to Cart</span>
+          <span class="pod-design-studio__cart-price">{{ product.price | plus: customization_fee | money }}</span>
+        </button>
+        
+        {%- comment -%} Hidden inputs for cart {%- endcomment -%}
+        <input type="hidden" id="pod-design-data" name="properties[_pod_design_data]" value="">
+        <input type="hidden" id="pod-design-preview" name="properties[_pod_design_preview]" value="">
+        <input type="hidden" id="pod-print-files" name="properties[_pod_print_files]" value="">
+      </div>
+      
+    </div>
+  </div>
+  
+  {%- comment -%} Load Design Studio Scripts {%- endcomment -%}
+  <script src="{{ 'pod-design-studio.js' | asset_url }}" defer></script>
+  
+  {%- comment -%} Pass configuration to JavaScript {%- endcomment -%}
+  <script>
+    window.PODDesignStudio = window.PODDesignStudio || {};
+    window.PODDesignStudio.config = {
+      productId: '{{ product.id }}',
+      productHandle: '{{ product.handle }}',
+      productType: '{{ product_type }}',
+      basePrice: {{ product.price }},
+      customizationFee: {{ customization_fee }},
+      printAreas: {{ print_areas | json }},
+      colors: {{ colors | json }},
+      sizes: {{ sizes | json }},
+      currency: '{{ shop.currency }}',
+      moneyFormat: '{{ shop.money_format | escape }}'
+    };
+  </script>
+  
+{%- else -%}
+  {%- comment -%} Design not enabled for this product {%- endcomment -%}
+  {%- if request.design_mode -%}
+    <div class="pod-design-studio__not-enabled">
+      <p>POD Design Studio is not enabled for this product.</p>
+      <p>Enable it in the Shopify Admin > Products > {Product Name} > POD Design Studio block.</p>
+    </div>
+  {%- endif -%}
+{%- endif -%}
+
+{%- comment -%} Schema for theme editor {%- endcomment -%}
+{% schema %}
+{
+  "name": "POD Design Studio",
+  "target": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Customize Your Design"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Upload your artwork or add text to create a unique design"
+    },
+    {
+      "type": "header",
+      "content": "Canvas Settings"
+    },
+    {
+      "type": "range",
+      "id": "canvas_width",
+      "label": "Canvas Width",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "default": 500,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "canvas_height",
+      "label": "Canvas Height",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "default": 600,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Primary Color",
+      "default": "#1976D2"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f5f5f5"
+    }
+  ],
+  "presets": [
+    {
+      "name": "POD Design Studio"
+    }
+  ]
+}
+{% endschema %}

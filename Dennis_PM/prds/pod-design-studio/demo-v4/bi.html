@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BI Cost Analysis - POD Design Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.6.15/dist/vuetify.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Roboto', sans-serif; background: #f5f5f5; }
+    .chart-container { height: 300px; position: relative; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      <!-- Navigation Drawer -->
+      <v-navigation-drawer v-model="drawer" app color="#1a1a2e" dark width="260">
+        <div class="pa-4">
+          <div class="d-flex align-center">
+            <span class="font-weight-light white--text" style="font-size: 20px">POD</span>
+            <span class="white--text" style="font-weight: 500; font-size: 20px">BI</span>
+          </div>
+          <div class="caption white--text mt-1">Cost Analysis</div>
+        </div>
+        <v-divider class="my-2" dark></v-divider>
+        <v-list dense nav>
+          <v-list-item link @click="currentView = 'overview'">
+            <v-list-item-icon><v-icon>mdi-view-dashboard</v-icon></v-list-item-icon>
+            <v-list-item-content><v-list-item-title>Overview</v-list-item-title></v-list-item-content>
+          </v-list-item>
+          <v-list-item link @click="currentView = 'revenue'">
+            <v-list-item-icon><v-icon>mdi-currency-usd</v-icon></v-list-item-icon>
+            <v-list-item-content><v-list-item-title>Revenue</v-list-item-title></v-list-item-content>
+          </v-list-item>
+          <v-list-item link @click="currentView = 'costs'">
+            <v-list-item-icon><v-icon>mdi-chart-line</v-icon></v-list-item-icon>
+            <v-list-item-content><v-list-item-title>Costs</v-list-item-title></v-list-item-content>
+          </v-list-item>
+          <v-list-item link @click="currentView = 'margins'">
+            <v-list-item-icon><v-icon>mdi-percent</v-icon></v-list-item-icon>
+            <v-list-item-content><v-list-item-title>Margins</v-list-item-title></v-list-item-content>
+          </v-list-item>
+          <v-list-item link @click="currentView = 'reports'">
+            <v-list-item-icon><v-icon>mdi-file-document</v-icon></v-list-item-icon>
+            <v-list-item-content><v-list-item-title>Reports</v-list-item-title></v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+
+      <!-- App Bar -->
+      <v-app-bar app color="white" elevation="1">
+        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-toolbar-title class="text-capitalize">POD BI - {{ currentView }}</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-chip small outlined color="pink" class="mr-2">POD V4.0</v-chip>
+        <v-menu>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon v-bind="attrs" v-on="on">
+              <v-avatar size="32" color="pink">
+                <span class="white--text caption">BI</span>
+              </v-avatar>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item>
+              <v-list-item-icon><v-icon>mdi-account</v-icon></v-list-item-icon>
+              <v-list-item-title>Profile</v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-icon><v-icon>mdi-logout</v-icon></v-list-item-icon>
+              <v-list-item-title>Logout</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </v-app-bar>
+
+      <v-main>
+        <v-container fluid class="pa-4">
+          <!-- Date Range Selector -->
+          <v-row class="mb-4">
+            <v-col cols="12" md="8">
+              <v-btn-toggle v-model="dateRange" mandatory dense>
+                <v-btn small value="today">Today</v-btn>
+                <v-btn small value="week">This Week</v-btn>
+                <v-btn small value="month">This Month</v-btn>
+                <v-btn small value="quarter">This Quarter</v-btn>
+                <v-btn small value="year">This Year</v-btn>
+              </v-btn-toggle>
+            </v-col>
+            <v-col cols="12" md="4" class="text-right">
+              <v-btn color="primary" outlined>
+                <v-icon left>mdi-download</v-icon>
+                Export Report
+              </v-btn>
+            </v-col>
+          </v-row>
+
+          <!-- Overview View -->
+          <v-row v-if="currentView === 'overview'">
+            <!-- Summary Cards -->
+            <v-col cols="12" md="3">
+              <v-card>
+                <v-card-text class="text-center">
+                  <div class="text-h4 text-success">${{ stats.totalRevenue }}</div>
+                  <div class="text-body-2 grey--text">Total POD Revenue</div>
+                  <v-chip x-small color="success" class="mt-1">+12.5%</v-chip>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="12" md="3">
+              <v-card>
+                <v-card-text class="text-center">
+                  <div class="text-h4 text-primary">${{ stats.totalCost }}</div>
+                  <div class="text-body-2 grey--text">Total POD Cost</div>
+                  <v-chip x-small color="error" class="mt-1">+8.2%</v-chip>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="12" md="3">
+              <v-card>
+                <v-card-text class="text-center">
+                  <div class="text-h4 text-warning">${{ stats.grossProfit }}</div>
+                  <div class="text-body-2 grey--text">Gross Profit</div>
+                  <v-chip x-small color="success" class="mt-1">+15.3%</v-chip>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="12" md="3">
+              <v-card>
+                <v-card-text class="text-center">
+                  <div class="text-h4 text-info">{{ stats.margin }}%</div>
+                  <div class="text-body-2 grey--text">Gross Margin</div>
+                  <v-chip x-small color="success" class="mt-1">+2.1%</v-chip>
+                </v-card-text>
+              </v-card>
+            </v-col>
+
+            <!-- Revenue Chart -->
+            <v-col cols="12" md="8">
+              <v-card>
+                <v-card-title>Revenue Trend</v-card-title>
+                <v-card-text>
+                  <div class="chart-container d-flex align-center justify-center grey lighten-2">
+                    <v-icon size="64" color="grey">mdi-chart-line</v-icon>
+                    <span class="ml-2 grey--text">Revenue Trend Chart (Monthly)</span>
+                  </div>
+                </v-card-text>
+              </v-card>
+            </v-col>
+
+            <!-- Top Products -->
+            <v-col cols="12" md="4">
+              <v-card>
+                <v-card-title>Top POD Products</v-card-title>
+                <v-list dense>
+                  <v-list-item v-for="product in topProducts" :key="product.name">
+                    <v-list-item-content>
+                      <v-list-item-title>{{ product.name }}</v-list-item-title>
+                    </v-list-item-content>
+                    <v-list-item-action>
+                      <span class="font-weight-bold">${{ product.revenue }}</span>
+                    </v-list-item-action>
+                  </v-list-item>
+                </v-list>
+              </v-card>
+            </v-col>
+
+            <!-- Key Metrics -->
+            <v-col cols="12">
+              <v-card>
+                <v-card-title>Key POD Metrics</v-card-title>
+                <v-card-text>
+                  <v-row>
+                    <v-col cols="12" md="3">
+                      <div class="text-h5">{{ metrics.totalOrders }}</div>
+                      <div class="grey--text">Total Orders</div>
+                    </v-col>
+                    <v-col cols="12" md="3">
+                      <div class="text-h5">{{ metrics.avgOrderValue }}</div>
+                      <div class="grey--text">Avg Order Value</div>
+                    </v-col>
+                    <v-col cols="12" md="3">
+                      <div class="text-h5">{{ metrics.reprintRate }}%</div>
+                      <div class="grey--text">Reprint Rate</div>
+                    </v-col>
+                    <v-col cols="12" md="3">
+                      <div class="text-h5">{{ metrics.fulfillmentTime }}</div>
+                      <div class="grey--text">Avg Fulfillment Time</div>
+                    </v-col>
+                  </v-row>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <!-- Revenue View -->
+          <v-row v-if="currentView === 'revenue'">
+            <v-col cols="12">
+              <v-card>
+                <v-card-title>POD Revenue Analysis</v-card-title>
+                <v-card-text>
+                  <v-row>
+                    <v-col cols="12" md="6">
+                      <v-card outlined>
+                        <v-card-title class="text-subtitle-1">Revenue by Merchant</v-card-title>
+                        <v-simple-table>
+                          <thead>
+                            <tr>
+                              <th>Merchant</th>
+                              <th>Orders</th>
+                              <th>Revenue</th>
+                              <th>Share</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr v-for="m in merchantRevenue" :key="m.name">
+                              <td>{{ m.name }}</td>
+                              <td>{{ m.orders }}</td>
+                              <td>${{ m.revenue }}</td>
+                              <td>{{ m.share }}%</td>
+                            </tr>
+                          </tbody>
+                        </v-simple-table>
+                      </v-card>
+                    </v-col>
+                    <v-col cols="12" md="6">
+                      <v-card outlined>
+                        <v-card-title class="text-subtitle-1">Revenue by Product</v-card-title>
+                        <v-simple-table>
+                          <thead>
+                            <tr>
+                              <th>Product</th>
+                              <th>Qty</th>
+                              <th>Revenue</th>
+                              <th>Avg Price</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr v-for="p in productRevenue" :key="p.name">
+                              <td>{{ p.name }}</td>
+                              <td>{{ p.qty }}</td>
+                              <td>${{ p.revenue }}</td>
+                              <td>${{ p.avgPrice }}</td>
+                            </tr>
+                          </tbody>
+                        </v-simple-table>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <!-- Costs View -->
+          <v-row v-if="currentView === 'costs'">
+            <v-col cols="12">
+              <v-card>
+                <v-card-title>POD Cost Analysis</v-card-title>
+                <v-card-text>
+                  <v-row>
+                    <v-col cols="12" md="6">
+                      <v-card outlined>
+                        <v-card-title class="text-subtitle-1">Cost Breakdown</v-card-title>
+                        <v-simple-table>
+                          <thead>
+                            <tr>
+                              <th>Cost Item</th>
+                              <th>Amount</th>
+                              <th>% of Cost</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>DTG Printing</td>
+                              <td>${{ costs.dtg }}</td>
+                              <td>62.5%</td>
+                            </tr>
+                            <tr>
+                              <td>Handling Fee</td>
+                              <td>${{ costs.handling }}</td>
+                              <td>25.0%</td>
+                            </tr>
+                            <tr>
+                              <td>Blank SKU</td>
+                              <td>${{ costs.blank }}</td>
+                              <td>12.5%</td>
+                            </tr>
+                            <tr class="font-weight-bold">
+                              <td>Total</td>
+                              <td>${{ costs.total }}</td>
+                              <td>100%</td>
+                            </tr>
+                          </tbody>
+                        </v-simple-table>
+                      </v-card>
+                    </v-col>
+                    <v-col cols="12" md="6">
+                      <v-card outlined>
+                        <v-card-title class="text-subtitle-1">Cost by Warehouse</v-card-title>
+                        <v-simple-table>
+                          <thead>
+                            <tr>
+                              <th>Warehouse</th>
+                              <th>Jobs</th>
+                              <th>Cost</th>
+                              <th>Avg/Job</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr v-for="w in warehouseCosts" :key="w.name">
+                              <td>{{ w.name }}</td>
+                              <td>{{ w.jobs }}</td>
+                              <td>${{ w.cost }}</td>
+                              <td>${{ w.avg }}</td>
+                            </tr>
+                          </tbody>
+                        </v-simple-table>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <!-- Margins View -->
+          <v-row v-if="currentView === 'margins'">
+            <v-col cols="12">
+              <v-card>
+                <v-card-title>Margin Analysis</v-card-title>
+                <v-card-text>
+                  <v-row>
+                    <v-col cols="12" md="6">
+                      <v-card outlined>
+                        <v-card-title class="text-subtitle-1">Gross Margin by Product</v-card-title>
+                        <v-simple-table>
+                          <thead>
+                            <tr>
+                              <th>Product</th>
+                              <th>Revenue</th>
+                              <th>Cost</th>
+                              <th>Margin</th>
+                              <th>%</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr v-for="p in marginProducts" :key="p.name">
+                              <td>{{ p.name }}</td>
+                              <td>${{ p.revenue }}</td>
+                              <td>${{ p.cost }}</td>
+                              <td>${{ p.margin }}</td>
+                              <td>
+                                <v-chip x-small :color="p.percent >= 30 ? 'success' : 'warning'">{{ p.percent }}%</v-chip>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </v-simple-table>
+                      </v-card>
+                    </v-col>
+                    <v-col cols="12" md="6">
+                      <v-card outlined>
+                        <v-card-title class="text-subtitle-1">Margin Trend</v-card-title>
+                        <v-card-text>
+                          <div class="chart-container d-flex align-center justify-center grey lighten-2" style="height: 200px;">
+                            <v-icon size="48" color="grey">mdi-chart-line</v-icon>
+                            <span class="ml-2 grey--text">Margin Trend Chart</span>
+                          </div>
+                        </v-card-text>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <!-- Reports View -->
+          <v-row v-if="currentView === 'reports'">
+            <v-col cols="12">
+              <v-card>
+                <v-card-title>Monthly Reports</v-card-title>
+                <v-card-text>
+                  <v-list>
+                    <v-list-item v-for="report in reports" :key="report.month">
+                      <v-list-item-icon>
+                        <v-icon>mdi-file-pdf-box</v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-content>
+                        <v-list-item-title>{{ report.month }} POD Cost Report</v-list-item-title>
+                        <v-list-item-subtitle>{{ report.date }}</v-list-item-subtitle>
+                      </v-list-item-content>
+                      <v-list-item-action>
+                        <v-btn icon><v-icon>mdi-download</v-icon></v-btn>
+                      </v-list-item-action>
+                    </v-list-item>
+                  </v-list>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-main>
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.6.15/dist/vuetify.min.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data: {
+        drawer: true,
+        currentView: 'overview',
+        dateRange: 'month',
+
+        stats: {
+          totalRevenue: 12450.80,
+          totalCost: 4980.32,
+          grossProfit: 7470.48,
+          margin: 60,
+        },
+
+        metrics: {
+          totalOrders: 523,
+          avgOrderValue: 23.80,
+          reprintRate: 3.2,
+          fulfillmentTime: '1.8 days',
+        },
+
+        topProducts: [
+          { name: 'Classic Tee', revenue: 5620 },
+          { name: 'Premium Tee', revenue: 3420 },
+          { name: 'Eco Tee', revenue: 2100 },
+          { name: 'Hoodie', revenue: 1310 },
+        ],
+
+        merchantRevenue: [
+          { name: 'My Store', orders: 245, revenue: 5860, share: 47 },
+          { name: 'Test Shop', orders: 156, revenue: 3120, share: 25 },
+          { name: 'Demo Store', orders: 122, revenue: 3470, share: 28 },
+        ],
+
+        productRevenue: [
+          { name: 'Classic Tee', qty: 312, revenue: 5620, avgPrice: 18.01 },
+          { name: 'Premium Tee', qty: 114, revenue: 3420, avgPrice: 30.00 },
+          { name: 'Eco Tee', qty: 97, revenue: 2100, avgPrice: 21.65 },
+        ],
+
+        costs: {
+          dtg: 3112.70,
+          handling: 1245.08,
+          blank: 622.54,
+          total: 4980.32,
+        },
+
+        warehouseCosts: [
+          { name: 'SG-ONT1', jobs: 420, cost: 4200, avg: 10.00 },
+          { name: 'SG-ONT2', jobs: 103, cost: 780.32, avg: 7.58 },
+        ],
+
+        marginProducts: [
+          { name: 'Classic Tee', revenue: 5620, cost: 2248, margin: 3372, percent: 60 },
+          { name: 'Premium Tee', revenue: 3420, cost: 1368, margin: 2052, percent: 60 },
+          { name: 'Eco Tee', revenue: 2100, cost: 840, margin: 1260, percent: 60 },
+        ],
+
+        reports: [
+          { month: 'March 2026', date: 'Generated on 2026-03-19' },
+          { month: 'February 2026', date: 'Generated on 2026-02-28' },
+          { month: 'January 2026', date: 'Generated on 2026-01-31' },
+        ],
+      },
+    });
+  </script>
+</body>
+</html>

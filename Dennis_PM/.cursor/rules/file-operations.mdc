@@ -1,0 +1,39 @@
+---
+description: 文件读写操作规范，防止长文件截断和低效查找
+alwaysApply: true
+---
+
+# 文件操作规范
+
+## 写文件
+
+- 预估内容超过150行：禁止用 Write 工具一次写入，改用 Shell PowerShell Add-Content 分段追加，每段不超过80行
+- 预估内容不超过150行：可直接用 Write 工具
+- 修改已有文件的局部内容：优先用 StrReplace 精确替换，不整体重写
+- 写入前若文件已存在：先 Read 确认当前内容，再决定 Write 还是 StrReplace
+
+分段写入示例：
+
+```powershell
+# 第一段用 Write 工具写入（文件默认 UTF-8）
+# 后续段用 Add-Content 追加
+Add-Content -Path 'path/to/file.md' -Value $nextChunk -Encoding UTF8
+```
+
+编码注意事项：
+- Add-Content 追加前，原文件必须是 UTF-8 编码，否则中文会乱码
+- 出现乱码时的补救方案：改用 Set-Content 整体重写加 -Encoding UTF8 参数，不要继续追加
+- Write 工具写入的文件默认 UTF-8，可以安全追加
+- 追加完成后用 Read 工具抽查末尾几行，确认无乱码
+
+## 读文件和查找内容
+
+- 已知关键词：先用 Grep 定位行号，再用 Read 的 offset+limit 精确读取，不全量读
+- 已知大概位置：Read 时指定 offset，每次读不超过50行
+- 未知内容结构：先 Read 前30行了解结构，再按需读对应章节
+- 禁止对超过200行的文件做无 offset 的全量 Read（除非必须了解全貌）
+
+## 大任务执行
+
+- 生成完整 PRD 等长文档：必须先输出分节计划，用户确认后逐节执行，每节单独写入
+- 单节内容超过150行：继续拆分为子节分段写入

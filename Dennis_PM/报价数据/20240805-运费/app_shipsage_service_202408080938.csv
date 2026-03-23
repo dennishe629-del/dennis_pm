@@ -1,0 +1,59 @@
+service_id,service_name,service_code,comments,hidden,disabled,deleted,deleted_at,created_at,created_by,updated_at,updated_by
+,USPS Ground Advantage-Shipping Fee-E1-20240805-CN-VIP-GroundAdvantage,GroundAdvantage,USPS Ground Advantage-Shipping Fee-E1-20240805-CN-VIP-GroundAdvantage,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,USPS Ground Advantage Plus-Shipping Fee-E1-20240805-CN-VIP-GroundAdvantage,GroundAdvantage,USPS Ground Advantage Plus-Shipping Fee-E1-20240805-CN-VIP-GroundAdvantage,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,USPS Ground Advantage-Shipping Fee-E2-20240805-CN-SVIP-GroundAdvantage,GroundAdvantage,USPS Ground Advantage-Shipping Fee-E2-20240805-CN-SVIP-GroundAdvantage,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,USPS Ground Advantage Plus-Shipping Fee-E2-20240805-CN-SVIP-GroundAdvantage,GroundAdvantage,USPS Ground Advantage Plus-Shipping Fee-E2-20240805-CN-SVIP-GroundAdvantage,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,USPS Ground Advantage-Shipping Fee-E3-20240805-CN-SVIP-Plus-GroundAdvantage,GroundAdvantage,USPS Ground Advantage-Shipping Fee-E3-20240805-CN-SVIP-Plus-GroundAdvantage,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,USPS Ground Advantage Plus-Shipping Fee-E3-20240805-CN-SVIP-Plus-GroundAdvantage,GroundAdvantage,USPS Ground Advantage Plus-Shipping Fee-E3-20240805-CN-SVIP-Plus-GroundAdvantage,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,USPS Ground Advantage-Shipping Fee-N1-20240805-CN-SVIP-Plus-GroundAdvantage,GroundAdvantage,USPS Ground Advantage-Shipping Fee-N1-20240805-CN-SVIP-Plus-GroundAdvantage,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,USPS Ground Advantage Plus-Shipping Fee-N1-20240805-CN-SVIP-Plus-GroundAdvantage,GroundAdvantage,USPS Ground Advantage Plus-Shipping Fee-N1-20240805-CN-SVIP-Plus-GroundAdvantage,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,UPS Mail Innovations-Shipping Fee-E1-20240805-CN-VIP-M4,M4,UPS Mail Innovations-Shipping Fee-E1-20240805-CN-VIP-M4,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,UPS Mail Innovations Plus-Shipping Fee-E1-20240805-CN-VIP-M4,M4,UPS Mail Innovations Plus-Shipping Fee-E1-20240805-CN-VIP-M4,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,UPS Mail Innovations-Shipping Fee-E2-20240805-CN-SVIP-M4,M4,UPS Mail Innovations-Shipping Fee-E2-20240805-CN-SVIP-M4,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,UPS Mail Innovations Plus-Shipping Fee-E2-20240805-CN-SVIP-M4,M4,UPS Mail Innovations Plus-Shipping Fee-E2-20240805-CN-SVIP-M4,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,UPS Mail Innovations-Shipping Fee-E3-20240805-CN-SVIP-Plus-M4,M4,UPS Mail Innovations-Shipping Fee-E3-20240805-CN-SVIP-Plus-M4,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,UPS Mail Innovations Plus-Shipping Fee-E3-20240805-CN-SVIP-Plus-M4,M4,UPS Mail Innovations Plus-Shipping Fee-E3-20240805-CN-SVIP-Plus-M4,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,UPS Mail Innovations-Shipping Fee-N1-20240805-CN-SVIP-Plus-M4,M4,UPS Mail Innovations-Shipping Fee-N1-20240805-CN-SVIP-Plus-M4,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,UPS Mail Innovations Plus-Shipping Fee-N1-20240805-CN-SVIP-Plus-M4,M4,UPS Mail Innovations Plus-Shipping Fee-N1-20240805-CN-SVIP-Plus-M4,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,DHL Expedited-Shipping Fee-E1-20240805-CN-VIP-EXP,EXP,DHL Expedited-Shipping Fee-E1-20240805-CN-VIP-EXP,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,DHL Expedited Plus-Shipping Fee-E1-20240805-CN-VIP-EXP,EXP,DHL Expedited Plus-Shipping Fee-E1-20240805-CN-VIP-EXP,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,DHL Expedited-Shipping Fee-E2-20240805-CN-SVIP-EXP,EXP,DHL Expedited-Shipping Fee-E2-20240805-CN-SVIP-EXP,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,DHL Expedited Plus-Shipping Fee-E2-20240805-CN-SVIP-EXP,EXP,DHL Expedited Plus-Shipping Fee-E2-20240805-CN-SVIP-EXP,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,DHL Expedited-Shipping Fee-E3-20240805-CN-SVIP-Plus-EXP,EXP,DHL Expedited-Shipping Fee-E3-20240805-CN-SVIP-Plus-EXP,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,DHL Expedited Plus-Shipping Fee-E3-20240805-CN-SVIP-Plus-EXP,EXP,DHL Expedited Plus-Shipping Fee-E3-20240805-CN-SVIP-Plus-EXP,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,DHL Expedited-Shipping Fee-N1-20240805-CN-SVIP-Plus-EXP,EXP,DHL Expedited-Shipping Fee-N1-20240805-CN-SVIP-Plus-EXP,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,DHL Expedited Plus-Shipping Fee-N1-20240805-CN-SVIP-Plus-EXP,EXP,DHL Expedited Plus-Shipping Fee-N1-20240805-CN-SVIP-Plus-EXP,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,SG Parcel-Shipping Fee-S1-20240805-CN-VIP-SG Parcel,SG Parcel,SG Parcel-Shipping Fee-S1-20240805-CN-VIP-SG Parcel,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,SG Parcel Plus-Shipping Fee-S1-20240805-CN-VIP-SG Parcel,SG Parcel,SG Parcel Plus-Shipping Fee-S1-20240805-CN-VIP-SG Parcel,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,SG Parcel-Shipping Fee-S2-20240805-CN-SVIP-SG Parcel,SG Parcel,SG Parcel-Shipping Fee-S2-20240805-CN-SVIP-SG Parcel,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,SG Parcel Plus-Shipping Fee-S2-20240805-CN-SVIP-SG Parcel,SG Parcel,SG Parcel Plus-Shipping Fee-S2-20240805-CN-SVIP-SG Parcel,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,SG Parcel-Shipping Fee-S3-20240805-CN-SVIP-Plus-SG Parcel,SG Parcel,SG Parcel-Shipping Fee-S3-20240805-CN-SVIP-Plus-SG Parcel,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,SG Parcel Plus-Shipping Fee-S3-20240805-CN-SVIP-Plus-SG Parcel,SG Parcel,SG Parcel Plus-Shipping Fee-S3-20240805-CN-SVIP-Plus-SG Parcel,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,SG Ground-Shipping Fee-E1-20240805-CN-VIP-SG Ground,SG Ground,SG Ground-Shipping Fee-E1-20240805-CN-VIP-SG Ground,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,SG Ground-Shipping Fee-E2-20240805-CN-SVIP-SG Ground,SG Ground,SG Ground-Shipping Fee-E2-20240805-CN-SVIP-SG Ground,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,SG Ground-Shipping Fee-E3-20240805-CN-SVIP-Plus-SG Ground,SG Ground,SG Ground-Shipping Fee-E3-20240805-CN-SVIP-Plus-SG Ground,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,SG Ground-Shipping Fee-S1-20240805-CN-VIP-SG Ground,SG Ground,SG Ground-Shipping Fee-S1-20240805-CN-VIP-SG Ground,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,SG Ground-Shipping Fee-S2-20240805-CN-SVIP-SG Ground,SG Ground,SG Ground-Shipping Fee-S2-20240805-CN-SVIP-SG Ground,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,SG Ground-Shipping Fee-S3-20240805-CN-SVIP-Plus-SG Ground,SG Ground,SG Ground-Shipping Fee-S3-20240805-CN-SVIP-Plus-SG Ground,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,SG Ground-Shipping Fee-N1-20240805-CN-SVIP-Plus-SG Ground,SG Ground,SG Ground-Shipping Fee-N1-20240805-CN-SVIP-Plus-SG Ground,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,Next Day Air-Shipping Fee-E1-20240805-CN-VIP-Next Day Air,1,Next Day Air-Shipping Fee-E1-20240805-CN-VIP-Next Day Air,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,Next Day Air-Shipping Fee-E2-20240805-CN-SVIP-Next Day Air,1,Next Day Air-Shipping Fee-E2-20240805-CN-SVIP-Next Day Air,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,Next Day Air-Shipping Fee-E3-20240805-CN-SVIP-Plus-Next Day Air,1,Next Day Air-Shipping Fee-E3-20240805-CN-SVIP-Plus-Next Day Air,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,Next Day Air-Shipping Fee-S1-20240805-CN-VIP-Next Day Air,1,Next Day Air-Shipping Fee-S1-20240805-CN-VIP-Next Day Air,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,Next Day Air-Shipping Fee-S2-20240805-CN-SVIP-Next Day Air,1,Next Day Air-Shipping Fee-S2-20240805-CN-SVIP-Next Day Air,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,Next Day Air-Shipping Fee-S3-20240805-CN-SVIP-Plus-Next Day Air,1,Next Day Air-Shipping Fee-S3-20240805-CN-SVIP-Plus-Next Day Air,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,Next Day Air-Shipping Fee-N1-20240805-CN-SVIP-Plus-Next Day Air,1,Next Day Air-Shipping Fee-N1-20240805-CN-SVIP-Plus-Next Day Air,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,2nd Day Air-Shipping Fee-E1-20240805-CN-VIP-2nd Day Air,2,2nd Day Air-Shipping Fee-E1-20240805-CN-VIP-2nd Day Air,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,2nd Day Air-Shipping Fee-E2-20240805-CN-SVIP-2nd Day Air,2,2nd Day Air-Shipping Fee-E2-20240805-CN-SVIP-2nd Day Air,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,2nd Day Air-Shipping Fee-E3-20240805-CN-SVIP-Plus-2nd Day Air,2,2nd Day Air-Shipping Fee-E3-20240805-CN-SVIP-Plus-2nd Day Air,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,2nd Day Air-Shipping Fee-S1-20240805-CN-VIP-2nd Day Air,2,2nd Day Air-Shipping Fee-S1-20240805-CN-VIP-2nd Day Air,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,2nd Day Air-Shipping Fee-S2-20240805-CN-SVIP-2nd Day Air,2,2nd Day Air-Shipping Fee-S2-20240805-CN-SVIP-2nd Day Air,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,2nd Day Air-Shipping Fee-S3-20240805-CN-SVIP-Plus-2nd Day Air,2,2nd Day Air-Shipping Fee-S3-20240805-CN-SVIP-Plus-2nd Day Air,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,2nd Day Air-Shipping Fee-N1-20240805-CN-SVIP-Plus-2nd Day Air,2,2nd Day Air-Shipping Fee-N1-20240805-CN-SVIP-Plus-2nd Day Air,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,GlobalPost-Shipping Fee-E1-20240805-CN-VIP-GlobalPost,GlobalPostPriority,GlobalPost-Shipping Fee-E1-20240805-CN-VIP-GlobalPost,,,,,,,,
+,GlobalPost-Shipping Fee-E2-20240805-CN-SVIP-GlobalPost,GlobalPostPriority,GlobalPost-Shipping Fee-E2-20240805-CN-SVIP-GlobalPost,,,,,,,,
+,GlobalPost-Shipping Fee-E3-20240805-CN-SVIP-Plus-GlobalPost,GlobalPostPriority,GlobalPost-Shipping Fee-E3-20240805-CN-SVIP-Plus-GlobalPost,,,,,,,,
+,GlobalPost-Shipping Fee-S1-20240805-CN-VIP-GlobalPost,GlobalPostPriority,GlobalPost-Shipping Fee-S1-20240805-CN-VIP-GlobalPost,,,,,,,,
+,GlobalPost-Shipping Fee-S2-20240805-CN-SVIP-GlobalPost,GlobalPostPriority,GlobalPost-Shipping Fee-S2-20240805-CN-SVIP-GlobalPost,,,,,,,,
+,GlobalPost-Shipping Fee-S3-20240805-CN-SVIP-Plus-GlobalPost,GlobalPostPriority,GlobalPost-Shipping Fee-S3-20240805-CN-SVIP-Plus-GlobalPost,,,,,,,,
+,GlobalPost-Shipping Fee-N1-20240805-CN-SVIP-Plus-GlobalPost,GlobalPostPriority,GlobalPost-Shipping Fee-N1-20240805-CN-SVIP-Plus-GlobalPost,,,,,,,,

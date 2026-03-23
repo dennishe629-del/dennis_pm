@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShipSage 报价配置优化 Demo</title>
+  <style>
+    :root {
+      --bg: #f4f1ea;
+      --panel: rgba(255, 252, 247, 0.92);
+      --ink: #1c2421;
+      --muted: #66716c;
+      --line: rgba(28, 36, 33, 0.1);
+      --brand: #0d6b57;
+      --brand-soft: rgba(13, 107, 87, 0.12);
+      --accent: #c86b2b;
+      --danger: #b24634;
+      --success: #2d7a57;
+      --shadow: 0 24px 60px rgba(35, 35, 35, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI Variable", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(13, 107, 87, 0.18), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(200, 107, 43, 0.18), transparent 24%),
+        linear-gradient(180deg, #f9f5ee 0%, #f1ebe1 100%);
+      min-height: 100vh;
+    }
+    .shell { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+    .sidebar {
+      position: sticky; top: 0; height: 100vh; padding: 28px 20px;
+      background: rgba(24, 33, 30, 0.92); color: #edf3ef; display: flex; flex-direction: column; gap: 24px;
+    }
+    .brand, .note {
+      padding: 16px; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+    }
+    .brand h1 { margin: 0; font-size: 22px; }
+    .brand p, .note p { margin: 8px 0 0; color: rgba(237,243,239,0.74); line-height: 1.6; font-size: 13px; }
+    .note strong { display: block; margin-bottom: 8px; font-size: 14px; }
+    .nav-title { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: rgba(237,243,239,.55); padding: 0 10px; }
+    .nav-group { display: grid; gap: 10px; }
+    .nav-btn {
+      border: 0; border-radius: 16px; background: transparent; color: inherit; text-align: left;
+      padding: 14px; cursor: pointer; transition: .2s ease; display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    }
+    .nav-btn:hover, .nav-btn.active { background: rgba(255,255,255,0.1); transform: translateX(3px); }
+    .nav-btn small { display: block; margin-top: 3px; color: rgba(237,243,239,.6); font-size: 12px; }
+    .pill {
+      display: inline-flex; align-items: center; justify-content: center; min-width: 28px; height: 28px;
+      padding: 0 10px; border-radius: 999px; font-size: 12px; background: rgba(255,255,255,.12);
+    }
+    .content { padding: 26px; }
+    .hero, .card {
+      background: rgba(255,252,247,0.92); border: 1px solid var(--line); border-radius: 28px; box-shadow: var(--shadow);
+      overflow: hidden; margin-bottom: 22px;
+    }
+    .hero-inner {
+      padding: 28px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px;
+      background: linear-gradient(135deg, rgba(255,253,249,.96), rgba(244,249,245,.92));
+    }
+    .hero h2 { margin: 0; font-size: 32px; line-height: 1.15; }
+    .hero p { margin: 14px 0 0; color: var(--muted); line-height: 1.7; }
+    .hero-card {
+      background: rgba(17,30,27,.96); color: #f4f6f4; border-radius: 24px; padding: 22px;
+    }
+    .hero-card h3 { margin: 0 0 10px; font-size: 15px; color: rgba(244,246,244,.74); text-transform: uppercase; letter-spacing: .06em; }
+    .hero-card ul { margin: 0; padding-left: 18px; line-height: 1.8; font-size: 14px; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 22px; }
+    .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 18px; }
+    .stat span { display: block; color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+    .stat strong { display: block; font-size: 28px; line-height: 1; margin-bottom: 6px; }
+    .stat small { color: var(--muted); font-size: 12px; }
+    .screen { display: none; animation: fade .25s ease; }
+    .screen.active { display: block; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px);} to {opacity: 1; transform: translateY(0);} }
+    .card-head, .filters, .section-body, .tab-strip { padding-left: 24px; padding-right: 24px; }
+    .card-head {
+      padding-top: 22px; padding-bottom: 18px; display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; border-bottom: 1px solid var(--line); flex-wrap: wrap;
+    }
+    .title-wrap h3 { margin: 0; font-size: 22px; }
+    .title-wrap p { margin: 7px 0 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .actions, .filters { display: flex; flex-wrap: wrap; gap: 10px; }
+    .filters { padding-top: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.36); }
+    .tab-strip { display: flex; flex-wrap: wrap; gap: 10px; padding: 18px 24px 0; }
+    .chip {
+      border: 1px solid rgba(28,36,33,.12); background: #fff; color: var(--ink); padding: 10px 14px;
+      border-radius: 999px; font-size: 13px; cursor: pointer;
+    }
+    .chip.active { background: var(--brand-soft); color: var(--brand); border-color: rgba(13,107,87,.24); }
+    .section-body { padding-top: 20px; padding-bottom: 24px; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+    .meta {
+      background: rgba(13,107,87,.08); border: 1px solid rgba(13,107,87,.12); color: var(--brand);
+      border-radius: 999px; padding: 8px 12px; font-size: 12px; font-weight: 600;
+    }
+    select, input {
+      border: 1px solid rgba(28,36,33,.12); background: #fff; color: var(--ink); border-radius: 12px;
+      padding: 11px 14px; font-size: 14px; min-width: 150px; outline: none;
+    }
+    input[type="date"] { min-width: 165px; }
+    .btn {
+      border: 0; border-radius: 14px; padding: 11px 16px; cursor: pointer; font-size: 14px; font-weight: 600; transition: .18s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--brand); color: #fff; }
+    .btn-secondary { background: #fff; border: 1px solid rgba(28,36,33,.12); color: var(--ink); }
+    .btn-accent { background: var(--accent); color: #fff; }
+    .mini-panel {
+      background: rgba(255,255,255,.56); border: 1px solid var(--line); border-radius: 18px; padding: 18px;
+    }
+    .mini-panel h4 { margin: 0 0 10px; font-size: 16px; }
+    .mini-panel p, .mini-panel li { color: var(--muted); line-height: 1.7; font-size: 14px; }
+    .mini-panel ul { margin: 0; padding-left: 18px; }
+    .grid-two { display: grid; grid-template-columns: 1.2fr .9fr; gap: 20px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 14px 12px; border-bottom: 1px solid rgba(28,36,33,.08); text-align: left; vertical-align: middle; }
+    th { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+    tbody tr:hover { background: rgba(13,107,87,.04); }
+    .badge {
+      display: inline-flex; align-items: center; border-radius: 999px; padding: 7px 10px; font-size: 12px; font-weight: 700; white-space: nowrap;
+    }
+    .badge-success { background: rgba(45,122,87,.12); color: var(--success); }
+    .badge-warning { background: rgba(200,107,43,.14); color: var(--accent); }
+    .badge-muted { background: rgba(102,113,108,.12); color: var(--muted); }
+    .inline-edit { width: 92px; min-width: 92px; padding: 8px 10px; font-size: 13px; }
+    .source-tag { display: inline-flex; gap: 8px; align-items: center; font-size: 12px; color: var(--muted); }
+    .source-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--brand); }
+    .toast {
+      position: fixed; right: 26px; bottom: 26px; background: rgba(17,30,27,.94); color: #fff; padding: 14px 16px;
+      border-radius: 16px; box-shadow: 0 14px 28px rgba(0,0,0,.2); opacity: 0; pointer-events: none; transform: translateY(10px);
+      transition: .25s ease; max-width: 320px; line-height: 1.6; font-size: 13px;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .modal {
+      position: fixed; inset: 0; background: rgba(20,20,20,.32); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 20;
+    }
+    .modal.show { display: flex; }
+    .modal-card {
+      width: min(520px, 100%); background: #fffdfa; border-radius: 26px; border: 1px solid rgba(28,36,33,.08); box-shadow: var(--shadow); overflow: hidden;
+    }
+    .modal-card header, .modal-card footer { padding: 18px 22px; }
+    .modal-card header { border-bottom: 1px solid var(--line); }
+    .modal-card footer { border-top: 1px solid var(--line); display: flex; justify-content: flex-end; gap: 10px; }
+    .modal-card .body { padding: 20px 22px; }
+    .modal-card h4 { margin: 0; font-size: 20px; }
+    .modal-card p { margin: 10px 0 0; color: var(--muted); line-height: 1.7; }
+    .full-width { width: 100%; }
+    .muted { color: var(--muted); }
+    @media (max-width: 1100px) {
+      .shell { grid-template-columns: 1fr; }
+      .sidebar { position: relative; height: auto; }
+      .hero-inner, .grid-two, .stats { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .content { padding: 14px; }
+      .card-head, .filters, .section-body, .hero-inner { padding-left: 16px; padding-right: 16px; }
+      table { display: block; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>ShipSage Quote Lab</h1>
+        <p>报价配置优化与客户报价查询演示版。用于产品评审、业务讲解与开发对齐。</p>
+      </div>
+      <div class="nav-group">
+        <div class="nav-title">演示导航</div>
+        <button class="nav-btn active" data-screen="overview"><div>总览首页<small>目标、价值与入口结构</small></div><span class="pill">01</span></button>
+        <button class="nav-btn" data-screen="standard"><div>标准版配置<small>行级编辑、草稿、发布</small></div><span class="pill">02</span></button>
+        <button class="nav-btn" data-screen="company"><div>客户版配置<small>继承标准版与客户覆盖</small></div><span class="pill">03</span></button>
+        <button class="nav-btn" data-screen="internal-query"><div>内部最终报价查询<small>核价、解释来源与区间</small></div><span class="pill">04</span></button>
+        <button class="nav-btn" data-screen="client-query"><div>客户报价查询<small>客户只看最终生效价</small></div><span class="pill">05</span></button>
+      </div>
+      <div class="note">
+        <strong>演示建议顺序</strong>
+        <p>先讲总览，再演示标准版配置、客户版配置，最后切到内部查询与客户查询，对比同一客户同一天的展示差异。</p>
+      </div>
+    </aside>
+    <main class="content">
+      <section class="hero">
+        <div class="hero-inner">
+          <div>
+            <h2>报价不再是隐藏逻辑，而是可配置、可查询、可解释的产品能力。</h2>
+            <p>这份 demo 将 PRD 中的核心范围可视化为一个可演示前端原型：统一配置中心承接标准版与客户版维护，最终生效价成为内部和客户共用的查询口径，但展示字段按权限分层。</p>
+          </div>
+          <div class="hero-card">
+            <h3>本次演示重点</h3>
+            <ul>
+              <li>标准版报价可独立配置，不再隐身</li>
+              <li>客户版支持页面行级编辑，保留草稿与直存</li>
+              <li>最终生效价统一查询，内部可解释、客户可自助</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats">
+        <div class="stat"><span>标准版对象</span><strong>18</strong><small>按费用类型、子模块与服务组合管理</small></div>
+        <div class="stat"><span>客户覆盖客户数</span><strong>126</strong><small>支持复制、折扣、历史追溯</small></div>
+        <div class="stat"><span>当前待发布草稿</span><strong>09</strong><small>标准版 3 个，客户版 6 个</small></div>
+        <div class="stat"><span>最终报价查询一致率</span><strong>99.2%</strong><small>目标内外部展示同口径</small></div>
+      </section>
+
+      <section id="overview" class="screen active">
+        <div class="card">
+          <div class="card-head">
+            <div class="title-wrap">
+              <h3>配置中心与查询中心总览</h3>
+              <p>用一页把核心模型、入口结构和价值讲清楚，适合开场介绍。</p>
+            </div>
+            <div class="actions">
+              <button class="btn btn-secondary" data-open-modal="architecture">查看模型说明</button>
+              <button class="btn btn-primary" data-jump="standard">开始演示</button>
+            </div>
+          </div>
+          <div class="section-body">
+            <div class="grid-two">
+              <div class="mini-panel">
+                <h4>产品结构</h4>
+                <table>
+                  <thead><tr><th>模块</th><th>定位</th><th>主要用户</th></tr></thead>
+                  <tbody>
+                    <tr><td>标准版配置</td><td>维护系统基准底稿与结构</td><td>计费运营、产品运营</td></tr>
+                    <tr><td>客户版配置</td><td>维护客户覆盖价格</td><td>计费运营、客服</td></tr>
+                    <tr><td>内部最终报价查询</td><td>核价与对外解释</td><td>运营、客服、销售</td></tr>
+                    <tr><td>客户报价查询</td><td>客户自助查看有效报价</td><td>OMS 客户</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="mini-panel">
+                <h4>关键变化</h4>
+                <ul>
+                  <li>过去以导入驱动为主，现在允许页面行级编辑。</li>
+                  <li>过去客户只能理解“定制价”，现在客户能直接看到最终生效价。</li>
+                  <li>过去标准版在底层隐式存在，现在标准版独立成可运营对象。</li>
+                  <li>过去查询更像后台表，现在查询结果能解释版本、生效区间和来源。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="standard" class="screen">
+        <div class="card">
+          <div class="card-head">
+            <div class="title-wrap">
+              <h3>标准版配置</h3>
+              <p>标准版从“底层基准数据”升级为“可配置对象”，支持价格编辑、增删行、影响分析和版本管理。</p>
+            </div>
+            <div class="actions">
+              <button class="btn btn-secondary">导入模板</button>
+              <button class="btn btn-secondary" id="standard-add-row">新增费项</button>
+              <button class="btn btn-secondary" id="standard-remove-row">删除费项</button>
+              <button class="btn btn-secondary" id="standard-draft">保存草稿</button>
+              <button class="btn btn-primary" id="standard-publish">发布生效</button>
+            </div>
+          </div>
+          <div class="filters">
+            <select><option>服务: Express Saver</option><option>服务: Economy Parcel</option></select>
+            <select><option>版本: TV2026.03.01</option><option>版本: TV2026.04.01</option></select>
+            <select><option>生效状态: 当前生效</option><option>生效状态: 未来版本</option></select>
+          </div>
+          <div class="tab-strip">
+            <button class="chip active">运费</button>
+            <button class="chip">操作费</button>
+            <button class="chip">仓储费</button>
+            <button class="chip">关务费</button>
+            <button class="chip">增值服务费</button>
+            <button class="chip">包材费</button>
+            <button class="chip">其他费用</button>
+          </div>
+          <div class="tab-strip" style="padding-top:12px;">
+            <button class="chip active">基础运费</button>
+            <button class="chip">附加费</button>
+            <button class="chip">材积系数</button>
+            <button class="chip">分区规则</button>
+          </div>
+          <div class="section-body">
+            <div class="meta-row">
+              <div class="meta">当前生效版本 TV2026.03.01</div>
+              <div class="meta">生效区间 2026-03-01 ~ 长期</div>
+              <div class="meta">待发布草稿 1 份</div>
+            </div>
+            <div class="mini-panel" style="margin-bottom:18px;">
+              <h4>结构变更影响分析</h4>
+              <p>本次草稿包含 1 个新增费项与 1 个删除费项。系统识别出：受影响客户 23 个，存在未来客户版本冲突 4 个，高风险删除冲突 1 个。</p>
+              <p>高风险客户示例：ABC Logistics 在 2026-04-01 有未来生效客户价，但当前标准版草稿删除了其仍在依赖的“卸货操作费”。</p>
+            </div>
+            <table id="standard-table">
+              <thead><tr><th>费用类型</th><th>费项</th><th>单位</th><th>当前价格</th><th>编辑价格</th><th>状态</th><th>结构动作</th><th>影响</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="company" class="screen">
+        <div class="card">
+          <div class="card-head">
+            <div class="title-wrap">
+              <h3>客户版配置</h3>
+              <p>清楚区分“继承标准版”与“客户覆盖”，并在标准版结构变更后提示客户侧是否存在待确认或未来版本冲突。</p>
+            </div>
+            <div class="actions">
+              <button class="btn btn-secondary">复制到其他客户</button>
+              <button class="btn btn-secondary">应用折扣</button>
+              <button class="btn btn-secondary" id="company-draft">保存草稿</button>
+              <button class="btn btn-accent" id="company-direct-save">直存生效</button>
+            </div>
+          </div>
+          <div class="filters">
+            <select><option>客户: ABC Logistics</option><option>客户: North Harbor US</option></select>
+            <select><option>服务: Express Saver</option><option>服务: Economy Parcel</option></select>
+            <select><option>状态: 当前生效</option><option>状态: 草稿中</option></select>
+          </div>
+          <div class="tab-strip">
+            <button class="chip active">运费</button>
+            <button class="chip">操作费</button>
+            <button class="chip">仓储费</button>
+            <button class="chip">关务费</button>
+            <button class="chip">增值服务费</button>
+            <button class="chip">包材费</button>
+            <button class="chip">其他费用</button>
+          </div>
+          <div class="tab-strip" style="padding-top:12px;">
+            <button class="chip active">基础运费</button>
+            <button class="chip">附加费</button>
+            <button class="chip">材积系数</button>
+            <button class="chip">分区规则</button>
+          </div>
+          <div class="section-body">
+            <div class="meta-row">
+              <div class="meta">客户 ABC Logistics</div>
+              <div class="meta">4 项客户覆盖</div>
+              <div class="meta">6 项继承标准版</div>
+              <div class="meta">1 项结构冲突待确认</div>
+            </div>
+            <table id="company-table">
+              <thead><tr><th>费用类型</th><th>费项</th><th>单位</th><th>标准价</th><th>客户价</th><th>最终结果</th><th>状态</th><th>来源说明</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="internal-query" class="screen">
+        <div class="card">
+          <div class="card-head">
+            <div class="title-wrap">
+              <h3>内部最终报价查询</h3>
+              <p>对销售、客服和运营暴露统一最终报价口径，同时保留来源和区间说明。</p>
+            </div>
+            <div class="actions">
+              <button class="btn btn-secondary" id="internal-reset">重置</button>
+              <button class="btn btn-primary" id="internal-run">执行查询</button>
+              <button class="btn btn-secondary">导出结果</button>
+            </div>
+          </div>
+          <div class="filters">
+            <select><option>客户: ABC Logistics</option><option>客户: North Harbor US</option></select>
+            <input type="date" value="2026-03-21">
+            <select><option>服务: Express Saver</option><option>服务: Economy Parcel</option></select>
+            <select><option>来源状态: 全部</option><option>来源状态: 客户覆盖</option><option>来源状态: 标准版继承</option></select>
+          </div>
+          <div class="tab-strip">
+            <button class="chip active">运费</button>
+            <button class="chip">操作费</button>
+            <button class="chip">仓储费</button>
+            <button class="chip">其他费用</button>
+          </div>
+          <div class="tab-strip" style="padding-top:12px;">
+            <button class="chip active">基础运费</button>
+            <button class="chip">附加费</button>
+            <button class="chip">材积系数</button>
+            <button class="chip">分区规则</button>
+          </div>
+          <div class="section-body">
+            <div class="mini-panel" style="margin-bottom:18px;">
+              <div class="source-tag"><span class="source-dot"></span>查询口径说明：同一客户、同一日期，内部与客户侧使用同一套最终生效价格结果；内部额外可识别结构冲突与待确认项。</div>
+            </div>
+            <table id="internal-table">
+              <thead><tr><th>费用类型</th><th>费项</th><th>单位</th><th>最终价</th><th>来源类型</th><th>来源版本</th><th>生效区间</th><th>异常状态</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="client-query" class="screen">
+        <div class="card">
+          <div class="card-head">
+            <div class="title-wrap">
+              <h3>客户报价查询</h3>
+              <p>客户只看到对自己生效的最终价，不暴露标准价、覆盖逻辑和内部来源版本。</p>
+            </div>
+            <div class="actions">
+              <button class="btn btn-secondary" id="client-reset">重置</button>
+              <button class="btn btn-primary" id="client-run">查询报价</button>
+              <button class="btn btn-secondary">导出</button>
+            </div>
+          </div>
+          <div class="filters">
+            <input type="date" value="2026-03-21">
+            <select><option>服务: Express Saver</option><option>服务: Economy Parcel</option></select>
+          </div>
+          <div class="tab-strip">
+            <button class="chip active">运费</button>
+            <button class="chip">操作费</button>
+            <button class="chip">仓储费</button>
+            <button class="chip">其他费用</button>
+          </div>
+          <div class="tab-strip" style="padding-top:12px;">
+            <button class="chip active">基础运费</button>
+            <button class="chip">附加费</button>
+            <button class="chip">材积系数</button>
+          </div>
+          <div class="section-body">
+            <div class="meta-row">
+              <div class="meta">当前客户 ABC Logistics</div>
+              <div class="meta">仅展示最终生效价</div>
+            </div>
+            <table id="client-table">
+              <thead><tr><th>费项</th><th>单位</th><th>最终价</th><th>生效区间</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="publish-modal">
+    <div class="modal-card">
+      <header><h4>发布标准版报价</h4></header>
+      <div class="body">
+        <p>为新版本设置生效日期后，将自动收口旧版本区间，并刷新最终报价查询口径。</p>
+        <div style="margin-top:18px;">
+          <label class="muted" for="effective-date">生效日期</label>
+          <input id="effective-date" class="full-width" type="date" value="2026-04-01">
+        </div>
+      </div>
+      <footer>
+        <button class="btn btn-secondary" id="cancel-publish">取消</button>
+        <button class="btn btn-primary" id="confirm-publish">确认发布</button>
+      </footer>
+    </div>
+  </div>
+
+  <div class="modal" id="architecture-modal">
+    <div class="modal-card">
+      <header><h4>报价三层模型</h4></header>
+      <div class="body">
+        <p><strong>标准版报价</strong> 作为系统底稿维护。</p>
+        <p><strong>客户版报价</strong> 只保存相对标准版的覆盖内容。</p>
+        <p><strong>最终生效报价</strong> 按客户、日期、服务、费用类型与子模块生成展示结果。</p>
+      </div>
+      <footer><button class="btn btn-primary" id="close-architecture">知道了</button></footer>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const standardData = [
+      { category: "基础运费", item: "重量费", unit: "KG", current: "12.00", draft: "12.00", status: "生效中", structure: "保留", impact: "无" },
+      { category: "操作费", item: "首重处理费", unit: "ORDER", current: "5.00", draft: "5.20", status: "草稿中", structure: "保留", impact: "影响 6 个客户" },
+      { category: "附加费", item: "偏远地区附加费", unit: "SHIPMENT", current: "18.00", draft: "18.00", status: "生效中", structure: "保留", impact: "无" },
+      { category: "仓储费", item: "上架费", unit: "PALLET", current: "-", draft: "32.00", status: "草稿中", structure: "新增", impact: "影响 23 个客户继承关系" },
+      { category: "操作费", item: "卸货操作费", unit: "ORDER", current: "7.00", draft: "-", status: "冲突", structure: "删除", impact: "与 4 个未来客户版本冲突" }
+    ];
+    const companyData = [
+      { category: "基础运费", item: "重量费", unit: "KG", standard: "12.00", company: "12.50", result: "客户覆盖", status: "生效中", note: "客户专属协议价" },
+      { category: "操作费", item: "首重处理费", unit: "ORDER", standard: "5.00", company: "", result: "继承标准版", status: "生效中", note: "未配置客户覆盖" },
+      { category: "附加费", item: "偏远地区附加费", unit: "SHIPMENT", standard: "18.00", company: "19.00", result: "客户覆盖", status: "草稿中", note: "待 04-01 生效" },
+      { category: "仓储费", item: "上架费", unit: "PALLET", standard: "32.00", company: "", result: "继承标准版", status: "待确认", note: "标准版新增行，待客户确认是否覆盖" },
+      { category: "操作费", item: "卸货操作费", unit: "ORDER", standard: "-", company: "6.50", result: "结构冲突", status: "冲突", note: "客户未来版本仍引用已删除标准项" }
+    ];
+    const internalData = [
+      { category: "基础运费", item: "重量费", unit: "KG", finalPrice: "12.50", sourceType: "客户覆盖", version: "CV2026.03.21", range: "2026-03-21 ~ 长期", alert: "正常" },
+      { category: "操作费", item: "首重处理费", unit: "ORDER", finalPrice: "5.00", sourceType: "标准版继承", version: "TV2026.03.01", range: "2026-03-01 ~ 长期", alert: "正常" },
+      { category: "仓储费", item: "上架费", unit: "PALLET", finalPrice: "32.00", sourceType: "标准版继承", version: "TV2026.04.01", range: "2026-04-01 ~ 长期", alert: "新增项待客户确认" },
+      { category: "操作费", item: "卸货操作费", unit: "ORDER", finalPrice: "-", sourceType: "结构冲突", version: "CV2026.04.01", range: "2026-04-01 ~ 长期", alert: "未来客户版本冲突" }
+    ];
+    const clientData = [
+      { item: "重量费", unit: "KG", finalPrice: "12.50", range: "2026-03-21 ~ 长期" },
+      { item: "首重处理费", unit: "ORDER", finalPrice: "5.00", range: "2026-03-01 ~ 长期" },
+      { item: "偏远地区附加费", unit: "SHIPMENT", finalPrice: "18.00", range: "2026-03-01 ~ 长期" },
+      { item: "燃油附加费", unit: "%", finalPrice: "8.50", range: "2026-03-01 ~ 长期" }
+    ];
+
+    const toast = document.getElementById("toast");
+    const screenButtons = document.querySelectorAll(".nav-btn");
+    const screens = document.querySelectorAll(".screen");
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    function switchScreen(id) {
+      screenButtons.forEach((button) => button.classList.toggle("active", button.dataset.screen === id));
+      screens.forEach((screen) => screen.classList.toggle("active", screen.id === id));
+    }
+
+    screenButtons.forEach((button) => button.addEventListener("click", () => switchScreen(button.dataset.screen)));
+    document.querySelectorAll("[data-jump]").forEach((button) => button.addEventListener("click", () => switchScreen(button.dataset.jump)));
+
+    function badgeClass(type) {
+      if (type.includes("生效")) return "badge badge-success";
+      if (type.includes("冲突")) return "badge badge-warning";
+      if (type.includes("待确认")) return "badge badge-warning";
+      if (type.includes("草稿") || type.includes("覆盖")) return "badge badge-warning";
+      if (type.includes("继承")) return "badge badge-muted";
+      return "badge badge-muted";
+    }
+
+    function renderStandardTable() {
+      const tbody = document.querySelector("#standard-table tbody");
+      tbody.innerHTML = standardData.map((row, index) => `
+        <tr>
+          <td>${row.category}</td>
+          <td>${row.item}</td>
+          <td>${row.unit}</td>
+          <td>${row.current}</td>
+          <td><input class="inline-edit" value="${row.draft}" data-standard-index="${index}"></td>
+          <td><span class="${badgeClass(row.status)}">${row.status}</span></td>
+          <td><span class="${badgeClass(row.structure)}">${row.structure}</span></td>
+          <td>${row.impact}</td>
+        </tr>
+      `).join("");
+      tbody.querySelectorAll("input").forEach((input) => {
+        input.addEventListener("input", (event) => {
+          standardData[Number(event.currentTarget.dataset.standardIndex)].draft = event.currentTarget.value;
+        });
+      });
+    }
+
+    function renderCompanyTable() {
+      const tbody = document.querySelector("#company-table tbody");
+      tbody.innerHTML = companyData.map((row, index) => `
+        <tr>
+          <td>${row.category}</td>
+          <td>${row.item}</td>
+          <td>${row.unit}</td>
+          <td>${row.standard}</td>
+          <td><input class="inline-edit" value="${row.company}" placeholder="继承标准版" data-company-index="${index}"></td>
+          <td><span class="${badgeClass(row.result)}">${row.result}</span></td>
+          <td><span class="${badgeClass(row.status)}">${row.status}</span></td>
+          <td>${row.note}</td>
+        </tr>
+      `).join("");
+      tbody.querySelectorAll("input").forEach((input) => {
+        input.addEventListener("input", (event) => {
+          const row = companyData[Number(event.currentTarget.dataset.companyIndex)];
+          row.company = event.currentTarget.value;
+          row.result = row.company ? "客户覆盖" : "继承标准版";
+          row.note = row.company ? "客户专属覆盖已更新" : "未配置客户覆盖";
+          row.status = row.company ? "草稿中" : "生效中";
+          renderCompanyTable();
+        });
+      });
+    }
+
+    function renderInternalTable() {
+      document.querySelector("#internal-table tbody").innerHTML = internalData.map((row) => `
+        <tr>
+          <td>${row.category}</td>
+          <td>${row.item}</td>
+          <td>${row.unit}</td>
+          <td>${row.finalPrice}</td>
+          <td><span class="${badgeClass(row.sourceType)}">${row.sourceType}</span></td>
+          <td>${row.version}</td>
+          <td>${row.range}</td>
+          <td>${row.alert}</td>
+        </tr>
+      `).join("");
+    }
+
+    function renderClientTable() {
+      document.querySelector("#client-table tbody").innerHTML = clientData.map((row) => `
+        <tr>
+          <td>${row.item}</td>
+          <td>${row.unit}</td>
+          <td>${row.finalPrice}</td>
+          <td>${row.range}</td>
+        </tr>
+      `).join("");
+    }
+
+    renderStandardTable();
+    renderCompanyTable();
+    renderInternalTable();
+    renderClientTable();
+
+    const publishModal = document.getElementById("publish-modal");
+    const architectureModal = document.getElementById("architecture-modal");
+
+    document.getElementById("standard-draft").addEventListener("click", () => showToast("标准版草稿已保存，可后续补充修改后再发布。"));
+    document.getElementById("standard-add-row").addEventListener("click", () => showToast("演示中：已新增标准版费项行，发布前需先执行影响分析。"));
+    document.getElementById("standard-remove-row").addEventListener("click", () => showToast("演示中：删除标准版费项会检查客户未来版本是否仍引用该费项。"));
+    document.getElementById("company-draft").addEventListener("click", () => showToast("客户版草稿已保存，当前正式报价未发生变化。"));
+    document.getElementById("company-direct-save").addEventListener("click", () => showToast("已执行高权限直存生效，并记录版本与操作日志。"));
+    document.getElementById("internal-run").addEventListener("click", () => { renderInternalTable(); showToast("内部最终报价查询已完成，结果按统一口径返回。"); });
+    document.getElementById("internal-reset").addEventListener("click", () => showToast("内部查询条件已重置。"));
+    document.getElementById("client-run").addEventListener("click", () => { renderClientTable(); showToast("客户查询结果已刷新，只展示最终生效价。"); });
+    document.getElementById("client-reset").addEventListener("click", () => showToast("客户查询条件已重置。"));
+
+    document.getElementById("standard-publish").addEventListener("click", () => publishModal.classList.add("show"));
+    document.getElementById("cancel-publish").addEventListener("click", () => publishModal.classList.remove("show"));
+    document.getElementById("confirm-publish").addEventListener("click", () => {
+      publishModal.classList.remove("show");
+      showToast("标准版新版本已发布，系统已完成影响分析并刷新最终报价查询口径。");
+    });
+
+    document.querySelectorAll("[data-open-modal='architecture']").forEach((button) => {
+      button.addEventListener("click", () => architectureModal.classList.add("show"));
+    });
+    document.getElementById("close-architecture").addEventListener("click", () => architectureModal.classList.remove("show"));
+
+    [publishModal, architectureModal].forEach((modal) => {
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) modal.classList.remove("show");
+      });
+    });
+  </script>
+</body>
+</html>

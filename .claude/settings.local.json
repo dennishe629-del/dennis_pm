@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:riin.com)",
+      "WebFetch(domain:www.jijiaerp.com)",
+      "WebFetch(domain:pod.riin.com)"
+    ]
+  }
+}

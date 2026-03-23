@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShipSage · 审批电子流</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090f;--bg2:#0c0f1c;--surface:#101623;--surface2:#151e30;
+  --border:#1e2d48;--border2:#263554;
+  --accent:#3b82f6;--accent-h:#60a5fa;--violet:#7c3aed;
+  --green:#10b981;--green-bg:rgba(16,185,129,.1);
+  --orange:#f59e0b;--orange-bg:rgba(245,158,11,.1);
+  --red:#ef4444;--red-bg:rgba(239,68,68,.1);--blue-bg:rgba(59,130,246,.1);
+  --text:#e2e8f0;--text2:#64748b;--text3:#94a3b8;
+  --r:10px;--rl:14px;
+  --fn:'Noto Sans SC','Inter',system-ui,sans-serif;
+  --fm:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--fn);font-size:14px;display:flex;overflow:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+.sidebar{width:232px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;position:relative;z-index:10}
+.sidebar::after{content:'';position:absolute;top:0;right:-1px;width:1px;height:100%;background:linear-gradient(180deg,transparent,rgba(59,130,246,.22) 40%,rgba(124,58,237,.14) 70%,transparent);pointer-events:none}
+.logo{padding:20px 18px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.logo-mark{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),var(--violet));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;font-family:'Inter',sans-serif;box-shadow:0 0 18px rgba(59,130,246,.3);flex-shrink:0}
+.logo-texts{display:flex;flex-direction:column;gap:1px}
+.logo-name{font-size:15px;font-weight:700;color:#fff;letter-spacing:-.2px}
+.logo-sub{font-size:10px;color:var(--text2);letter-spacing:.04em}
+.nav-group{padding:16px 0 6px}
+.nav-group-label{padding:0 18px 7px;font-size:10px;font-weight:600;color:var(--text2);letter-spacing:.12em;text-transform:uppercase;font-family:'Inter',sans-serif}
+.nav-item{margin:1px 8px;padding:8px 10px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--text2);font-size:13px;font-weight:500;transition:color .15s,background .15s;position:relative;user-select:none}
+.nav-item:hover{background:var(--surface2);color:var(--text3)}
+.nav-item.active{background:linear-gradient(90deg,rgba(59,130,246,.14),rgba(59,130,246,.04));color:var(--accent-h)}
+.nav-item.active::before{content:'';position:absolute;left:-8px;top:7px;bottom:7px;width:3px;background:var(--accent);border-radius:0 3px 3px 0;box-shadow:0 0 8px var(--accent)}
+.nav-icon{font-size:14px;width:18px;text-align:center;flex-shrink:0}
+.nav-badge{margin-left:auto;background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;font-family:'Inter',sans-serif;animation:badgePulse 2s ease-in-out infinite}
+@keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.5)}50%{box-shadow:0 0 0 5px rgba(239,68,68,0)}}
+.sidebar-bottom{margin-top:auto;padding:14px 16px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.user-ava{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--violet));display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.user-info{flex:1;min-width:0}
+.user-name{font-size:13px;font-weight:600;color:var(--text)}
+.user-role{font-size:11px;color:var(--text2);margin-top:1px}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.topbar{height:54px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;gap:14px;flex-shrink:0}
+.topbar-crumb{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text2)}
+.topbar-sep{color:var(--border2)}
+.topbar-page{color:var(--text);font-weight:600}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.tb-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .15s;position:relative}
+.tb-btn:hover{background:var(--surface2);color:var(--text)}
+.tb-dot{position:absolute;top:6px;right:6px;width:6px;height:6px;background:var(--red);border-radius:50%;border:1.5px solid var(--surface)}
+.content{flex:1;overflow-y:auto;padding:28px 32px}
+.page{display:none}
+.page.active{display:block;animation:fadeUp .2s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:16px}
+.ph h1{font-size:20px;font-weight:700;color:#fff;letter-spacing:-.3px}
+.ph p{font-size:13px;color:var(--text2);margin-top:4px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:20px 20px 16px;position:relative;overflow:hidden;transition:border-color .2s,transform .18s;cursor:default}
+.sc:hover{transform:translateY(-2px)}
+.sc.blue:hover{border-color:rgba(59,130,246,.4)}.sc.orange:hover{border-color:rgba(245,158,11,.4)}.sc.green:hover{border-color:rgba(16,185,129,.4)}.sc.red:hover{border-color:rgba(239,68,68,.4)}
+.sc::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;opacity:0;transition:opacity .2s}
+.sc:hover::after{opacity:1}
+.sc.blue::after{background:linear-gradient(90deg,transparent,rgba(59,130,246,.55),transparent)}
+.sc.orange::after{background:linear-gradient(90deg,transparent,rgba(245,158,11,.55),transparent)}
+.sc.green::after{background:linear-gradient(90deg,transparent,rgba(16,185,129,.55),transparent)}
+.sc.red::after{background:linear-gradient(90deg,transparent,rgba(239,68,68,.55),transparent)}
+.sc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.sc-label{font-size:12px;color:var(--text2);font-weight:500}
+.sc-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.blue .sc-ico{background:var(--blue-bg)}.orange .sc-ico{background:var(--orange-bg)}.green .sc-ico{background:var(--green-bg)}.red .sc-ico{background:var(--red-bg)}
+.sc-val{font-size:32px;font-weight:700;letter-spacing:-1.2px;font-family:'Inter',sans-serif;line-height:1}
+.blue .sc-val{color:var(--accent-h)}.orange .sc-val{color:var(--orange)}.green .sc-val{color:var(--green)}.red .sc-val{color:var(--red)}
+.sc-trend{font-size:11px;color:var(--text2);margin-top:10px;display:flex;align-items:center;gap:4px}
+.up{color:var(--green)}.dn{color:var(--red)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);margin-bottom:20px;overflow:hidden}
+.card-hd{padding:16px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.card-title{font-size:14px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:8px}
+.card-cnt{background:var(--surface2);color:var(--text2);font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;font-family:'Inter',sans-serif}
+.card-bd{padding:22px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;align-items:center}
+select,input[type=text],input[type=date]{background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:7px 11px;border-radius:8px;font-size:13px;font-family:var(--fn);outline:none;transition:border-color .15s}
+select:focus,input:focus{border-color:var(--accent)}
+input::placeholder{color:var(--text2)}
+.form-group{margin-bottom:16px}
+.form-label{display:block;font-size:11px;font-weight:600;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
+.form-control{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-size:13px;font-family:var(--fn);outline:none;transition:border-color .15s}
+.form-control:focus{border-color:var(--accent)}
+textarea.form-control{resize:vertical;min-height:80px}
+.req{color:var(--red)}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:10px 14px;color:var(--text2);font-size:11px;font-weight:600;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:.06em;font-family:'Inter',sans-serif}
+td{padding:13px 14px;border-bottom:1px solid rgba(30,45,72,.55);font-size:13px;vertical-align:middle}
+tr:hover td{background:rgba(255,255,255,.016)}
+tr:last-child td{border-bottom:none}
+.mono{font-family:var(--fm);font-size:12px;color:var(--accent-h);font-weight:500}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:20px;font-size:12px;font-weight:500}
+.badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+.b-pending{background:rgba(245,158,11,.1);color:var(--orange);border:1px solid rgba(245,158,11,.2)}
+.b-approved{background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.2)}
+.b-rejected{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.2)}
+.b-recalled{background:rgba(100,116,139,.08);color:var(--text2);border:1px solid rgba(100,116,139,.15)}
+.b-active{background:rgba(59,130,246,.1);color:var(--accent-h);border:1px solid rgba(59,130,246,.2)}
+.b-disabled{background:rgba(100,116,139,.07);color:var(--text2);border:1px solid rgba(100,116,139,.12)}
+.btn{padding:7px 16px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;border:none;transition:all .15s;display:inline-flex;align-items:center;gap:6px;font-family:var(--fn);white-space:nowrap}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 0 16px rgba(59,130,246,.25)}
+.btn-primary:hover{background:#2563eb;box-shadow:0 0 24px rgba(59,130,246,.4)}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border)}
+.btn-ghost:hover{background:var(--surface2);color:var(--text);border-color:var(--border2)}
+.btn-danger{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.25)}
+.btn-danger:hover{background:rgba(239,68,68,.18)}
+.btn-success{background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.25)}
+.btn-success:hover{background:rgba(16,185,129,.18)}
+.btn-sm{padding:5px 12px;font-size:12px}
+.pagination{display:flex;align-items:center;gap:8px;justify-content:flex-end;margin-top:18px}
+.page-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:5px 12px;border-radius:7px;cursor:pointer;font-size:12px;font-family:'Inter',sans-serif;transition:all .15s}
+.page-btn:hover{color:var(--text)}
+.page-btn.pg-active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.page-info{font-size:12px;color:var(--text2);font-family:'Inter',sans-serif}
+
+/* PANEL */
+.panel{display:none;position:fixed;top:0;right:0;width:520px;height:100vh;background:var(--surface);border-left:1px solid var(--border);z-index:200;flex-direction:column;box-shadow:-8px 0 48px rgba(0,0,0,.5)}
+.panel.open{display:flex;animation:slideIn .22s ease}
+@keyframes slideIn{from{transform:translateX(16px);opacity:0}to{transform:none;opacity:1}}
+.panel-hd{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.ptitle{font-size:15px;font-weight:700;color:#fff}
+.psub{font-size:12px;color:var(--text2);margin-top:2px}
+.panel-body{flex:1;overflow-y:auto;padding:24px}
+.panel-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
+.close-btn{background:none;border:none;color:var(--text2);font-size:22px;cursor:pointer;line-height:1;padding:2px 6px;border-radius:6px;transition:all .15s}
+.close-btn:hover{background:var(--surface2);color:var(--text)}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:150;backdrop-filter:blur(2px)}
+.overlay.open{display:block}
+
+/* MODAL */
+.modal{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:490px;background:var(--surface);border:1px solid var(--border2);border-radius:16px;z-index:300;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.7)}
+.modal.open{display:flex;animation:popIn .2s ease}
+@keyframes popIn{from{opacity:0;transform:translate(-50%,-48%) scale(.97)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.modal-hd{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:15px;font-weight:700;color:#fff}
+.modal-body{padding:24px}
+.modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
+
+/* INFO GRID */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.info-item label{color:var(--text2);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:4px}
+.info-item span{font-size:13px;color:var(--text)}
+
+/* STEPS */
+.steps{display:flex;align-items:flex-start;margin-bottom:24px}
+.step{flex:1;text-align:center;position:relative}
+.step-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-size:12px;font-weight:700;border:2px solid var(--border);background:var(--surface2);color:var(--text2);position:relative;z-index:1}
+.step.done .step-dot{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 0 12px rgba(16,185,129,.35)}
+.step.current .step-dot{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 12px rgba(59,130,246,.35)}
+.step.rejected .step-dot{background:var(--red);border-color:var(--red);color:#fff}
+.step-label{font-size:11px;color:var(--text2)}
+.step.done .step-label,.step.current .step-label{color:var(--text)}
+.step-line{flex:1;height:2px;background:var(--border);margin-top:13px}
+.step-line.done{background:var(--green)}
+
+/* TPL NODE */
+.tpl-node{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.tpl-node-hd{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.node-num{width:22px;height:22px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.tag{background:rgba(59,130,246,.12);color:var(--accent-h);padding:2px 8px;border-radius:4px;font-size:11px;border:1px solid rgba(59,130,246,.2)}
+.node-meta{display:flex;gap:12px;font-size:12px;color:var(--text2);flex-wrap:wrap;margin-top:4px}
+
+/* NOTIF */
+.notif-item{padding:14px;border-radius:8px;cursor:pointer;transition:background .1s;position:relative;margin-bottom:2px}
+.notif-item:hover{background:var(--surface2)}
+.notif-item.unread::before{content:'';width:7px;height:7px;background:var(--accent);border-radius:50%;position:absolute;left:4px;top:18px}
+.notif-title{font-size:13px;margin-bottom:4px;padding-left:8px;color:var(--text)}
+.notif-time{font-size:11px;color:var(--text2);padding-left:8px}
+.notif-cta{font-size:12px;color:var(--accent-h);margin-top:4px;padding-left:8px}
+
+.alert-warn{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.22);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--orange);margin-bottom:20px}
+.alert-err{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.22);border-radius:8px;padding:14px;margin-top:16px}
+.alert-err-title{color:var(--red);font-size:12px;font-weight:600;margin-bottom:6px}
+.section-label{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+.divider{height:1px;background:var(--border);margin:20px 0}
+#toast{display:none;position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:12px 24px;font-size:13px;color:var(--text);z-index:500;box-shadow:0 8px 40px rgba(0,0,0,.5);white-space:nowrap;animation:toastIn .2s ease}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="logo">
+    <div class="logo-mark">S</div>
+    <div class="logo-texts"><div class="logo-name">ShipSage</div><div class="logo-sub">Approval Flow</div></div>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">财务</div>
+    <div class="nav-item active" onclick="showPage('all',this)"><span class="nav-icon">📋</span>全部申请</div>
+    <div class="nav-item" onclick="showPage('pending',this)"><span class="nav-icon">⏰</span>待我审批<span class="nav-badge">3</span></div>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">设置</div>
+    <div class="nav-item" onclick="showPage('templates',this)"><span class="nav-icon">🗂</span>审批流配置</div>
+    <div class="nav-item" onclick="showPage('delegation',this)"><span class="nav-icon">👤</span>审批委托</div>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-label">通知</div>
+    <div class="nav-item" onclick="showPage('notif',this)"><span class="nav-icon">🔔</span>消息中心<span class="nav-badge">2</span></div>
+  </div>
+  <div class="sidebar-bottom">
+    <div class="user-ava">张</div>
+    <div class="user-info"><div class="user-name">张三</div><div class="user-role">财务主管</div></div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-crumb">ShipSage <span class="topbar-sep">/</span> <span class="topbar-page" id="topbar-page">全部申请</span></div>
+    <div class="topbar-right">
+      <button class="tb-btn" onclick="showPage('notif',null)">🔔<div class="tb-dot"></div></button>
+      <div class="user-ava" style="width:32px;height:32px;font-size:13px;cursor:pointer">张</div>
+    </div>
+  </div>
+  <div class="content">
+
+    <!-- PAGE: ALL -->
+    <div class="page active" id="page-all">
+      <div class="ph"><div><h1>全部申请</h1><p>查看和管理所有审批流程申请</p></div><button class="btn btn-primary" onclick="openModal('new')">+ 发起申请</button></div>
+      <div class="stats-grid">
+        <div class="sc blue"><div class="sc-top"><span class="sc-label">全部申请</span><div class="sc-ico">📋</div></div><div class="sc-val">48</div><div class="sc-trend"><span class="up">↑ 12%</span> 较上月</div></div>
+        <div class="sc orange"><div class="sc-top"><span class="sc-label">审批中</span><div class="sc-ico">⏳</div></div><div class="sc-val">12</div><div class="sc-trend"><span class="dn">3 条超时</span></div></div>
+        <div class="sc green"><div class="sc-top"><span class="sc-label">本月通过</span><div class="sc-ico">✅</div></div><div class="sc-val">29</div><div class="sc-trend"><span class="up">↑ 8%</span> 较上月</div></div>
+        <div class="sc red"><div class="sc-top"><span class="sc-label">已拒绝</span><div class="sc-ico">❌</div></div><div class="sc-val">7</div><div class="sc-trend"><span class="dn">↑ 2</span> 较上月</div></div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><span class="card-title">申请列表 <span class="card-cnt">48</span></span></div>
+        <div class="card-bd">
+          <div class="filters">
+            <select><option>类型: 全部</option><option>约车付款</option><option>客户开票</option><option>合同生效</option><option>渠道充值</option></select>
+            <select><option>状态: 全部</option><option>审批中</option><option>已通过</option><option>已拒绝</option><option>已撤回</option></select>
+            <input type="text" placeholder="搜索单号/申请人..." style="width:210px">
+          </div>
+          <table>
+            <thead><tr><th>申请单号</th><th>类型</th><th>申请人</th><th>状态</th><th>金额</th><th>提交时间</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td><span class="mono">APR-2026031901</span></td><td>约车付款</td><td>张三</td><td><span class="badge b-pending">审批中</span></td><td>$800.00</td><td style="color:var(--text2)">2026-03-19 10:23</td><td><button class="btn btn-ghost btn-sm" onclick="openPanel('d1')">查看</button></td></tr>
+              <tr><td><span class="mono">APR-2026031902</span></td><td>客户开票</td><td>客户A</td><td><span class="badge b-approved">已通过</span></td><td>¥3,200.00</td><td style="color:var(--text2)">2026-03-19 09:15</td><td><button class="btn btn-ghost btn-sm" onclick="openPanel('d2')">查看</button></td></tr>
+              <tr><td><span class="mono">APR-2026031801</span></td><td>合同生效</td><td>李四</td><td><span class="badge b-rejected">已拒绝</span></td><td>—</td><td style="color:var(--text2)">2026-03-18 14:30</td><td><button class="btn btn-ghost btn-sm" onclick="openPanel('d3')">查看</button></td></tr>
+              <tr><td><span class="mono">APR-2026031802</span></td><td>渠道充值</td><td>王五</td><td><span class="badge b-approved">已通过</span></td><td>$500.00</td><td style="color:var(--text2)">2026-03-18 11:00</td><td><button class="btn btn-ghost btn-sm" onclick="openPanel('d2')">查看</button></td></tr>
+              <tr><td><span class="mono">APR-2026031701</span></td><td>约车付款</td><td>张三</td><td><span class="badge b-recalled">已撤回</span></td><td>$350.00</td><td style="color:var(--text2)">2026-03-17 16:45</td><td><button class="btn btn-ghost btn-sm">查看</button></td></tr>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <button class="page-btn">"</button>
+            <button class="page-btn pg-active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">"</button>
+            <span class="page-info">共 48 条</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE: PENDING -->
+    <div class="page" id="page-pending">
+      <div class="ph"><div><h1>待我审批</h1><p>需要您处理的审批请求</p></div></div>
+      <div class="card">
+        <div class="card-hd"><span class="card-title">待审批列表 <span class="card-cnt" style="background:var(--red-bg);color:var(--red)">3</span></span></div>
+        <div class="card-bd">
+          <table>
+            <thead><tr><th>申请单号</th><th>类型</th><th>申请人</th><th>摘要</th><th>等待时长</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td><span class="mono">APR-2026031901</span></td><td>约车付款</td><td>张三</td><td>约车费 $800 / TRK-2026031901</td><td><span style="color:var(--orange)">2h 15min</span></td><td><button class="btn btn-success btn-sm" onclick="openPanel('d1')">审批</button></td></tr>
+              <tr><td><span class="mono">APR-2026031903</span></td><td>合同生效</td><td>赵六</td><td>新签客户合同 2026-2027</td><td><span style="color:var(--red)">4h 52min ⚠</span></td><td><button class="btn btn-success btn-sm" onclick="openPanel('d1')">审批</button></td></tr>
+              <tr><td><span class="mono">APR-2026031904</span></td><td>渠道充值</td><td>王五</td><td>FedEx渠道充值 $500</td><td>38min</td><td><button class="btn btn-success btn-sm" onclick="openPanel('d1')">审批</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE: TEMPLATES -->
+    <div class="page" id="page-templates">
+      <div class="ph"><div><h1>审批流配置</h1><p>管理审批流程模板和节点</p></div><button class="btn btn-primary" onclick="openModal('tpl')">+ 新建模板</button></div>
+      <div class="card">
+        <div class="card-hd"><span class="card-title">审批流模板</span></div>
+        <div class="card-bd">
+          <table>
+            <thead><tr><th>模板名称</th><th>业务类型</th><th>节点数</th><th>状态</th><th>最后更新</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td><b>约车付款审批</b></td><td>约车付款</td><td>2</td><td><span class="badge b-active">启用</span></td><td style="color:var(--text2)">2026-03-01</td><td><button class="btn btn-ghost btn-sm" onclick="openPanel('t1')">编辑</button> <button class="btn btn-danger btn-sm">停用</button></td></tr>
+              <tr><td><b>客户开票审批</b></td><td>客户开票</td><td>1</td><td><span class="badge b-active">启用</span></td><td style="color:var(--text2)">2026-03-01</td><td><button class="btn btn-ghost btn-sm" onclick="openPanel('t1')">编辑</button> <button class="btn btn-danger btn-sm">停用</button></td></tr>
+              <tr><td><b>合同生效审批</b></td><td>合同生效</td><td>2</td><td><span class="badge b-active">启用</span></td><td style="color:var(--text2)">2026-03-05</td><td><button class="btn btn-ghost btn-sm" onclick="openPanel('t1')">编辑</button> <button class="btn btn-danger btn-sm">停用</button></td></tr>
+              <tr><td><b>渠道充值审批(旧)</b></td><td>渠道充值</td><td>1</td><td><span class="badge b-disabled">已停用</span></td><td style="color:var(--text2)">2026-01-10</td><td><button class="btn btn-ghost btn-sm">编辑</button> <button class="btn btn-success btn-sm">启用</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE: DELEGATION -->
+    <div class="page" id="page-delegation">
+      <div class="ph"><div><h1>审批委托</h1><p>设置审批权限委托</p></div><button class="btn btn-primary" onclick="openModal('dlg')">+ 新建委托</button></div>
+      <div class="card">
+        <div class="card-hd"><span class="card-title">委托列表</span></div>
+        <div class="card-bd">
+          <table>
+            <thead><tr><th>委托给</th><th>委托类型</th><th>开始时间</th><th>结束时间</th><th>状态</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td>王副理</td><td>全部</td><td>2026-03-20</td><td>2026-03-25</td><td><span class="badge b-active">有效</span></td><td><button class="btn btn-danger btn-sm" onclick="showToast('委托已撤销')">撤销</button></td></tr>
+              <tr><td>李会计</td><td>客户开票</td><td>2026-02-01</td><td>2026-02-05</td><td><span class="badge b-disabled">已过期</span></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE: NOTIF -->
+    <div class="page" id="page-notif">
+      <div class="ph"><div><h1>消息中心</h1><p>审批相关通知和提醒</p></div><button class="btn btn-ghost">全部标为已读</button></div>
+      <div class="card">
+        <div class="card-bd" style="padding:8px 12px">
+          <div class="notif-item unread" onclick="openPanel('d1')"><div class="notif-title">您有一条待审批申请：约车付款申请 APR-2026031901</div><div class="notif-time">2026-03-19 10:30</div><div class="notif-cta">立即查看 →</div></div>
+          <div class="notif-item unread"><div class="notif-title">申请「合同生效审批 APR-2026031903」已超时 4 小时，请及时处理</div><div class="notif-time">2026-03-19 10:00</div><div class="notif-cta">立即查看 →</div></div>
+          <div class="notif-item"><div class="notif-title">您的申请「客户开票申请」已通过审批</div><div class="notif-time">2026-03-19 09:20</div></div>
+          <div class="notif-item"><div class="notif-title">您的发票已开具，请前往「我的发票」查看下载</div><div class="notif-time">2026-03-18 16:00</div><div class="notif-cta">前往下载 →</div></div>
+          <div class="notif-item"><div class="notif-title">您的申请「约车付款申请 APR-2026031701」已被拒绝，原因：金额超出本月预算</div><div class="notif-time">2026-03-17 17:00</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end content -->
+</div><!-- end main -->
+
+<!-- PANEL: 审批中 -->
+<div class="panel" id="panel-d1">
+  <div class="panel-hd">
+    <div><div class="ptitle">APR-2026031901</div><div class="psub">约车付款申请</div></div>
+    <button class="close-btn" onclick="closeAll()">×</button>
+  </div>
+  <div class="panel-body">
+    <div style="margin-bottom:18px"><span class="badge b-pending">审批中</span></div>
+    <div class="section-label">审批进度</div>
+    <div class="steps">
+      <div class="step current"><div class="step-dot">1</div><div class="step-label">主管审批</div></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-dot">2</div><div class="step-label">财务审批</div></div>
+    </div>
+    <div class="section-label">申请信息</div>
+    <div class="info-grid">
+      <div class="info-item"><label>申请人</label><span>张三</span></div>
+      <div class="info-item"><label>提交时间</label><span>2026-03-19 10:23</span></div>
+      <div class="info-item"><label>约车单号</label><span class="mono">TRK-2026031901</span></div>
+      <div class="info-item"><label>申请金额</label><span style="font-weight:700;color:var(--orange)">$800.00 USD</span></div>
+      <div class="info-item"><label>收款方</label><span>XX运输公司</span></div>
+      <div class="info-item"><label>当前审批人</label><span>王主管</span></div>
+    </div>
+    <div class="info-item" style="margin-bottom:20px"><label>付款说明</label><span>3月第2批次约车费用，含2条线路共4台车</span></div>
+    <div class="divider"></div>
+    <div class="section-label">审批意见</div>
+    <div class="form-group"><textarea class="form-control" placeholder="请输入审批意见（拒绝时必填）..."></textarea></div>
+  </div>
+  <div class="panel-footer">
+    <button class="btn btn-ghost" onclick="showToast('申请已撤回')">撤回申请</button>
+    <button class="btn btn-danger" onclick="showToast('已拒绝该申请')">拒绝</button>
+    <button class="btn btn-success" onclick="showToast('审批已通过！')">通过</button>
+  </div>
+</div>
+
+<!-- PANEL: 已通过 -->
+<div class="panel" id="panel-d2">
+  <div class="panel-hd">
+    <div><div class="ptitle">APR-2026031902</div><div class="psub">客户开票申请</div></div>
+    <button class="close-btn" onclick="closeAll()">×</button>
+  </div>
+  <div class="panel-body">
+    <div style="margin-bottom:18px"><span class="badge b-approved">已通过</span></div>
+    <div class="section-label">审批进度</div>
+    <div class="steps"><div class="step done"><div class="step-dot">✓</div><div class="step-label">财务审批</div></div></div>
+    <div class="section-label">申请信息</div>
+    <div class="info-grid">
+      <div class="info-item"><label>申请人</label><span>客户A</span></div>
+      <div class="info-item"><label>开票金额</label><span style="font-weight:700;color:var(--green)">¥3,200.00</span></div>
+      <div class="info-item"><label>发票类型</label><span>增值税普通发票</span></div>
+      <div class="info-item"><label>审批人</label><span>财务小李</span></div>
+      <div class="info-item"><label>通过时间</label><span>2026-03-19 09:20</span></div>
+      <div class="info-item"><label>发票状态</label><span style="color:var(--green)">已上传</span></div>
+    </div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;display:flex;align-items:center;gap:12px">
+      <span style="font-size:24px">📄</span>
+      <div style="flex:1"><div style="font-size:13px;font-weight:500">invoice-20260319.pdf</div><div style="font-size:12px;color:var(--text2)">2.3 MB</div></div>
+      <button class="btn btn-primary btn-sm" onclick="showToast('生成下载链接，有效期1小时')">下载</button>
+    </div>
+  </div>
+  <div class="panel-footer"><button class="btn btn-ghost" onclick="closeAll()">关闭</button></div>
+</div>
+
+<!-- PANEL: 已拒绝 -->
+<div class="panel" id="panel-d3">
+  <div class="panel-hd">
+    <div><div class="ptitle">APR-2026031801</div><div class="psub">合同生效审批</div></div>
+    <button class="close-btn" onclick="closeAll()">×</button>
+  </div>
+  <div class="panel-body">
+    <div style="margin-bottom:18px"><span class="badge b-rejected">已拒绝</span></div>
+    <div class="section-label">审批进度</div>
+    <div class="steps">
+      <div class="step done"><div class="step-dot">✓</div><div class="step-label">主管审批</div></div>
+      <div class="step-line done"></div>
+      <div class="step rejected"><div class="step-dot">✕</div><div class="step-label">运营总监</div></div>
+    </div>
+    <div class="section-label">申请信息</div>
+    <div class="info-grid">
+      <div class="info-item"><label>申请人</label><span>李四</span></div>
+      <div class="info-item"><label>合同类型</label><span>新签</span></div>
+      <div class="info-item"><label>客户名称</label><span>深圳XX贸易有限公司</span></div>
+      <div class="info-item"><label>有效期</label><span>2026-04-01 ~ 2027-03-31</span></div>
+    </div>
+    <div class="alert-err"><div class="alert-err-title">拒绝原因</div><div style="font-size:13px">合同条款第3条需重新谈判，请与法务确认后重新提交。</div></div>
+  </div>
+  <div class="panel-footer">
+    <button class="btn btn-ghost" onclick="closeAll()">关闭</button>
+    <button class="btn btn-primary" onclick="showToast('已重新发起申请')">重新申请</button>
+  </div>
+</div>
+
+<!-- PANEL: 模板编辑 -->
+<div class="panel" id="panel-t1">
+  <div class="panel-hd">
+    <div><div class="ptitle">约车付款审批</div><div class="psub">审批流模板</div></div>
+    <button class="close-btn" onclick="closeAll()">×</button>
+  </div>
+  <div class="panel-body">
+    <div class="alert-warn">⚠ 变更仅影响新申请，存量申请继续按原快照执行。</div>
+    <div class="info-grid" style="margin-bottom:20px">
+      <div class="info-item"><label>业务类型</label><span>约车付款</span></div>
+      <div class="info-item"><label>状态</label><span class="badge b-active">启用</span></div>
+    </div>
+    <div class="section-label">节点配置</div>
+    <div class="tpl-node"><div class="tpl-node-hd"><div class="node-num">1</div><span style="font-weight:600">主管审批</span><span class="tag">会签</span></div><div class="node-meta"><span>角色：客服主管</span><span>超时：24小时</span></div></div>
+    <div class="tpl-node"><div class="tpl-node-hd"><div class="node-num">2</div><span style="font-weight:600">财务审批</span><span class="tag">或签</span></div><div class="node-meta"><span>角色：财务</span><span>超时：24小时</span></div></div>
+  </div>
+  <div class="panel-footer">
+    <button class="btn btn-ghost" onclick="closeAll()">取消</button>
+    <button class="btn btn-primary" onclick="showToast('模板已保存')">保存</button>
+  </div>
+</div>
+
+<!-- MODAL: 发起申请 -->
+<div class="modal" id="modal-new">
+  <div class="modal-hd">发起审批申请 <button class="close-btn" onclick="closeAll()">×</button></div>
+  <div class="modal-body">
+    <div class="form-group"><label class="form-label">审批类型 <span class="req">*</span></label><select class="form-control" onchange="updateFields(this.value)"><option value="">请选择审批类型</option><option value="truck">约车付款</option><option value="invoice">客户开票</option><option value="contract">合同生效</option><option value="recharge">渠道充值</option></select></div>
+    <div id="dynamic-fields"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-ghost" onclick="closeAll()">取消</button>
+    <button class="btn btn-primary" onclick="submitReq()">提交申请</button>
+  </div>
+</div>
+
+<!-- MODAL: 新建模板 -->
+<div class="modal" id="modal-tpl">
+  <div class="modal-hd">新建审批流模板 <button class="close-btn" onclick="closeAll()">×</button></div>
+  <div class="modal-body">
+    <div class="form-group"><label class="form-label">模板名称 <span class="req">*</span></label><input class="form-control" placeholder="如：约车付款审批"></div>
+    <div class="form-group"><label class="form-label">业务类型 <span class="req">*</span></label><select class="form-control"><option>约车付款</option><option>客户开票</option><option>合同生效</option><option>渠道充值</option></select></div>
+    <div class="section-label" style="margin-bottom:10px">节点配置</div>
+    <div class="tpl-node">
+      <div class="tpl-node-hd"><div class="node-num">1</div><input class="form-control" style="flex:1" placeholder="节点名称"><select class="form-control" style="width:80px"><option>会签</option><option>或签</option></select></div>
+      <div style="margin-top:8px"><select class="form-control"><option>客服主管</option><option>财务</option><option>运营</option></select></div>
+    </div>
+    <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:6px">+ 添加节点</button>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-ghost" onclick="closeAll()">取消</button>
+    <button class="btn btn-primary" onclick="showToast('模板已创建并启用');closeAll()">保存并启用</button>
+  </div>
+</div>
+
+<!-- MODAL: 新建委托 -->
+<div class="modal" id="modal-dlg">
+  <div class="modal-hd">新建审批委托 <button class="close-btn" onclick="closeAll()">×</button></div>
+  <div class="modal-body">
+    <div class="form-group"><label class="form-label">委托给 <span class="req">*</span></label><select class="form-control"><option>请选择用户</option><option>王副理</option><option>李会计</option><option>赵主管</option></select></div>
+    <div class="form-group">
+      <label class="form-label">委托业务类型 <span class="req">*</span></label>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;margin-top:4px">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="radio" name="dlg-type" checked> 全部审批类型</label>
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="radio" name="dlg-type"> 指定类型</label>
+      </div>
+    </div>
+    <div class="form-group"><label class="form-label">开始时间 <span class="req">*</span></label><input type="date" class="form-control" value="2026-03-20"></div>
+    <div class="form-group"><label class="form-label">结束时间 <span class="req">*</span></label><input type="date" class="form-control" value="2026-03-25"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-ghost" onclick="closeAll()">取消</button>
+    <button class="btn btn-primary" onclick="showToast('委托已创建');closeAll()">确认创建</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
+<div id="toast"></div>
+
+<script>
+const PT={all:'全部申请',pending:'待我审批',templates:'审批流配置',delegation:'审批委托',notif:'消息中心'};
+function showPage(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const pg=document.getElementById('page-'+id);
+  if(pg)pg.classList.add('active');
+  if(el)el.classList.add('active');
+  document.getElementById('topbar-page').textContent=PT[id]||'';
+  closeAll();
+}
+function openPanel(id){
+  closeAll();
+  const p=document.getElementById('panel-'+id);
+  if(p){p.classList.add('open');document.getElementById('overlay').classList.add('open');}
+}
+function openModal(id){
+  closeAll();
+  const m=document.getElementById('modal-'+id);
+  if(m){m.classList.add('open');document.getElementById('overlay').classList.add('open');}
+}
+function closeAll(){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));
+  document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));
+  document.getElementById('overlay').classList.remove('open');
+}
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.style.display='block';
+  setTimeout(()=>{t.style.display='none';},2200);
+}
+function submitReq(){showToast('申请已提交，审批人将收到通知');closeAll();}
+function updateFields(v){
+  const el=document.getElementById('dynamic-fields');
+  const truck=`<div class="form-group"><label class="form-label">约车单号 <span class="req">*</span></label><input class="form-control" value="TRK-2026031901" readonly></div><div class="form-group"><label class="form-label">申请金额</label><input class="form-control" value="800.00" readonly></div><div class="form-group"><label class="form-label">收款方 <span class="req">*</span></label><input class="form-control" value="XX运输公司"></div><div class="form-group"><label class="form-label">付款说明</label><textarea class="form-control" placeholder="请输入付款说明..."></textarea></div><p style="font-size:12px;color:var(--text2);margin-top:-8px">单笔申请上限 $1,000 USD</p>`;
+  const invoice=`<div class="form-group"><label class="form-label">充值记录 <span class="req">*</span></label><select class="form-control"><option>2026-03-18 $500.00</option><option>2026-02-28 $200.00</option></select></div><div class="form-group"><label class="form-label">开票抬头 <span class="req">*</span></label><input class="form-control" placeholder="公司全称"></div><div class="form-group"><label class="form-label">税号 <span class="req">*</span></label><input class="form-control" placeholder="统一社会信用代码"></div>`;
+  const contract=`<div class="form-group"><label class="form-label">合同类型 <span class="req">*</span></label><select class="form-control"><option>新签</option><option>续签</option></select></div><div class="form-group"><label class="form-label">客户名称 <span class="req">*</span></label><input class="form-control" placeholder="请输入客户名称"></div><div class="form-group"><label class="form-label">合同附件 <span class="req">*</span></label><input type="file" class="form-control"></div>`;
+  const recharge=`<div class="form-group"><label class="form-label">渠道 <span class="req">*</span></label><select class="form-control"><option>UPS</option><option>FedEx</option><option>USPS</option></select></div><div class="form-group"><label class="form-label">充值金额 <span class="req">*</span></label><input class="form-control" placeholder="USD金额"></div><div class="form-group"><label class="form-label">充值原因 <span class="req">*</span></label><textarea class="form-control" placeholder="请输入充值原因"></textarea></div>`;
+  const f={truck,invoice,contract,recharge};
+  el.innerHTML=f[v]||'';
+}
+</script>
+</body>
+</html>

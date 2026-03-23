@@ -1,0 +1,32 @@
+---
+description: 冷启动上下文加载顺序规范，减少无效文件读取
+alwaysApply: true
+---
+
+# 上下文加载规范
+
+## 冷启动必读（每次新对话开始）
+
+按顺序读取，不可跳过：
+1. `MEMORY.md` — 工作记忆（偏好、决策、进展、已踩的坑）
+2. `AGENT.MD` — 工作空间总览、可用 skill 和工具清单
+3. `.agent/rules/project-rule.md` — 核心原则和工作流索引
+
+**任务结束时**：如有新的决策、技术选型、踩坑记录或项目进展，主动提示用户更新 `MEMORY.md` 或对应项目的 `CONTEXT.md`。
+
+## 按需加载（根据任务类型）
+
+| 任务类型 | 需额外读取 |
+|----------|------------|
+| 收到新需求 | `.agent/workflows/1-analyze-requirement.md` |
+| 设计方案/数据建模 | `.agent/workflows/2-design-solution.md` |
+| 生成 PRD / Demo | `.agent/workflows/3-generate-specs.md` |
+| 自检/验收 | `.agent/workflows/4-verify-iterate.md` |
+| 涉及具体业务模块 | 参考 `context/docs-index.md` 按需加载对应文档 |
+| 需要工具（Zone Chart/费用导入等）| 对应 `tools/*/SKILL.md` |
+
+## 禁止行为
+
+- 禁止在任务开始时一次性读取所有 workflow 文件
+- 禁止重复读取同一文件（同一对话内已读过的文件不再重读）
+- 禁止读取与当前任务无关的 docs/ 文档

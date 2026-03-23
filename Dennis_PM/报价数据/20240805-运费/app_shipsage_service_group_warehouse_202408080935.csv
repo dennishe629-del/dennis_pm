@@ -1,0 +1,4 @@
+group_warehouse_id,service_group_id,warehouse_id,start_date,end_date,hidden,disabled,deleted,deleted_at,created_at,created_by,updated_at,updated_by
+,24,100,2024/8/8 0:00,2099/12/31 23:59,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,24,101,2024/8/8 0:00,2099/12/31 23:59,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0
+,24,109,2024/8/8 0:00,2099/12/31 23:59,0,0,0,,2024/8/8 0:00,0,2024/8/8 0:00,0

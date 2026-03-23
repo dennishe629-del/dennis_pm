@@ -1,0 +1,9 @@
+fee_version_id,fee_version_name,display_name,fee_charge_method_id,service_id,display_notice,hidden,disabled,deleted,deleted_at,created_at,created_by,updated_at,updated_by
+,Shipping Fee-E1-20240805-CN-VIP,Shipping Fee-E1-20240805-CN-VIP,1,0,,0,0,0,,2024/8/5 0:00,0,,0
+,Shipping Fee-E2-20240805-CN-SVIP,Shipping Fee-E2-20240805-CN-SVIP,1,0,,0,0,0,,2024/8/5 0:00,0,,0
+,Shipping Fee-E3-20240805-CN-SVIP-Plus,Shipping Fee-E3-20240805-CN-SVIP-Plus,1,0,,0,0,0,,2024/8/5 0:00,0,,0
+,Shipping Fee-S1-20240805-CN-VIP,Shipping Fee-S1-20240805-CN-VIP,1,0,,0,0,0,,2024/8/5 0:00,0,,0
+,Shipping Fee-S2-20240805-CN-SVIP,Shipping Fee-S2-20240805-CN-SVIP,1,0,,0,0,0,,2024/8/5 0:00,0,,0
+,Shipping Fee-S3-20240805-CN-SVIP-Plus,Shipping Fee-S3-20240805-CN-SVIP-Plus,1,0,,0,0,0,,2024/8/5 0:00,0,,0
+,Shipping Fee-N1-20240805-CN-SVIP-Plus,Shipping Fee-N1-20240805-CN-SVIP-Plus,1,0,,0,0,0,,2024/8/5 0:00,0,,0
+,Receiving Fee-CN-20240805,20240805-Warehouse&Service Base,12,3114,,0,0,0,,2024/8/5 0:00,0,,0

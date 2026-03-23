@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>POD Design Studio — Demo Hub</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#1a237e 0%,#1565C0 60%,#0288D1 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px}
+.hub{max-width:960px;width:100%}
+.hub-title{color:#fff;font-size:32px;font-weight:700;margin-bottom:6px}
+.hub-sub{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:36px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:#fff;border-radius:14px;padding:24px;box-shadow:0 4px 24px rgba(0,0,0,.15);text-decoration:none;color:#212121;display:flex;flex-direction:column;gap:10px;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.2)}
+.card-icon{font-size:36px}
+.card-role{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.card-name{font-size:17px;font-weight:700;margin-bottom:2px}
+.card-desc{font-size:12px;color:#9e9e9e;line-height:1.6}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
+.tag-blue{background:#E3F2FD;color:#1565C0}
+.tag-green{background:#E8F5E9;color:#2E7D32}
+.tag-dark{background:#212121;color:#fff}
+.tag-orange{background:#FFF3E0;color:#E65100}
+.footer{color:rgba(255,255,255,.5);font-size:12px;text-align:center;margin-top:28px}
+</style></head><body>
+<div class="hub">
+  <h1 class="hub-title">POD Design Studio</h1>
+  <p class="hub-sub">Demo Hub — PRD-v2 全功能演示 · ShipSage × Shopify POD Platform</p>
+  <div class="grid">
+    <a class="card" href="index.html">
+      <div class="card-icon">🛍</div>
+      <div><div class="card-role">POD-001 · Consumer</div><div class="card-name">Design Studio Widget</div></div>
+      <div class="card-desc">Shopify商品页嵌入设计器：上传图片、文字工具、模板选择、实时预览、加入购物车</div>
+      <span class="tag tag-blue">Consumer</span>
+    </a>
+    <a class="card" href="merchant.html">
+      <div class="card-icon">🏪</div>
+      <div><div class="card-role">POD-002 · Merchant</div><div class="card-name">Merchant App</div></div>
+      <div class="card-desc">商家管理后台：商品模板、订单管理、钱包充值、账单明细、利润计算器</div>
+      <span class="tag tag-blue">Merchant</span>
+    </a>
+    <a class="card" href="admin.html">
+      <div class="card-icon">🖥</div>
+      <div><div class="card-role">POD-004 · Admin</div><div class="card-name">Print Jobs Monitor</div></div>
+      <div class="card-desc">ShipSage管理员：印刷作业监控、异常处理、SD流程失败告警、全量订单视图</div>
+      <span class="tag tag-dark">Admin</span>
+    </a>
+    <a class="card" href="wms.html">
+      <div class="card-icon">🖨</div>
+      <div><div class="card-role">POD-005 · Warehouse</div><div class="card-name">WMS Print Queue</div></div>
+      <div class="card-desc">仓库操作员：印刷队列认领、作业执行、质检结果提交、超时预警</div>
+      <span class="tag tag-green">Warehouse</span>
+    </a>
+  </div>
+  <div class="footer">PRD-v2 · MVP Scope: T-Shirt × SG-ONT1 × Shopify · ShipSage POD Platform</div>
+</div>
+</body></html>

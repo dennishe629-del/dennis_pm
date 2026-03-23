@@ -1,0 +1,433 @@
+rate_id,service_id,fee_group,fee_code,fee_code_carrier,fee_type,commercial,residential,additional,rate_shopping,fee,start_date,end_date,created_at,created_by,updated_at,updated_by
+,3349,Additional Handling Charge,AHW-2,AHW,"{""min_weight"":""800.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,8.88,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHW-3T4,AHW,"{""min_weight"":""800.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,9.38,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHW-5T6,AHW,"{""min_weight"":""800.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,9.78,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHW-7T8,AHW,"{""min_weight"":""800.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,10.18,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHL-2,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":2,""max_zone"":2}",1,1,1,1,6.07,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHL-3T4,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.53,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHL-5T6,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6.92,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHL-7T8,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":7,""max_zone"":8}",1,1,1,1,7.49,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHS-2,AHS,"{""min_width"":""30.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,6.07,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHS-3T4,AHS,"{""min_width"":""30.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.53,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHS-5T6,AHS,"{""min_width"":""30.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6.92,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHS-7T8,AHS,"{""min_width"":""30.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,7.49,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHG-2,AHG,"{""min_girth"":""105.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,6.07,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHG-3T4,AHG,"{""min_girth"":""105.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.53,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHG-5T6,AHG,"{""min_girth"":""105.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6.92,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHG-7T8,AHG,"{""min_girth"":""105.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,7.49,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHV-2,AHV,"{""min_volume"":""10368.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,6.07,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHV-3T4,AHV,"{""min_volume"":""10368.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.53,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHV-5T6,AHV,"{""min_volume"":""10368.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6.92,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHV-7T8,AHV,"{""min_volume"":""10368.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,7.49,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHC-2,AHC,"{""min_zone"":2,""max_zone"":2}",1,1,1,1,6.33,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHC-3T4,AHC,"{""min_zone"":3,""max_zone"":4}",1,1,1,1,6.87,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHC-5T6,AHC,"{""min_zone"":5,""max_zone"":6}",1,1,1,1,7.21,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Additional Handling Charge,AHC-7T8,AHC,"{""min_zone"":7,""max_zone"":8}",1,1,1,1,7.66,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LLC-2,LLC,"{""min_length"":""96.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,42.25,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LLC-3T4,LLC,"{""min_length"":""96.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,45.45,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LLC-5T6,LLC,"{""min_length"":""96.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,51.4,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LLC-7T8,LLC,"{""min_length"":""96.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,54.17,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LPS-2,LPS,"{""min_girth"":""130.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,42.25,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LPS-3T4,LPS,"{""min_girth"":""130.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,45.45,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LPS-5T6,LPS,"{""min_girth"":""130.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,51.4,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LPS-7T8,LPS,"{""min_girth"":""130.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,54.17,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LWS-2,LWS,"{""min_weight"":""1760.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,42.25,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LWS-3T4,LWS,"{""min_weight"":""1760.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,45.45,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LWS-5T6,LWS,"{""min_weight"":""1760.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,51.4,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LWS-7T8,LWS,"{""min_weight"":""1760.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,54.17,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LVS-2,LVS,"{""min_volume"":""17280.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,42.25,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LVS-3T4,LVS,"{""min_volume"":""17280.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,45.45,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LVS-5T6,LVS,"{""min_volume"":""17280.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,51.4,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LVS-7T8,LVS,"{""min_volume"":""17280.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,54.17,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LLR-2,LLR,"{""min_length"":""96.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,42.25,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LLR-3T4,LLR,"{""min_length"":""96.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,45.45,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LLR-5T6,LLR,"{""min_length"":""96.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,51.4,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LLR-7T8,LLR,"{""min_length"":""96.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,54.17,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LPR-2,LPR,"{""min_girth"":""130.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,42.25,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LPR-3T4,LPR,"{""min_girth"":""130.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,45.45,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LPR-5T6,LPR,"{""min_girth"":""130.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,51.4,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LPR-7T8,LPR,"{""min_girth"":""130.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,54.17,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LWR-2,LWR,"{""min_weight"":""1760.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,42.25,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LWR-3T4,LWR,"{""min_weight"":""1760.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,45.45,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LWR-5T6,LWR,"{""min_weight"":""1760.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,51.4,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LWR-7T8,LWR,"{""min_weight"":""1760.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,54.17,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LVR-2,LVR,"{""min_volume"":""17280.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,42.25,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LVR-3T4,LVR,"{""min_volume"":""17280.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,45.45,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LVR-5T6,LVR,"{""min_volume"":""17280.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,51.4,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Large Package Surcharge,LVR-7T8,LVR,"{""min_volume"":""17280.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,54.17,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Address Correction,ADC,ADC,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Delivery Confirmation Signature,DCS,DCS,{"signature_type":"direct"},0,1,1,1,4.22,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Delivery Confirmation Signature Commercial,CSG,CSG,{"signature_type":"direct"},1,0,1,1,4.22,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Adult Signature Required,ADS,ADS,{"signature_type":"adult"},1,1,1,1,5.56,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Delivery Area Surcharge Commercial,RDC,RDC,{"AreaSurchargeZip":"RDC"},1,0,1,1,2.59,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Delivery Area Surcharge Residential,RDR,RDR,{"AreaSurchargeZip":"RDR"},0,1,1,1,3.79,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Delivery Area Surcharge Commercial - Extended,LDC,LDC,{"AreaSurchargeZip":"LDC"},1,0,1,1,3.23,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Delivery Area Surcharge Residential - Extended,LDR,LDR,{"AreaSurchargeZip":"LDR"},0,1,1,1,5.07,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Remote Area Surcharge - 48 States,CAC,CAC,{"AreaSurchargeZip":"CAC"},1,0,1,1,11.66,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Remote Area Surcharge - 48 States,CAR,CAR,{"AreaSurchargeZip":"CAR"},0,1,1,1,11.66,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Residential Surcharge,RES,RES,,0,1,1,1,2.98,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Over Maximum,OML,OML,{"min_length":"108.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Over Maximum,OVR,OVR,{"min_girth":"165.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Over Maximum,OVX,OVX,{"min_weight":"2400.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Return To Sender - Web Request,ISW,ISW,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3349,Reroute - Web Request,IRW,IRW,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHW-2,AHW,"{""min_weight"":""800.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,8.88,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHW-3T4,AHW,"{""min_weight"":""800.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,9.38,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHW-5T6,AHW,"{""min_weight"":""800.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,9.78,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHW-7T8,AHW,"{""min_weight"":""800.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,10.18,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHL-2,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":2,""max_zone"":2}",1,1,1,1,6.07,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHL-3T4,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.53,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHL-5T6,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6.92,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHL-7T8,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":7,""max_zone"":8}",1,1,1,1,7.49,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHS-2,AHS,"{""min_width"":""30.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,6.07,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHS-3T4,AHS,"{""min_width"":""30.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.53,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHS-5T6,AHS,"{""min_width"":""30.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6.92,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHS-7T8,AHS,"{""min_width"":""30.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,7.49,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHG-2,AHG,"{""min_girth"":""105.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,6.07,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHG-3T4,AHG,"{""min_girth"":""105.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.53,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHG-5T6,AHG,"{""min_girth"":""105.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6.92,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHG-7T8,AHG,"{""min_girth"":""105.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,7.49,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHV-2,AHV,"{""min_volume"":""10368.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,6.07,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHV-3T4,AHV,"{""min_volume"":""10368.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.53,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHV-5T6,AHV,"{""min_volume"":""10368.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6.92,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHV-7T8,AHV,"{""min_volume"":""10368.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,7.49,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHC-2,AHC,"{""min_zone"":2,""max_zone"":2}",1,1,1,1,6.33,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHC-3T4,AHC,"{""min_zone"":3,""max_zone"":4}",1,1,1,1,6.87,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHC-5T6,AHC,"{""min_zone"":5,""max_zone"":6}",1,1,1,1,7.21,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Additional Handling Charge,AHC-7T8,AHC,"{""min_zone"":7,""max_zone"":8}",1,1,1,1,7.66,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LLC-2,LLC,"{""min_length"":""96.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,42.25,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LLC-3T4,LLC,"{""min_length"":""96.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,45.45,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LLC-5T6,LLC,"{""min_length"":""96.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,51.4,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LLC-7T8,LLC,"{""min_length"":""96.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,54.17,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LPS-2,LPS,"{""min_girth"":""130.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,42.25,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LPS-3T4,LPS,"{""min_girth"":""130.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,45.45,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LPS-5T6,LPS,"{""min_girth"":""130.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,51.4,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LPS-7T8,LPS,"{""min_girth"":""130.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,54.17,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LWS-2,LWS,"{""min_weight"":""1760.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,42.25,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LWS-3T4,LWS,"{""min_weight"":""1760.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,45.45,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LWS-5T6,LWS,"{""min_weight"":""1760.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,51.4,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LWS-7T8,LWS,"{""min_weight"":""1760.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,54.17,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LVS-2,LVS,"{""min_volume"":""17280.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,42.25,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LVS-3T4,LVS,"{""min_volume"":""17280.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,45.45,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LVS-5T6,LVS,"{""min_volume"":""17280.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,51.4,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LVS-7T8,LVS,"{""min_volume"":""17280.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,54.17,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LLR-2,LLR,"{""min_length"":""96.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,42.25,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LLR-3T4,LLR,"{""min_length"":""96.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,45.45,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LLR-5T6,LLR,"{""min_length"":""96.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,51.4,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LLR-7T8,LLR,"{""min_length"":""96.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,54.17,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LPR-2,LPR,"{""min_girth"":""130.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,42.25,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LPR-3T4,LPR,"{""min_girth"":""130.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,45.45,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LPR-5T6,LPR,"{""min_girth"":""130.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,51.4,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LPR-7T8,LPR,"{""min_girth"":""130.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,54.17,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LWR-2,LWR,"{""min_weight"":""1760.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,42.25,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LWR-3T4,LWR,"{""min_weight"":""1760.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,45.45,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LWR-5T6,LWR,"{""min_weight"":""1760.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,51.4,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LWR-7T8,LWR,"{""min_weight"":""1760.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,54.17,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LVR-2,LVR,"{""min_volume"":""17280.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,42.25,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LVR-3T4,LVR,"{""min_volume"":""17280.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,45.45,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LVR-5T6,LVR,"{""min_volume"":""17280.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,51.4,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Large Package Surcharge,LVR-7T8,LVR,"{""min_volume"":""17280.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,54.17,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Address Correction,ADC,ADC,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Delivery Confirmation Signature,DCS,DCS,{"signature_type":"direct"},0,1,1,1,4.22,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Delivery Confirmation Signature Commercial,CSG,CSG,{"signature_type":"direct"},1,0,1,1,4.22,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Adult Signature Required,ADS,ADS,{"signature_type":"adult"},1,1,1,1,5.56,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Delivery Area Surcharge Commercial,RDC,RDC,{"AreaSurchargeZip":"RDC"},1,0,1,1,2.59,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Delivery Area Surcharge Residential,RDR,RDR,{"AreaSurchargeZip":"RDR"},0,1,1,1,3.79,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Delivery Area Surcharge Commercial - Extended,LDC,LDC,{"AreaSurchargeZip":"LDC"},1,0,1,1,3.23,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Delivery Area Surcharge Residential - Extended,LDR,LDR,{"AreaSurchargeZip":"LDR"},0,1,1,1,5.07,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Remote Area Surcharge - 48 States,CAC,CAC,{"AreaSurchargeZip":"CAC"},1,0,1,1,11.66,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Remote Area Surcharge - 48 States,CAR,CAR,{"AreaSurchargeZip":"CAR"},0,1,1,1,11.66,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Residential Surcharge,RES,RES,,0,1,1,1,2.98,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Over Maximum,OML,OML,{"min_length":"108.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Over Maximum,OVR,OVR,{"min_girth":"165.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Over Maximum,OVX,OVX,{"min_weight":"2400.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Return To Sender - Web Request,ISW,ISW,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3353,Reroute - Web Request,IRW,IRW,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHW-2,AHW,"{""min_weight"":""800.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,7.97,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHW-3T4,AHW,"{""min_weight"":""800.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,8.44,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHW-5T6,AHW,"{""min_weight"":""800.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,8.74,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHW-7T8,AHW,"{""min_weight"":""800.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,9.11,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHL-2,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":2,""max_zone"":2}",1,1,1,1,5.57,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHL-3T4,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.13,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHL-5T6,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6.52,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHL-7T8,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.99,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHS-2,AHS,"{""min_width"":""30.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,5.57,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHS-3T4,AHS,"{""min_width"":""30.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.13,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHS-5T6,AHS,"{""min_width"":""30.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6.52,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHS-7T8,AHS,"{""min_width"":""30.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.99,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHG-2,AHG,"{""min_girth"":""105.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,5.57,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHG-3T4,AHG,"{""min_girth"":""105.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.13,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHG-5T6,AHG,"{""min_girth"":""105.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6.52,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHG-7T8,AHG,"{""min_girth"":""105.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.99,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHV-2,AHV,"{""min_volume"":""10368.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,5.57,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHV-3T4,AHV,"{""min_volume"":""10368.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.13,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHV-5T6,AHV,"{""min_volume"":""10368.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6.52,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHV-7T8,AHV,"{""min_volume"":""10368.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.99,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHC-2,AHC,"{""min_zone"":2,""max_zone"":2}",1,1,1,1,5.83,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHC-3T4,AHC,"{""min_zone"":3,""max_zone"":4}",1,1,1,1,6.37,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHC-5T6,AHC,"{""min_zone"":5,""max_zone"":6}",1,1,1,1,6.91,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Additional Handling Charge,AHC-7T8,AHC,"{""min_zone"":7,""max_zone"":8}",1,1,1,1,7.26,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LLC-2,LLC,"{""min_length"":""96.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,41.8,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LLC-3T4,LLC,"{""min_length"":""96.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,44.95,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LLC-5T6,LLC,"{""min_length"":""96.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,50.9,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LLC-7T8,LLC,"{""min_length"":""96.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,53.72,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LPS-2,LPS,"{""min_girth"":""130.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,41.8,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LPS-3T4,LPS,"{""min_girth"":""130.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,44.95,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LPS-5T6,LPS,"{""min_girth"":""130.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,50.9,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LPS-7T8,LPS,"{""min_girth"":""130.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,53.72,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LWS-2,LWS,"{""min_weight"":""1760.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,41.8,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LWS-3T4,LWS,"{""min_weight"":""1760.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,44.95,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LWS-5T6,LWS,"{""min_weight"":""1760.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,50.9,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LWS-7T8,LWS,"{""min_weight"":""1760.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,53.72,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LVS-2,LVS,"{""min_volume"":""17280.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,41.8,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LVS-3T4,LVS,"{""min_volume"":""17280.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,44.95,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LVS-5T6,LVS,"{""min_volume"":""17280.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,50.9,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LVS-7T8,LVS,"{""min_volume"":""17280.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,53.72,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LLR-2,LLR,"{""min_length"":""96.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,41.8,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LLR-3T4,LLR,"{""min_length"":""96.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,44.95,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LLR-5T6,LLR,"{""min_length"":""96.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,50.9,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LLR-7T8,LLR,"{""min_length"":""96.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,53.72,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LPR-2,LPR,"{""min_girth"":""130.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,41.8,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LPR-3T4,LPR,"{""min_girth"":""130.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,44.95,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LPR-5T6,LPR,"{""min_girth"":""130.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,50.9,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LPR-7T8,LPR,"{""min_girth"":""130.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,53.72,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LWR-2,LWR,"{""min_weight"":""1760.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,41.8,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LWR-3T4,LWR,"{""min_weight"":""1760.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,44.95,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LWR-5T6,LWR,"{""min_weight"":""1760.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,50.9,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LWR-7T8,LWR,"{""min_weight"":""1760.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,53.72,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LVR-2,LVR,"{""min_volume"":""17280.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,41.8,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LVR-3T4,LVR,"{""min_volume"":""17280.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,44.95,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LVR-5T6,LVR,"{""min_volume"":""17280.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,50.9,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Large Package Surcharge,LVR-7T8,LVR,"{""min_volume"":""17280.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,53.72,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Address Correction,ADC,ADC,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Delivery Confirmation Signature,DCS,DCS,{"signature_type":"direct"},0,1,1,1,7.6,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Delivery Confirmation Signature Commercial,CSG,CSG,{"signature_type":"direct"},1,0,1,1,7.6,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Adult Signature Required,ADS,ADS,{"signature_type":"adult"},1,1,1,1,10,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Delivery Area Surcharge Commercial,RDC,RDC,{"AreaSurchargeZip":"RDC"},1,0,1,1,2.55,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Delivery Area Surcharge Residential,RDR,RDR,{"AreaSurchargeZip":"RDR"},0,1,1,1,3.76,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Delivery Area Surcharge Commercial - Extended,LDC,LDC,{"AreaSurchargeZip":"LDC"},1,0,1,1,3.17,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Delivery Area Surcharge Residential - Extended,LDR,LDR,{"AreaSurchargeZip":"LDR"},0,1,1,1,4.98,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Remote Area Surcharge - 48 States,CAC,CAC,{"AreaSurchargeZip":"CAC"},1,0,1,1,9.81,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Remote Area Surcharge - 48 States,CAR,CAR,{"AreaSurchargeZip":"CAR"},0,1,1,1,9.81,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Residential Surcharge,RES,RES,,0,1,1,1,2.78,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Over Maximum,OML,OML,{"min_length":"108.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Over Maximum,OVR,OVR,{"min_girth":"165.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Over Maximum,OVX,OVX,{"min_weight":"2400.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Return To Sender - Web Request,ISW,ISW,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3350,Reroute - Web Request,IRW,IRW,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHW-2,AHW,"{""min_weight"":""800.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,7.97,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHW-3T4,AHW,"{""min_weight"":""800.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,8.44,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHW-5T6,AHW,"{""min_weight"":""800.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,8.74,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHW-7T8,AHW,"{""min_weight"":""800.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,9.11,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHL-2,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":2,""max_zone"":2}",1,1,1,1,5.57,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHL-3T4,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.13,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHL-5T6,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6.52,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHL-7T8,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.99,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHS-2,AHS,"{""min_width"":""30.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,5.57,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHS-3T4,AHS,"{""min_width"":""30.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.13,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHS-5T6,AHS,"{""min_width"":""30.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6.52,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHS-7T8,AHS,"{""min_width"":""30.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.99,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHG-2,AHG,"{""min_girth"":""105.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,5.57,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHG-3T4,AHG,"{""min_girth"":""105.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.13,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHG-5T6,AHG,"{""min_girth"":""105.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6.52,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHG-7T8,AHG,"{""min_girth"":""105.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.99,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHV-2,AHV,"{""min_volume"":""10368.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,5.57,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHV-3T4,AHV,"{""min_volume"":""10368.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.13,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHV-5T6,AHV,"{""min_volume"":""10368.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6.52,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHV-7T8,AHV,"{""min_volume"":""10368.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.99,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHC-2,AHC,"{""min_zone"":2,""max_zone"":2}",1,1,1,1,5.83,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHC-3T4,AHC,"{""min_zone"":3,""max_zone"":4}",1,1,1,1,6.37,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHC-5T6,AHC,"{""min_zone"":5,""max_zone"":6}",1,1,1,1,6.91,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Additional Handling Charge,AHC-7T8,AHC,"{""min_zone"":7,""max_zone"":8}",1,1,1,1,7.26,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LLC-2,LLC,"{""min_length"":""96.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,41.8,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LLC-3T4,LLC,"{""min_length"":""96.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,44.95,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LLC-5T6,LLC,"{""min_length"":""96.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,50.9,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LLC-7T8,LLC,"{""min_length"":""96.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,53.72,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LPS-2,LPS,"{""min_girth"":""130.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,41.8,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LPS-3T4,LPS,"{""min_girth"":""130.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,44.95,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LPS-5T6,LPS,"{""min_girth"":""130.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,50.9,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LPS-7T8,LPS,"{""min_girth"":""130.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,53.72,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LWS-2,LWS,"{""min_weight"":""1760.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,41.8,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LWS-3T4,LWS,"{""min_weight"":""1760.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,44.95,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LWS-5T6,LWS,"{""min_weight"":""1760.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,50.9,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LWS-7T8,LWS,"{""min_weight"":""1760.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,53.72,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LVS-2,LVS,"{""min_volume"":""17280.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,41.8,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LVS-3T4,LVS,"{""min_volume"":""17280.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,44.95,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LVS-5T6,LVS,"{""min_volume"":""17280.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,50.9,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LVS-7T8,LVS,"{""min_volume"":""17280.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,53.72,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LLR-2,LLR,"{""min_length"":""96.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,41.8,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LLR-3T4,LLR,"{""min_length"":""96.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,44.95,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LLR-5T6,LLR,"{""min_length"":""96.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,50.9,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LLR-7T8,LLR,"{""min_length"":""96.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,53.72,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LPR-2,LPR,"{""min_girth"":""130.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,41.8,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LPR-3T4,LPR,"{""min_girth"":""130.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,44.95,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LPR-5T6,LPR,"{""min_girth"":""130.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,50.9,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LPR-7T8,LPR,"{""min_girth"":""130.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,53.72,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LWR-2,LWR,"{""min_weight"":""1760.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,41.8,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LWR-3T4,LWR,"{""min_weight"":""1760.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,44.95,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LWR-5T6,LWR,"{""min_weight"":""1760.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,50.9,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LWR-7T8,LWR,"{""min_weight"":""1760.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,53.72,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LVR-2,LVR,"{""min_volume"":""17280.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,41.8,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LVR-3T4,LVR,"{""min_volume"":""17280.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,44.95,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LVR-5T6,LVR,"{""min_volume"":""17280.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,50.9,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Large Package Surcharge,LVR-7T8,LVR,"{""min_volume"":""17280.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,53.72,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Address Correction,ADC,ADC,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Delivery Confirmation Signature,DCS,DCS,{"signature_type":"direct"},0,1,1,1,7.6,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Delivery Confirmation Signature Commercial,CSG,CSG,{"signature_type":"direct"},1,0,1,1,7.6,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Adult Signature Required,ADS,ADS,{"signature_type":"adult"},1,1,1,1,10,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Delivery Area Surcharge Commercial,RDC,RDC,{"AreaSurchargeZip":"RDC"},1,0,1,1,2.55,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Delivery Area Surcharge Residential,RDR,RDR,{"AreaSurchargeZip":"RDR"},0,1,1,1,3.76,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Delivery Area Surcharge Commercial - Extended,LDC,LDC,{"AreaSurchargeZip":"LDC"},1,0,1,1,3.17,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Delivery Area Surcharge Residential - Extended,LDR,LDR,{"AreaSurchargeZip":"LDR"},0,1,1,1,4.98,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Remote Area Surcharge - 48 States,CAC,CAC,{"AreaSurchargeZip":"CAC"},1,0,1,1,9.81,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Remote Area Surcharge - 48 States,CAR,CAR,{"AreaSurchargeZip":"CAR"},0,1,1,1,9.81,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Residential Surcharge,RES,RES,,0,1,1,1,2.78,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Over Maximum,OML,OML,{"min_length":"108.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Over Maximum,OVR,OVR,{"min_girth":"165.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Over Maximum,OVX,OVX,{"min_weight":"2400.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Return To Sender - Web Request,ISW,ISW,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3354,Reroute - Web Request,IRW,IRW,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHW-2,AHW,"{""min_weight"":""800.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,6.99,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHW-3T4,AHW,"{""min_weight"":""800.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,7.54,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHW-5T6,AHW,"{""min_weight"":""800.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,7.84,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHW-7T8,AHW,"{""min_weight"":""800.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,8.41,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHL-2,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":2,""max_zone"":2}",1,1,1,1,5.05,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHL-3T4,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":3,""max_zone"":4}",1,1,1,1,5.61,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHL-5T6,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHL-7T8,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.47,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHS-2,AHS,"{""min_width"":""30.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,5.05,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHS-3T4,AHS,"{""min_width"":""30.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,5.61,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHS-5T6,AHS,"{""min_width"":""30.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHS-7T8,AHS,"{""min_width"":""30.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.47,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHG-2,AHG,"{""min_girth"":""105.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,5.05,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHG-3T4,AHG,"{""min_girth"":""105.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,5.61,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHG-5T6,AHG,"{""min_girth"":""105.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHG-7T8,AHG,"{""min_girth"":""105.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.47,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHV-2,AHV,"{""min_volume"":""10368.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,5.05,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHV-3T4,AHV,"{""min_volume"":""10368.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,5.61,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHV-5T6,AHV,"{""min_volume"":""10368.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,6,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHV-7T8,AHV,"{""min_volume"":""10368.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.47,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHC-2,AHC,"{""min_zone"":2,""max_zone"":2}",1,1,1,1,5.33,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHC-3T4,AHC,"{""min_zone"":3,""max_zone"":4}",1,1,1,1,5.77,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHC-5T6,AHC,"{""min_zone"":5,""max_zone"":6}",1,1,1,1,6.01,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Additional Handling Charge,AHC-7T8,AHC,"{""min_zone"":7,""max_zone"":8}",1,1,1,1,6.16,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LLC-2,LLC,"{""min_length"":""96.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,41,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LLC-3T4,LLC,"{""min_length"":""96.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,44.45,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LLC-5T6,LLC,"{""min_length"":""96.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,50.25,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LLC-7T8,LLC,"{""min_length"":""96.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,52.67,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LPS-2,LPS,"{""min_girth"":""130.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,41,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LPS-3T4,LPS,"{""min_girth"":""130.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,44.45,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LPS-5T6,LPS,"{""min_girth"":""130.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,50.25,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LPS-7T8,LPS,"{""min_girth"":""130.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,52.67,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LWS-2,LWS,"{""min_weight"":""1760.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,41,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LWS-3T4,LWS,"{""min_weight"":""1760.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,44.45,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LWS-5T6,LWS,"{""min_weight"":""1760.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,50.25,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LWS-7T8,LWS,"{""min_weight"":""1760.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,52.67,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LVS-2,LVS,"{""min_volume"":""17280.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,41,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LVS-3T4,LVS,"{""min_volume"":""17280.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,44.45,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LVS-5T6,LVS,"{""min_volume"":""17280.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,50.25,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LVS-7T8,LVS,"{""min_volume"":""17280.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,52.67,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LLR-2,LLR,"{""min_length"":""96.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,41,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LLR-3T4,LLR,"{""min_length"":""96.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,44.45,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LLR-5T6,LLR,"{""min_length"":""96.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,50.25,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LLR-7T8,LLR,"{""min_length"":""96.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,52.67,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LPR-2,LPR,"{""min_girth"":""130.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,41,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LPR-3T4,LPR,"{""min_girth"":""130.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,44.45,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LPR-5T6,LPR,"{""min_girth"":""130.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,50.25,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LPR-7T8,LPR,"{""min_girth"":""130.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,52.67,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LWR-2,LWR,"{""min_weight"":""1760.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,41,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LWR-3T4,LWR,"{""min_weight"":""1760.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,44.45,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LWR-5T6,LWR,"{""min_weight"":""1760.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,50.25,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LWR-7T8,LWR,"{""min_weight"":""1760.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,52.67,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LVR-2,LVR,"{""min_volume"":""17280.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,41,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LVR-3T4,LVR,"{""min_volume"":""17280.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,44.45,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LVR-5T6,LVR,"{""min_volume"":""17280.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,50.25,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Large Package Surcharge,LVR-7T8,LVR,"{""min_volume"":""17280.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,52.67,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Address Correction,ADC,ADC,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Delivery Confirmation Signature,DCS,DCS,{"signature_type":"direct"},0,1,1,1,7.6,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Delivery Confirmation Signature Commercial,CSG,CSG,{"signature_type":"direct"},1,0,1,1,7.6,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Adult Signature Required,ADS,ADS,{"signature_type":"adult"},1,1,1,1,10,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Delivery Area Surcharge Commercial,RDC,RDC,{"AreaSurchargeZip":"RDC"},1,0,1,1,2.43,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Delivery Area Surcharge Residential,RDR,RDR,{"AreaSurchargeZip":"RDR"},0,1,1,1,3.61,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Delivery Area Surcharge Commercial - Extended,LDC,LDC,{"AreaSurchargeZip":"LDC"},1,0,1,1,3.02,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Delivery Area Surcharge Residential - Extended,LDR,LDR,{"AreaSurchargeZip":"LDR"},0,1,1,1,4.75,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Remote Area Surcharge - 48 States,CAC,CAC,{"AreaSurchargeZip":"CAC"},1,0,1,1,8.56,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Remote Area Surcharge - 48 States,CAR,CAR,{"AreaSurchargeZip":"CAR"},0,1,1,1,8.56,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Residential Surcharge,RES,RES,,0,1,1,1,2.78,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Over Maximum,OML,OML,{"min_length":"108.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Over Maximum,OVR,OVR,{"min_girth":"165.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Over Maximum,OVX,OVX,{"min_weight":"2400.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Return To Sender - Web Request,ISW,ISW,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3351,Reroute - Web Request,IRW,IRW,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHW-2,AHW,"{""min_weight"":""800.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,6.85,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHW-3T4,AHW,"{""min_weight"":""800.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,7.55,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHW-5T6,AHW,"{""min_weight"":""800.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,7.92,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHW-7T8,AHW,"{""min_weight"":""800.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,7.99,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHL-2,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":2,""max_zone"":2}",1,1,1,1,4.7,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHL-3T4,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":3,""max_zone"":4}",1,1,1,1,5.13,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHL-5T6,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":5,""max_zone"":6}",1,1,1,1,5.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHL-7T8,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.1,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHS-2,AHS,"{""min_width"":""30.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,4.7,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHS-3T4,AHS,"{""min_width"":""30.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,5.13,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHS-5T6,AHS,"{""min_width"":""30.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,5.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHS-7T8,AHS,"{""min_width"":""30.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.1,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHG-2,AHG,"{""min_girth"":""105.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,4.7,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHG-3T4,AHG,"{""min_girth"":""105.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,5.13,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHG-5T6,AHG,"{""min_girth"":""105.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,5.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHG-7T8,AHG,"{""min_girth"":""105.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.1,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHV-2,AHV,"{""min_volume"":""10368.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,4.7,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHV-3T4,AHV,"{""min_volume"":""10368.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,5.13,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHV-5T6,AHV,"{""min_volume"":""10368.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,5.5,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHV-7T8,AHV,"{""min_volume"":""10368.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.1,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHC-2,AHC,"{""min_zone"":2,""max_zone"":2}",1,1,1,1,4.69,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHC-3T4,AHC,"{""min_zone"":3,""max_zone"":4}",1,1,1,1,5.36,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHC-5T6,AHC,"{""min_zone"":5,""max_zone"":6}",1,1,1,1,5.64,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Additional Handling Charge,AHC-7T8,AHC,"{""min_zone"":7,""max_zone"":8}",1,1,1,1,5.85,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LLC-2,LLC,"{""min_length"":""96.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,40.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LLC-3T4,LLC,"{""min_length"":""96.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,43.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LLC-5T6,LLC,"{""min_length"":""96.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,49.75,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LLC-7T8,LLC,"{""min_length"":""96.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,52.67,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LPS-2,LPS,"{""min_girth"":""130.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,40.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LPS-3T4,LPS,"{""min_girth"":""130.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,43.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LPS-5T6,LPS,"{""min_girth"":""130.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,49.75,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LPS-7T8,LPS,"{""min_girth"":""130.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,52.67,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LWS-2,LWS,"{""min_weight"":""1760.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,40.5,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LWS-3T4,LWS,"{""min_weight"":""1760.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,43.5,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LWS-5T6,LWS,"{""min_weight"":""1760.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,49.75,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LWS-7T8,LWS,"{""min_weight"":""1760.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,52.67,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LVS-2,LVS,"{""min_volume"":""17280.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,40.5,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LVS-3T4,LVS,"{""min_volume"":""17280.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,43.5,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LVS-5T6,LVS,"{""min_volume"":""17280.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,49.75,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LVS-7T8,LVS,"{""min_volume"":""17280.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,52.67,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LLR-2,LLR,"{""min_length"":""96.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,40.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LLR-3T4,LLR,"{""min_length"":""96.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,43.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LLR-5T6,LLR,"{""min_length"":""96.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,49.75,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LLR-7T8,LLR,"{""min_length"":""96.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,52.67,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LPR-2,LPR,"{""min_girth"":""130.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,40.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LPR-3T4,LPR,"{""min_girth"":""130.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,43.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LPR-5T6,LPR,"{""min_girth"":""130.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,49.75,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LPR-7T8,LPR,"{""min_girth"":""130.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,52.67,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LWR-2,LWR,"{""min_weight"":""1760.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,40.5,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LWR-3T4,LWR,"{""min_weight"":""1760.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,43.5,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LWR-5T6,LWR,"{""min_weight"":""1760.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,49.75,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LWR-7T8,LWR,"{""min_weight"":""1760.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,52.67,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LVR-2,LVR,"{""min_volume"":""17280.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,40.5,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LVR-3T4,LVR,"{""min_volume"":""17280.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,43.5,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LVR-5T6,LVR,"{""min_volume"":""17280.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,49.75,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Large Package Surcharge,LVR-7T8,LVR,"{""min_volume"":""17280.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,52.67,2026/1/12 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Address Correction,ADC,ADC,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Delivery Confirmation Signature,DCS,DCS,{"signature_type":"direct"},0,1,1,1,7.6,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Delivery Confirmation Signature Commercial,CSG,CSG,{"signature_type":"direct"},1,0,1,1,7.6,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Adult Signature Required,ADS,ADS,{"signature_type":"adult"},1,1,1,1,10,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Delivery Area Surcharge Commercial,RDC,RDC,{"AreaSurchargeZip":"RDC"},1,0,1,1,2.43,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Delivery Area Surcharge Residential,RDR,RDR,{"AreaSurchargeZip":"RDR"},0,1,1,1,3.24,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Delivery Area Surcharge Commercial - Extended,LDC,LDC,{"AreaSurchargeZip":"LDC"},1,0,1,1,3.02,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Delivery Area Surcharge Residential - Extended,LDR,LDR,{"AreaSurchargeZip":"LDR"},0,1,1,1,4.75,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Remote Area Surcharge - 48 States,CAC,CAC,{"AreaSurchargeZip":"CAC"},1,0,1,1,8.56,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Remote Area Surcharge - 48 States,CAR,CAR,{"AreaSurchargeZip":"CAR"},0,1,1,1,8.56,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Residential Surcharge,RES,RES,,0,1,1,1,2.68,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Over Maximum,OML,OML,{"min_length":"108.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Over Maximum,OVR,OVR,{"min_girth":"165.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Over Maximum,OVX,OVX,{"min_weight":"2400.01"},1,1,1,1,1875,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Return To Sender - Web Request,ISW,ISW,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3352,Reroute - Web Request,IRW,IRW,,1,1,1,0,25.5,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0

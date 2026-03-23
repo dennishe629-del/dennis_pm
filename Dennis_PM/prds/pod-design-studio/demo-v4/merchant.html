@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merchant Admin - POD Design Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.6.15/dist/vuetify.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Roboto', sans-serif; background: #f5f5f5; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      <!-- Navigation Drawer -->
+      <v-navigation-drawer v-model="drawer" app color="#1a1a2e" dark width="260">
+        <div class="pa-4">
+          <div class="d-flex align-center">
+            <span class="font-weight-light white--text" style="font-size: 20px">POD</span>
+            <span class="white--text" style="font-weight: 500; font-size: 20px">Studio</span>
+          </div>
+          <div class="caption white--text mt-1">Merchant Admin</div>
+        </div>
+        <v-divider class="my-2" dark></v-divider>
+        <v-list dense nav>
+          <v-list-item link @click="currentView = 'dashboard'">
+            <v-list-item-icon><v-icon>mdi-view-dashboard</v-icon></v-list-item-icon>
+            <v-list-item-content><v-list-item-title>Dashboard</v-list-item-title></v-list-item-content>
+          </v-list-item>
+          <v-list-item link @click="currentView = 'products'">
+            <v-list-item-icon><v-icon>mdi-tshirt-crew</v-icon></v-list-item-icon>
+            <v-list-item-content><v-list-item-title>Products</v-list-item-title></v-list-item-content>
+          </v-list-item>
+          <v-list-item link @click="currentView = 'orders'">
+            <v-list-item-icon><v-icon>mdi-receipt</v-icon></v-list-item-icon>
+            <v-list-item-content><v-list-item-title>Orders</v-list-item-title></v-list-item-content>
+          </v-list-item>
+          <v-list-item link @click="currentView = 'billing'">
+            <v-list-item-icon><v-icon>mdi-credit-card</v-icon></v-list-item-icon>
+            <v-list-item-content><v-list-item-title>Billing</v-list-item-title></v-list-item-content>
+          </v-list-item>
+          <v-list-item link @click="currentView = 'embed'">
+            <v-list-item-icon><v-icon>mdi-code-tags</v-icon></v-list-item-icon>
+            <v-list-item-content><v-list-item-title>Embed Code</v-list-item-title></v-list-item-content>
+          </v-list-item>
+          <v-list-item link @click="currentView = 'settings'">
+            <v-list-item-icon><v-icon>mdi-cog</v-icon></v-list-item-icon>
+            <v-list-item-content><v-list-item-title>Settings</v-list-item-title></v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+
+      <!-- App Bar -->
+      <v-app-bar app color="white" elevation="1">
+        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-toolbar-title class="text-capitalize">{{ currentView }}</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-chip small outlined color="primary" class="mr-2">POD V4.0</v-chip>
+        <v-menu>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon v-bind="attrs" v-on="on">
+              <v-icon>mdi-bell</v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>3 new orders</v-list-item-title>
+                <v-list-item-subtitle>2 minutes ago</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+        <v-menu>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon v-bind="attrs" v-on="on">
+              <v-avatar size="32" color="primary">
+                <span class="white--text caption">MJ</span>
+              </v-avatar>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item>
+              <v-list-item-icon><v-icon>mdi-account</v-icon></v-list-item-icon>
+              <v-list-item-title>Profile</v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-icon><v-icon>mdi-logout</v-icon></v-list-item-icon>
+              <v-list-item-title>Logout</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </v-app-bar>
+
+      <v-main>
+        <v-container fluid class="pa-4">
+          <!-- Dashboard View -->
+          <v-row v-if="currentView === 'dashboard'">
+            <v-col cols="12">
+              <v-card class="pa-4 mb-4" color="#1976D2" dark>
+                <div class="text-h4">Welcome to POD Studio</div>
+                <div class="text-body-1 mt-2">Manage your custom print-on-demand products</div>
+              </v-card>
+            </v-col>
+
+            <!-- Stats Cards -->
+            <v-col cols="12" md="3">
+              <v-card>
+                <v-card-text class="text-center">
+                  <div class="text-h3 text-primary">{{ stats.totalOrders }}</div>
+                  <div class="text-body-2 grey--text">Total Orders</div>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="12" md="3">
+              <v-card>
+                <v-card-text class="text-center">
+                  <div class="text-h3 text-success">{{ stats.podOrders }}</div>
+                  <div class="text-body-2 grey--text">POD Orders</div>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="12" md="3">
+              <v-card>
+                <v-card-text class="text-center">
+                  <div class="text-h3 text-warning">{{ stats.pendingPrint }}</div>
+                  <div class="text-body-2 grey--text">Pending Print</div>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="12" md="3">
+              <v-card>
+                <v-card-text class="text-center">
+                  <div class="text-h3 text-info">{{ stats.shipped }}</div>
+                  <div class="text-body-2 grey--text">Shipped</div>
+                </v-card-text>
+              </v-card>
+            </v-col>
+
+            <!-- Recent Orders -->
+            <v-col cols="12" md="8">
+              <v-card>
+                <v-card-title>
+                  Recent Orders
+                  <v-spacer></v-spacer>
+                  <v-btn text color="primary" @click="currentView = 'orders'">View All</v-btn>
+                </v-card-title>
+                <v-data-table
+                  :headers="orderHeaders"
+                  :items="recentOrders"
+                  :items-per-page="5"
+                  dense
+                >
+                  <template v-slot:item.status="{ item }">
+                    <v-chip x-small :color="getStatusColor(item.status)">{{ item.status }}</v-chip>
+                  </template>
+                  <template v-slot:item.actions="{ item }">
+                    <v-btn x-small icon><v-icon small>mdi-eye</v-icon></v-btn>
+                  </template>
+                </v-data-table>
+              </v-card>
+            </v-col>
+
+            <!-- Quick Actions -->
+            <v-col cols="12" md="4">
+              <v-card>
+                <v-card-title>Quick Actions</v-card-title>
+                <v-card-text>
+                  <v-btn block color="primary" class="mb-2" @click="currentView = 'products'">
+                    <v-icon left>mdi-plus</v-icon>
+                    Add New Product
+                  </v-btn>
+                  <v-btn block color="success" class="mb-2" @click="currentView = 'orders'">
+                    <v-icon left>mdi-view-list</v-icon>
+                    View Orders
+                  </v-btn>
+                  <v-btn block color="orange" class="mb-2" @click="currentView = 'embed'">
+                    <v-icon left>mdi-code-tags</v-icon>
+                    Get Embed Code
+                  </v-btn>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <!-- Products View -->
+          <v-row v-if="currentView === 'products'">
+            <v-col cols="12">
+              <v-card>
+                <v-card-title>
+                  Product Templates
+                  <v-spacer></v-spacer>
+                  <v-btn color="primary" @click="productDialog = true">
+                    <v-icon left>mdi-plus</v-icon>
+                    New Template
+                  </v-btn>
+                </v-card-title>
+                <v-data-table
+                  :headers="productHeaders"
+                  :items="products"
+                  :items-per-page="10"
+                  dense
+                >
+                  <template v-slot:item.status="{ item }">
+                    <v-chip x-small :color="item.status === 'Active' ? 'success' : 'grey'">{{ item.status }}</v-chip>
+                  </template>
+                  <template v-slot:item.actions="{ item }">
+                    <v-btn x-small icon><v-icon small>mdi-pencil</v-icon></v-btn>
+                    <v-btn x-small icon><v-icon small>mdi-delete</v-icon></v-btn>
+                  </template>
+                </v-data-table>
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <!-- Orders View -->
+          <v-row v-if="currentView === 'orders'">
+            <v-col cols="12">
+              <v-card>
+                <v-card-title>
+                  Orders
+                  <v-spacer></v-spacer>
+                  <v-text-field
+                    v-model="orderSearch"
+                    append-icon="mdi-magnify"
+                    label="Search orders..."
+                    single-line
+                    hide-details
+                    dense
+                    outlined
+                    class="mr-4"
+                    style="max-width: 300px"
+                  ></v-text-field>
+                </v-card-title>
+                <v-data-table
+                  :headers="orderHeaders"
+                  :items="orders"
+                  :search="orderSearch"
+                  dense
+                >
+                  <template v-slot:item.status="{ item }">
+                    <v-chip x-small :color="getStatusColor(item.status)">{{ item.status }}</v-chip>
+                  </template>
+                  <template v-slot:item.print_status="{ item }">
+                    <v-chip x-small v-if="item.print_status" :color="getPrintStatusColor(item.print_status)">
+                      {{ item.print_status }}
+                    </v-chip>
+                    <span v-else class="grey--text">-</span>
+                  </template>
+                  <template v-slot:item.actions="{ item }">
+                    <v-btn x-small icon><v-icon small>mdi-eye</v-icon></v-btn>
+                    <v-btn x-small icon><v-icon small>mdi-download</v-icon></v-btn>
+                  </template>
+                </v-data-table>
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <!-- Billing View -->
+          <v-row v-if="currentView === 'billing'">
+            <v-col cols="12" md="4">
+              <v-card>
+                <v-card-text class="text-center">
+                  <div class="text-h4 text-success">${{ billing.balance }}</div>
+                  <div class="grey--text">Account Balance</div>
+                  <v-btn color="primary" block class="mt-2">Add Funds</v-btn>
+                </v-card-text>
+              </v-card>
+            </v-col>
+            <v-col cols="12" md="8">
+              <v-card>
+                <v-card-title>Billing Configuration</v-card-title>
+                <v-card-text>
+                  <v-alert type="info" dense class="mb-4">
+                    POD printing fees are handled through ShipSage Billing. Configure your rates below.
+                  </v-alert>
+                  <v-simple-table>
+                    <thead>
+                      <tr>
+                        <th>Service</th>
+                        <th>Rate</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>DTG Printing (per item)</td>
+                        <td>$5.00</td>
+                        <td><v-chip x-small color="success">Active</v-chip></td>
+                      </tr>
+                      <tr>
+                        <td>Handling Fee (per item)</td>
+                        <td>$1.00</td>
+                        <td><v-chip x-small color="success">Active</v-chip></td>
+                      </tr>
+                      <tr>
+                        <td>Shipping</td>
+                        <td>By weight</td>
+                        <td><v-chip x-small color="success">Active</v-chip></td>
+                      </tr>
+                    </tbody>
+                  </v-simple-table>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <!-- Embed View -->
+          <v-row v-if="currentView === 'embed'">
+            <v-col cols="12">
+              <v-card>
+                <v-card-title>Embed Code Generator</v-card-title>
+                <v-card-text>
+                  <v-alert type="info" dense class="mb-4">
+                    Copy this code to your non-Shopify website to display the product customizer.
+                  </v-alert>
+                  <v-select
+                    v-model="embedProduct"
+                    :items="products"
+                    item-text="name"
+                    item-value="id"
+                    label="Select Product"
+                    outlined
+                    class="mb-4"
+                  ></v-select>
+                  <v-textarea
+                    :value="embedCode"
+                    readonly
+                    outlined
+                    rows="4"
+                    label="Embed Code"
+                  ></v-textarea>
+                  <v-btn color="primary">
+                    <v-icon left>mdi-content-copy</v-icon>
+                    Copy Code
+                  </v-btn>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <!-- Settings View -->
+          <v-row v-if="currentView === 'settings'">
+            <v-col cols="12" md="6">
+              <v-card>
+                <v-card-title>Brand Settings</v-card-title>
+                <v-card-text>
+                  <v-text-field label="Brand Name" outlined value="My Store"></v-text-field>
+                  <v-text-field label="Brand Color" type="color" outlined value="#1976D2"></v-text-field>
+                  <v-text-field label="Custom Font" outlined placeholder="Enter font name"></v-text-field>
+                  <v-switch label="Enable Watermark" v-model="settings.watermark"></v-switch>
+                  <v-btn color="primary">Save Settings</v-btn>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-main>
+    </v-app>
+
+    <!-- New Product Dialog -->
+    <v-dialog v-model="productDialog" max-width="600">
+      <v-card>
+        <v-card-title>New Product Template</v-card-title>
+        <v-card-text>
+          <v-select
+            v-model="newProduct.category"
+            :items="['T-Shirt', 'Hoodie', 'Phone Case', 'Mug']"
+            label="Product Category"
+            outlined
+            class="mb-2"
+          ></v-select>
+          <v-select
+            v-model="newProduct.blankSku"
+            :items="['Bella+Canvas 3001', 'Gildan 5000', 'Hanes 5250']"
+            label="Blank SKU"
+            outlined
+            class="mb-2"
+          ></v-select>
+          <v-text-field
+            label="Print Area (cm)"
+            placeholder="e.g., 28 x 32"
+            outlined
+            class="mb-2"
+          ></v-text-field>
+          <v-text-field
+            label="Retail Price ($)"
+            type="number"
+            outlined
+          ></v-text-field>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn text @click="productDialog = false">Cancel</v-btn>
+          <v-btn color="primary" @click="productDialog = false">Create</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.6.15/dist/vuetify.min.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data: {
+        drawer: true,
+        currentView: 'dashboard',
+        productDialog: false,
+        orderSearch: '',
+        embedProduct: 1,
+        settings: { watermark: false },
+
+        stats: {
+          totalOrders: 156,
+          podOrders: 89,
+          pendingPrint: 12,
+          shipped: 67,
+        },
+
+        billing: {
+          balance: 1245.50,
+        },
+
+        newProduct: {
+          category: null,
+          blankSku: null,
+        },
+
+        products: [
+          { id: 1, name: 'Classic Tee', blankSku: 'B+C-3001', status: 'Active', price: 24.99 },
+          { id: 2, name: 'Premium Tee', blankSku: 'B+C-3400', status: 'Active', price: 29.99 },
+          { id: 3, name: 'Eco Tee', blankSku: 'B+C-3413', status: 'Draft', price: 27.99 },
+        ],
+
+        recentOrders: [
+          { id: '#1234', customer: 'John Doe', product: 'Classic Tee', status: 'Paid', date: '2026-03-19', amount: 24.99 },
+          { id: '#1233', customer: 'Jane Smith', product: 'Premium Tee', status: 'Paid', date: '2026-03-19', amount: 29.99 },
+          { id: '#1232', customer: 'Bob Wilson', product: 'Classic Tee', status: 'Shipped', date: '2026-03-18', amount: 24.99 },
+          { id: '#1231', customer: 'Alice Brown', product: 'Eco Tee', status: 'Pending', date: '2026-03-18', amount: 27.99 },
+        ],
+
+        orders: [
+          { id: '#1234', customer: 'John Doe', product: 'Classic Tee', status: 'Paid', print_status: 'Done', date: '2026-03-19', amount: 24.99 },
+          { id: '#1233', customer: 'Jane Smith', product: 'Premium Tee', status: 'Paid', print_status: 'Processing', date: '2026-03-19', amount: 29.99 },
+          { id: '#1232', customer: 'Bob Wilson', product: 'Classic Tee', status: 'Shipped', print_status: 'Done', date: '2026-03-18', amount: 24.99 },
+          { id: '#1231', customer: 'Alice Brown', product: 'Eco Tee', status: 'Pending', print_status: 'Pending', date: '2026-03-18', amount: 27.99 },
+        ],
+
+        orderHeaders: [
+          { text: 'Order', value: 'id' },
+          { text: 'Customer', value: 'customer' },
+          { text: 'Product', value: 'product' },
+          { text: 'Status', value: 'status' },
+          { text: 'Print', value: 'print_status' },
+          { text: 'Date', value: 'date' },
+          { text: 'Amount', value: 'amount' },
+          { text: 'Actions', value: 'actions', sortable: false },
+        ],
+
+        productHeaders: [
+          { text: 'Product Name', value: 'name' },
+          { text: 'Blank SKU', value: 'blankSku' },
+          { text: 'Status', value: 'status' },
+          { text: 'Price', value: 'price' },
+          { text: 'Actions', value: 'actions', sortable: false },
+        ],
+      },
+      computed: {
+        embedCode() {
+          return '<script src="https://cdn.shipsage-pod.com/widget.js"' +
+            '\n        data-shop-id="MERCHANT001"' +
+            '\n        data-product-id="' + this.embedProduct + '"><\/script>';
+        },
+      },
+      methods: {
+        getStatusColor(status) {
+          const colors = {
+            'Paid': 'success',
+            'Pending': 'warning',
+            'Shipped': 'info',
+            'Cancelled': 'error',
+          };
+          return colors[status] || 'grey';
+        },
+        getPrintStatusColor(status) {
+          const colors = {
+            'Done': 'success',
+            'Processing': 'warning',
+            'Pending': 'grey',
+            'Failed': 'error',
+          };
+          return colors[status] || 'grey';
+        },
+      },
+    });
+  </script>
+</body>
+</html>

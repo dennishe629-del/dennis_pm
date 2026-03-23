@@ -1,0 +1,36 @@
+service_quote_id,service_id,name,index,quote,unit,start_date,end_date
+,3114,20' Container Palletized,3,250,per container,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,20' Container Floor Loaded,4,250,per container,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,40' Container Palletized,5,400,per container,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,40' Container Floor Loaded,6,400,per container,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,45' Container Palletized,7,450,per container,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,45' Container Floor Loaded,8,450,per container,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,40' HQ Container Palletized,9,400,per container,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,40' HQ Container Floor Loaded,10,400,per container,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,53' Container Palletized,11,500,per container,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,53' Container Floor Loaded,12,500,per container,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,20' HQ Container Palletized,13,250,per container,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,20' HQ Container Floor Loaded,14,250,per container,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,45' HQ Container Palletized,15,450,per container,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,45' HQ Container Floor Loaded,16,450,per container,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,53' HQ Container Palletized,17,500,per container,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,53' HQ Container Floor Loaded,18,500,per container,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,ASN: Extra Product Type Surcharge,asn_additional_sku_price,5,per category,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,ASN: Quantity Limits on Product Types,asn_additional_sku_min_skus,10,quantity,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,ASN: Carton Overweight Surcharge,carton_overweight_price,1,per carton,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,ASN: Overweight Carton Configuration(lbs),Carton Overweight Min Lbs,50,lbs,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,Pallet: Carton Sort Surcharge,pallet_additional_carton_price,0.4,per carton,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,Pallet: Quantity Limits for Cartons,pallet_additional_carton_min_cartons,30,quantity,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,Pallet,each_pallet,12,per pallet,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,Carton,each_carton,2,per carton,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,Put Away Surcharge,putaway_surcharge,0,per handling unit,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,Unit Product Max Weight,unit_product_max_weight,5,lb,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,x > 0 & x <= 1,x > 0 & x <= 1,0.1,,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,x > 1 & x <= 2,x > 1 & x <= 2,0.1,,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,x > 2 & x <= 3,x > 2 & x <= 3,0.1,,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,x > 3 & x <= 4,x > 3 & x <= 4,0.1,,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,x > 4 & x <= 5,x > 4 & x <= 5,0.1,,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,x > 5 & x <= 6,x > 5 & x <= 6,0,,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,x > 7 & x <= 8,x > 7 & x <= 8,0,,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,x > 8 & x <= 9,x > 8 & x <= 9,0,,5/8/2024 00:00:00,31/12/2099 23:59:59
+,3114,x > 9 & x <= 10,x > 9 & x <= 10,0,,5/8/2024 00:00:00,31/12/2099 23:59:59

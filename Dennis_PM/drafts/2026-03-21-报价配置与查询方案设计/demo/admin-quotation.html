@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>客户报价配置 - ShipSage Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+  <style>
+    :root {
+      --primary: #3B82F6;
+      --primary-dark: #2563EB;
+      --primary-lighten: #EFF6FF;
+      --sidebar-bg: #1A1F2E;
+      --sidebar-logo-bg: #0F1419;
+      --topbar-bg: #1E2330;
+      --page-bg: #F9FAFB;
+      --card-bg: #FFFFFF;
+      --border-color: #E5E7EB;
+      --table-header-bg: #F9FAFB;
+      --table-row-hover: #F3F4F6;
+      --text-primary: #1F2937;
+      --text-secondary: #6B7280;
+      --text-disabled: #9CA3AF;
+      --success: #10B981;
+      --warning: #F59E0B;
+      --error: #EF4444;
+    }
+    body { font-family: -apple-system, 'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif; margin: 0; }
+    .sidebar { width: 220px; background-color: var(--sidebar-bg); min-height: 100vh; position: fixed; left: 0; top: 0; z-index: 200; }
+    .sidebar-logo { height: 64px; background-color: var(--sidebar-logo-bg); display: flex; align-items: center; padding: 0 16px; color: white; font-weight: 600; font-size: 16px; }
+    .sidebar-nav-item { display: flex; align-items: center; padding: 11px 16px; color: #E5E7EB; font-size: 13px; cursor: pointer; transition: background-color 0.15s; gap: 10px; }
+    .sidebar-nav-item:hover { background-color: rgba(255,255,255,0.05); }
+    .sidebar-nav-item.active { background-color: rgba(59,130,246,0.1); color: white; border-left: 3px solid var(--primary); padding-left: 13px; }
+    .sidebar-section { padding: 12px 16px 6px; font-size: 11px; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; }
+    .topbar { height: 64px; background-color: var(--topbar-bg); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: fixed; top: 0; left: 220px; right: 0; z-index: 100; }
+    .main-content { margin-left: 220px; margin-top: 64px; padding: 24px; background-color: var(--page-bg); min-height: calc(100vh - 64px); }
+    .tab-btn { padding: 10px 16px; font-size: 13px; font-weight: 500; color: var(--text-secondary); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; white-space: nowrap; }
+    .tab-btn:hover { color: var(--text-primary); }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+    .btn-primary { background-color: var(--primary); color: white; border-radius: 6px; padding: 8px 16px; font-weight: 500; font-size: 13px; border: none; cursor: pointer; transition: background-color 0.15s; }
+    .btn-primary:hover { background-color: var(--primary-dark); }
+    .btn-secondary { background-color: white; color: #374151; border: 1px solid #D1D5DB; border-radius: 6px; padding: 8px 16px; font-weight: 500; font-size: 13px; cursor: pointer; }
+    .btn-secondary:hover { background-color: #F3F4F6; }
+    .btn-danger { background-color: var(--error); color: white; border-radius: 6px; padding: 8px 16px; font-weight: 500; font-size: 13px; border: none; cursor: pointer; }
+    .btn-danger:hover { background-color: #DC2626; }
+    .btn-sm { padding: 4px 10px; font-size: 12px; }
+    .badge-draft { background-color: #FEF3C7; color: #92400E; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+    .badge-standard { background-color: #F3F4F6; color: #6B7280; padding: 2px 8px; border-radius: 4px; font-size: 11px; }
+    .badge-company { background-color: #DBEAFE; color: #1E40AF; padding: 2px 8px; border-radius: 4px; font-size: 11px; }
+    .input-edit { border: 1px solid var(--primary); border-radius: 4px; padding: 4px 8px; font-size: 13px; width: 100px; outline: none; }
+    .input-edit:focus { box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table th { background-color: var(--table-header-bg); font-size: 11px; font-weight: 600; color: var(--text-secondary); text-align: left; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 14px; border-bottom: 1px solid var(--border-color); }
+    .data-table td { font-size: 13px; color: var(--text-primary); padding: 12px 14px; border-bottom: 1px solid var(--border-color); }
+    .data-table tbody tr:hover { background-color: var(--table-row-hover); }
+    .toast { position: fixed; top: 80px; right: 24px; z-index: 9999; padding: 12px 20px; border-radius: 6px; color: white; font-size: 13px; font-weight: 500; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: all 0.3s; }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 300; display: flex; align-items: center; justify-content: center; }
+    .modal-content { background: white; border-radius: 8px; box-shadow: 0 24px 38px rgba(0,0,0,0.14); max-width: 560px; width: 90%; max-height: 80vh; overflow-y: auto; }
+    .font-mono { font-family: 'SF Mono', 'Monaco', 'Consolas', monospace; }
+    .btn-link-danger { padding: 4px 10px; font-size: 12px; color: #DC2626; background: transparent; border: none; cursor: pointer; font-weight: 500; }
+    .btn-link-danger:hover { color: #991B1B; text-decoration: underline; }
+  </style>
+</head>
+<body>
+<div x-data="adminQuotation()">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-logo">&#9781;&nbsp;&nbsp;ShipSage Admin</div>
+    <div class="sidebar-section">Billing</div>
+    <div class="sidebar-nav-item">&#128202;&nbsp; 费用管理</div>
+    <div class="sidebar-nav-item active">&#128176;&nbsp; 报价配置</div>
+    <div class="sidebar-nav-item">&nbsp;&nbsp;&nbsp;&#8627; 服务报价</div>
+    <div class="sidebar-nav-item" style="background-color:rgba(59,130,246,0.05); color:white;">&nbsp;&nbsp;&nbsp;&#8627; 客户报价</div>
+    <div class="sidebar-nav-item">&nbsp;&nbsp;&nbsp;&#8627; 定制报价</div>
+    <div class="sidebar-section">Logistics</div>
+    <div class="sidebar-nav-item">&#128666;&nbsp; 承运商管理</div>
+    <div class="sidebar-nav-item">&#127760;&nbsp; 分区表</div>
+    <div class="sidebar-nav-item">&#128196;&nbsp; 费用代码</div>
+  </div>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="flex items-center gap-4">
+      <input type="text" placeholder="Search..." class="text-white text-sm px-3 py-2 rounded-md w-64 border-none outline-none" style="background-color: rgba(255,255,255,0.08);">
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="text-gray-400 cursor-pointer hover:text-white text-lg relative">&#128276;<span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-red-500"></span></span>
+      <span class="text-gray-400 cursor-pointer hover:text-white text-lg">&#9881;</span>
+      <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium" style="background-color: var(--primary);">D</div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-2 text-sm mb-4">
+      <a href="index.html" class="text-gray-500 hover:text-blue-600">Demo Home</a>
+      <span class="text-gray-400">&#8250;</span>
+      <span class="text-gray-500">Billing</span>
+      <span class="text-gray-400">&#8250;</span>
+      <span class="text-gray-500">报价配置</span>
+      <span class="text-gray-400">&#8250;</span>
+      <span class="text-gray-800 font-medium">ABC Logistics</span>
+    </div>
+
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-5">
+      <div>
+        <h1 class="text-xl font-medium text-gray-800">客户报价配置</h1>
+        <p class="text-sm text-gray-500 mt-1">ABC Logistics (company_id: 1024) &middot; VIP Level: SVIP+</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <span x-show="draftCount > 0" class="badge-draft" x-text="draftCount + ' 条草稿待发布'"></span>
+        <button class="btn-secondary" x-show="draftCount > 0" @click="clearAllDrafts()">撤销所有草稿</button>
+        <button class="btn-primary" :class="{'opacity-50 cursor-not-allowed': draftCount === 0}" :disabled="draftCount === 0" @click="if(draftCount>0) showPublishModal = true">
+          &#128640;&nbsp; 发布
+        </button>
+        <button class="btn-secondary" @click="showChangelogModal = true">&#128221;&nbsp; 变更日志</button>
+      </div>
+    </div>
+
+    <!-- Info Card -->
+    <div class="bg-white rounded-lg border p-4 mb-5" style="border-color: var(--border-color);">
+      <div class="grid grid-cols-5 gap-4 text-sm">
+        <div><span class="text-gray-500">Fee Version:</span><br><span class="font-medium">Shipping Fee-S3-CN-SVIP+</span></div>
+        <div><span class="text-gray-500">Service:</span><br><span class="font-medium">FedEx Ground S3</span></div>
+        <div><span class="text-gray-500">Status:</span><br><span class="inline-flex items-center gap-1 mt-0.5"><span class="w-2 h-2 rounded-full" style="background-color: var(--success);"></span> 已发布</span></div>
+        <div><span class="text-gray-500">Version:</span><br><span class="font-mono font-medium">v3</span></div>
+        <div><span class="text-gray-500">上次发布:</span><br><span class="font-medium">2026-03-20 14:30</span></div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="bg-white rounded-lg border overflow-hidden" style="border-color: var(--border-color);">
+      <div class="flex border-b overflow-x-auto" style="border-color: var(--border-color);">
+        <div v-for="tab in tabs" class="tab-btn"
+          x-bind:class="{'active': activeTab === 0}" @click="activeTab = 0">Shipping Fee</div>
+        <div class="tab-btn" :class="{'active': activeTab === 1}" @click="activeTab = 1">Surcharge (New)</div>
+        <div class="tab-btn" :class="{'active': activeTab === 2}" @click="activeTab = 2">Handling Fee</div>
+        <div class="tab-btn" :class="{'active': activeTab === 3}" @click="activeTab = 3">Storage Fee</div>
+        <div class="tab-btn" :class="{'active': activeTab === 4}" @click="activeTab = 4">Receiving Fee</div>
+        <div class="tab-btn" :class="{'active': activeTab === 5}" @click="activeTab = 5">Return Fee</div>
+        <div class="tab-btn" :class="{'active': activeTab === 6}" @click="activeTab = 6">Packing Material</div>
+        <div class="tab-btn" :class="{'active': activeTab === 7}" @click="activeTab = 7">Misc Fee</div>
+      </div>
+
+      <!-- Filters -->
+      <div class="p-4 border-b flex items-center gap-3" style="border-color: var(--border-color);">
+        <select class="text-sm border rounded-md px-3 py-2" style="border-color: var(--border-color);">
+          <option>FedEx Ground S3 (service_id: 3351)</option>
+          <option>UPS Ground S2</option>
+        </select>
+        <select x-show="activeTab === 0" class="text-sm border rounded-md px-3 py-2" style="border-color: var(--border-color);">
+          <option>NJ Warehouse (warehouse_id: 1)</option>
+          <option>CA Warehouse (warehouse_id: 2)</option>
+        </select>
+        <input type="text" placeholder="Search..." class="text-sm border rounded-md px-3 py-2 w-48" style="border-color: var(--border-color);">
+        <span class="ml-auto text-xs text-gray-500" x-text="'Showing ' + currentData().length + ' rows'"></span>
+      </div>
+
+      <!-- ========== Shipping Fee Table (Tab 0) ========== -->
+      <div x-show="activeTab === 0">
+        <div class="overflow-x-auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Zone</th><th>Weight (lb)</th><th>Unit</th>
+                <th>Standard Rate</th><th>Company Rate</th><th>Effective Rate</th>
+                <th>Source</th><th style="width:120px">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr x-for="(row, i) in shippingData" :key="'s'+i" :class="{'bg-yellow-50': row.isDraft}">
+                <td class="font-mono" x-text="row.zone"></td>
+                <td class="font-mono" x-text="row.weight"></td>
+                <td x-text="row.unit"></td>
+                <td class="font-mono" x-text="'$' + row.standardRate.toFixed(2)"></td>
+                <td>
+                  <input x-show="row.editing" type="number" step="0.01" class="input-edit" x-model.number="row.editValue" @keydown.enter="saveEdit(row, 'shipping')" @keydown.escape="cancelEdit(row)">
+                  <span x-show="!row.editing">
+                    <span class="font-mono" x-text="row.companyRate !== null ? '$' + row.companyRate.toFixed(2) : '—'" :class="{'text-gray-400': row.companyRate === null}"></span>
+                    <span x-show="row.isDraft" class="badge-draft ml-1">Draft</span>
+                  </span>
+                </td>
+                <td class="font-mono font-medium" x-text="'$' + row.effectiveRate.toFixed(2)"></td>
+                <td><span :class="row.source === 'company' ? 'badge-company' : 'badge-standard'" x-text="row.source === 'company' ? 'Company' : 'Standard'"></span></td>
+                <td>
+                  <button x-show="!row.editing && !row.isDraft" class="btn-secondary btn-sm" @click="startEdit(row)">Edit</button>
+                  <span x-show="row.editing" class="inline-flex gap-1">
+                    <button class="btn-primary btn-sm" @click="saveEdit(row, 'shipping')">&#10003;</button>
+                    <button class="btn-secondary btn-sm" @click="cancelEdit(row)">&#10005;</button>
+                  </span>
+                  <button x-show="row.isDraft && !row.editing" class="btn-link-danger" @click="revertDraft(row, 'shipping')">Revert</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="flex items-center justify-between px-4 py-3 border-t text-sm" style="border-color: var(--border-color);">
+          <span class="text-gray-500">Page 1 of 32 (3,200 total)</span>
+          <div class="flex gap-1">
+            <button class="px-3 py-1 border rounded text-gray-400 cursor-not-allowed" style="border-color: var(--border-color);">Prev</button>
+            <button class="px-3 py-1 border rounded text-white" style="background-color: var(--primary); border-color: var(--primary);">1</button>
+            <button class="px-3 py-1 border rounded hover:border-blue-400" style="border-color: var(--border-color);">2</button>
+            <button class="px-3 py-1 border rounded hover:border-blue-400" style="border-color: var(--border-color);">3</button>
+            <span class="px-2 py-1 text-gray-400">...</span>
+            <button class="px-3 py-1 border rounded hover:border-blue-400" style="border-color: var(--border-color);">32</button>
+            <button class="px-3 py-1 border rounded hover:border-blue-400" style="border-color: var(--border-color);">Next</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== Surcharge Table (Tab 1) ========== -->
+      <div x-show="activeTab === 1">
+        <div class="overflow-x-auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Fee Code</th><th>Description</th>
+                <th>Standard Rate</th><th>Company Rate</th><th>Effective Rate</th>
+                <th>Source</th><th style="width:120px">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr x-for="(row, i) in surchargeData" :key="'sc'+i" :class="{'bg-yellow-50': row.isDraft}">
+                <td class="font-mono font-medium" x-text="row.feeCode"></td>
+                <td>
+                  <div class="text-sm" x-text="row.descEn"></div>
+                  <div class="text-xs text-gray-400" x-text="row.descCn"></div>
+                </td>
+                <td class="font-mono" x-text="'$' + row.standardRate.toFixed(2)"></td>
+                <td>
+                  <input x-show="row.editing" type="number" step="0.01" class="input-edit" x-model.number="row.editValue" @keydown.enter="saveEdit(row, 'surcharge')" @keydown.escape="cancelEdit(row)">
+                  <span x-show="!row.editing">
+                    <span class="font-mono" x-text="row.companyRate !== null ? '$' + row.companyRate.toFixed(2) : '—'" :class="{'text-gray-400': row.companyRate === null}"></span>
+                    <span x-show="row.isDraft" class="badge-draft ml-1">Draft</span>
+                  </span>
+                </td>
+                <td class="font-mono font-medium" x-text="'$' + row.effectiveRate.toFixed(2)"></td>
+                <td><span :class="row.source === 'company' ? 'badge-company' : 'badge-standard'" x-text="row.source === 'company' ? 'Company' : 'Standard'"></span></td>
+                <td>
+                  <button x-show="!row.editing && !row.isDraft" class="btn-secondary btn-sm" @click="startEdit(row)">Edit</button>
+                  <span x-show="row.editing" class="inline-flex gap-1">
+                    <button class="btn-primary btn-sm" @click="saveEdit(row, 'surcharge')">&#10003;</button>
+                    <button class="btn-secondary btn-sm" @click="cancelEdit(row)">&#10005;</button>
+                  </span>
+                  <button x-show="row.isDraft && !row.editing" class="btn-link-danger" @click="revertDraft(row, 'surcharge')">Revert</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ========== Service Quote Table (Tabs 2-7) ========== -->
+      <div x-show="activeTab >= 2">
+        <div class="overflow-x-auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th><th>Index</th><th>Unit</th>
+                <th>Standard Quote</th><th>Company Quote</th><th>Effective Quote</th>
+                <th>Source</th><th style="width:120px">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr x-for="(row, i) in serviceQuoteData" :key="'sq'+i" :class="{'bg-yellow-50': row.isDraft}">
+                <td class="font-medium" x-text="row.name"></td>
+                <td class="font-mono" x-text="row.index"></td>
+                <td x-text="row.unit"></td>
+                <td class="font-mono" x-text="'$' + row.standardQuote.toFixed(2)"></td>
+                <td>
+                  <input x-show="row.editing" type="number" step="0.01" class="input-edit" x-model.number="row.editValue" @keydown.enter="saveEdit(row, 'service')" @keydown.escape="cancelEdit(row)">
+                  <span x-show="!row.editing">
+                    <span class="font-mono" x-text="row.companyQuote !== null ? '$' + row.companyQuote.toFixed(2) : '—'" :class="{'text-gray-400': row.companyQuote === null}"></span>
+                    <span x-show="row.isDraft" class="badge-draft ml-1">Draft</span>
+                  </span>
+                </td>
+                <td class="font-mono font-medium" x-text="'$' + row.effectiveQuote.toFixed(2)"></td>
+                <td><span :class="row.source === 'company' ? 'badge-company' : 'badge-standard'" x-text="row.source === 'company' ? 'Company' : 'Standard'"></span></td>
+                <td>
+                  <button x-show="!row.editing && !row.isDraft" class="btn-secondary btn-sm" @click="startEdit(row)">Edit</button>
+                  <span x-show="row.editing" class="inline-flex gap-1">
+                    <button class="btn-primary btn-sm" @click="saveEdit(row, 'service')">&#10003;</button>
+                    <button class="btn-secondary btn-sm" @click="cancelEdit(row)">&#10005;</button>
+                  </span>
+                  <button x-show="row.isDraft && !row.editing" class="btn-link-danger" @click="revertDraft(row, 'service')">Revert</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Publish Modal ========== -->
+  <div x-show="showPublishModal" x-transition class="modal-overlay" @click.self="showPublishModal = false" style="display:none;">
+    <div class="modal-content">
+      <div class="p-6 border-b" style="border-color: var(--border-color);">
+        <h2 class="text-lg font-medium text-gray-800">&#128640; Publish Confirmation</h2>
+      </div>
+      <div class="p-6">
+        <div class="bg-gray-50 rounded-lg p-4 mb-4 text-sm">
+          <div class="font-medium text-gray-700 mb-2">Changes Summary</div>
+          <div class="flex justify-between py-1"><span class="text-gray-500">Changed rates:</span><span class="font-medium" x-text="draftCount + ' rows'"></span></div>
+          <div class="flex justify-between py-1"><span class="text-gray-500">Affected tabs:</span><span class="font-medium" x-text="affectedTabs()"></span></div>
+          <div class="flex justify-between py-1"><span class="text-gray-500">Affected snapshots:</span><span class="font-medium">1 (current company)</span></div>
+        </div>
+        <div class="mb-4">
+          <label class="text-sm font-medium text-gray-700 mb-1 block">Change Summary (optional)</label>
+          <textarea x-model="publishNote" class="w-full border rounded-md p-3 text-sm resize-none" rows="2" placeholder="Describe the reason for this change..." style="border-color: var(--border-color);"></textarea>
+        </div>
+        <div class="text-sm font-medium text-gray-700 mb-2">Change Details</div>
+        <div class="bg-gray-50 rounded-lg p-3 max-h-40 overflow-y-auto text-xs font-mono space-y-1">
+          <div x-for="d in getDraftDetails()" :key="d.key" class="flex gap-2">
+            <span class="text-gray-500" x-text="'[' + d.tab + ']'"></span>
+            <span x-text="d.label"></span>
+            <span class="text-red-500" x-text="'$' + d.oldVal.toFixed(2)"></span>
+            <span class="text-gray-400">&rarr;</span>
+            <span class="text-green-600" x-text="'$' + d.newVal.toFixed(2)"></span>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 border-t flex justify-end gap-3" style="border-color: var(--border-color);">
+        <button class="btn-secondary" @click="showPublishModal = false">Cancel</button>
+        <button class="btn-primary" @click="doPublish()">&#10003; Confirm Publish</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Changelog Modal ========== -->
+  <div x-show="showChangelogModal" x-transition class="modal-overlay" @click.self="showChangelogModal = false" style="display:none;">
+    <div class="modal-content" style="max-width: 680px;">
+      <div class="p-6 border-b flex items-center justify-between" style="border-color: var(--border-color);">
+        <h2 class="text-lg font-medium text-gray-800">&#128221; Change Log</h2>
+        <button class="text-gray-400 hover:text-gray-600 text-lg cursor-pointer bg-transparent border-none" @click="showChangelogModal = false">&#10005;</button>
+      </div>
+      <div class="p-6 max-h-96 overflow-y-auto">
+        <div x-for="log in changelog" :key="log.id" class="border-l-2 pl-4 pb-6 relative" :style="'border-color:' + (log.type === 'publish' ? 'var(--success)' : 'var(--primary)')">
+          <div class="absolute -left-1.5 top-0 w-3 h-3 rounded-full border-2 border-white" :style="'background-color:' + (log.type === 'publish' ? 'var(--success)' : 'var(--primary)')"></div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-sm font-medium text-gray-800" x-text="log.title"></span>
+            <span class="text-xs px-2 py-0.5 rounded" :class="log.type === 'publish' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'" x-text="log.type === 'publish' ? 'Published' : 'Edit'"></span>
+          </div>
+          <div class="text-xs text-gray-500 mb-1"><span x-text="log.operator"></span> &middot; <span x-text="log.time"></span></div>
+          <div class="text-sm text-gray-600" x-text="log.summary"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div x-show="toast.show" x-transition.duration.300ms class="toast" :style="'background-color:' + (toast.type === 'success' ? 'var(--success)' : toast.type === 'error' ? 'var(--error)' : 'var(--warning)')" style="display:none;">
+    <span x-text="toast.message"></span>
+  </div>
+</div>
+
+<script>
+function adminQuotation() {
+  return {
+    activeTab: 0,
+    showPublishModal: false,
+    showChangelogModal: false,
+    publishNote: '',
+    toast: { show: false, message: '', type: 'success' },
+
+    shippingData: [
+      { zone: 2, weight: 1, unit: 'lb', standardRate: 5.20, companyRate: 4.80, effectiveRate: 4.80, source: 'company', isDraft: false, editing: false, editValue: 0, originalCompany: 4.80 },
+      { zone: 2, weight: 2, unit: 'lb', standardRate: 5.85, companyRate: null, effectiveRate: 5.85, source: 'standard', isDraft: false, editing: false, editValue: 0, originalCompany: null },
+      { zone: 2, weight: 3, unit: 'lb', standardRate: 6.50, companyRate: 6.00, effectiveRate: 6.00, source: 'company', isDraft: false, editing: false, editValue: 0, originalCompany: 6.00 },
+      { zone: 3, weight: 1, unit: 'lb', standardRate: 6.10, companyRate: null, effectiveRate: 6.10, source: 'standard', isDraft: false, editing: false, editValue: 0, originalCompany: null },
+      { zone: 3, weight: 2, unit: 'lb', standardRate: 6.85, companyRate: 6.50, effectiveRate: 6.50, source: 'company', isDraft: false, editing: false, editValue: 0, originalCompany: 6.50 },
+      { zone: 3, weight: 3, unit: 'lb', standardRate: 7.60, companyRate: null, effectiveRate: 7.60, source: 'standard', isDraft: false, editing: false, editValue: 0, originalCompany: null },
+      { zone: 4, weight: 1, unit: 'lb', standardRate: 7.20, companyRate: 6.80, effectiveRate: 6.80, source: 'company', isDraft: false, editing: false, editValue: 0, originalCompany: 6.80 },
+      { zone: 4, weight: 2, unit: 'lb', standardRate: 8.10, companyRate: null, effectiveRate: 8.10, source: 'standard', isDraft: false, editing: false, editValue: 0, originalCompany: null },
+      { zone: 5, weight: 1, unit: 'lb', standardRate: 8.50, companyRate: 7.90, effectiveRate: 7.90, source: 'company', isDraft: false, editing: false, editValue: 0, originalCompany: 7.90 },
+      { zone: 5, weight: 2, unit: 'lb', standardRate: 9.60, companyRate: null, effectiveRate: 9.60, source: 'standard', isDraft: false, editing: false, editValue: 0, originalCompany: null },
+    ],
+    surchargeData: [
+      { feeCode: 'FSC', descEn: 'Fuel Surcharge', descCn: '燃油附加费', standardRate: 2.50, companyRate: 2.00, effectiveRate: 2.00, source: 'company', isDraft: false, editing: false, editValue: 0, originalCompany: 2.00 },
+      { feeCode: 'RDC', descEn: 'Delivery Area Surcharge (Comm.)', descCn: '偏远地区配送费(商业)', standardRate: 4.00, companyRate: null, effectiveRate: 4.00, source: 'standard', isDraft: false, editing: false, editValue: 0, originalCompany: null },
+      { feeCode: 'RDR', descEn: 'Delivery Area Surcharge (Resi.)', descCn: '偏远地区配送费(住宅)', standardRate: 4.50, companyRate: null, effectiveRate: 4.50, source: 'standard', isDraft: false, editing: false, editValue: 0, originalCompany: null },
+      { feeCode: 'RES', descEn: 'Residential Delivery', descCn: '住宅配送费', standardRate: 3.50, companyRate: 3.00, effectiveRate: 3.00, source: 'company', isDraft: false, editing: false, editValue: 0, originalCompany: 3.00 },
+      { feeCode: 'AHW-2', descEn: 'Additional Handling (Weight)', descCn: '超重处理费', standardRate: 15.00, companyRate: null, effectiveRate: 15.00, source: 'standard', isDraft: false, editing: false, editValue: 0, originalCompany: null },
+      { feeCode: 'OS', descEn: 'Oversize Package', descCn: '超尺寸包裹费', standardRate: 22.00, companyRate: 18.00, effectiveRate: 18.00, source: 'company', isDraft: false, editing: false, editValue: 0, originalCompany: 18.00 },
+    ],
+    serviceQuoteData: [
+      { name: '0-1 lb', index: '0-1', unit: 'per order', standardQuote: 3.50, companyQuote: 3.00, effectiveQuote: 3.00, source: 'company', isDraft: false, editing: false, editValue: 0, originalCompany: 3.00 },
+      { name: '1-2 lb', index: '1-2', unit: 'per order', standardQuote: 3.80, companyQuote: null, effectiveQuote: 3.80, source: 'standard', isDraft: false, editing: false, editValue: 0, originalCompany: null },
+      { name: '2-3 lb', index: '2-3', unit: 'per order', standardQuote: 4.20, companyQuote: 3.80, effectiveQuote: 3.80, source: 'company', isDraft: false, editing: false, editValue: 0, originalCompany: 3.80 },
+      { name: '3-5 lb', index: '3-5', unit: 'per order', standardQuote: 4.80, companyQuote: null, effectiveQuote: 4.80, source: 'standard', isDraft: false, editing: false, editValue: 0, originalCompany: null },
+      { name: '5-10 lb', index: '5-10', unit: 'per order', standardQuote: 5.50, companyQuote: 5.00, effectiveQuote: 5.00, source: 'company', isDraft: false, editing: false, editValue: 0, originalCompany: 5.00 },
+      { name: 'Label per piece', index: 'label', unit: 'per piece', standardQuote: 0.15, companyQuote: 0.10, effectiveQuote: 0.10, source: 'company', isDraft: false, editing: false, editValue: 0, originalCompany: 0.10 },
+    ],
+    changelog: [
+      { id: 1, type: 'publish', title: 'Version v3 Published', operator: 'Dennis', time: '2026-03-20 14:30', summary: '3 shipping rates + 1 surcharge updated for ABC Logistics' },
+      { id: 2, type: 'edit', title: 'Shipping rates edited', operator: 'Dennis', time: '2026-03-20 14:25', summary: 'Zone 2/1lb: $5.00 -> $4.80, Zone 3/2lb: $6.85 -> $6.50' },
+      { id: 3, type: 'publish', title: 'Version v2 Published', operator: 'Alice', time: '2026-03-15 10:00', summary: 'Initial company override for SVIP+ pricing' },
+      { id: 4, type: 'edit', title: 'Surcharge rates edited', operator: 'Alice', time: '2026-03-15 09:45', summary: 'FSC: $2.50 -> $2.00, RES: $3.50 -> $3.00' },
+    ],
+
+    get draftCount() {
+      return this.shippingData.filter(r => r.isDraft).length
+           + this.surchargeData.filter(r => r.isDraft).length
+           + this.serviceQuoteData.filter(r => r.isDraft).length;
+    },
+    currentData() {
+      if (this.activeTab === 0) return this.shippingData;
+      if (this.activeTab === 1) return this.surchargeData;
+      return this.serviceQuoteData;
+    },
+    startEdit(row) {
+      row.editValue = row.companyRate ?? row.companyQuote ?? row.standardRate ?? row.standardQuote ?? 0;
+      row.editing = true;
+    },
+    saveEdit(row, type) {
+      if (row.editValue < 0) { this.showToast('Value cannot be negative', 'error'); return; }
+      row.editing = false;
+      row.isDraft = true;
+      if (type === 'service') { row.companyQuote = row.editValue; row.effectiveQuote = row.editValue; }
+      else { row.companyRate = row.editValue; row.effectiveRate = row.editValue; }
+      row.source = 'company';
+      this.showToast('Draft saved', 'success');
+    },
+    cancelEdit(row) { row.editing = false; },
+    revertDraft(row, type) {
+      row.isDraft = false;
+      if (type === 'service') {
+        row.companyQuote = row.originalCompany;
+        row.effectiveQuote = row.companyQuote ?? row.standardQuote;
+        row.source = row.companyQuote !== null ? 'company' : 'standard';
+      } else {
+        row.companyRate = row.originalCompany;
+        row.effectiveRate = row.companyRate ?? row.standardRate;
+        row.source = row.companyRate !== null ? 'company' : 'standard';
+      }
+      this.showToast('Draft reverted', 'warning');
+    },
+    clearAllDrafts() {
+      [...this.shippingData, ...this.surchargeData, ...this.serviceQuoteData].forEach(row => {
+        if (!row.isDraft) return;
+        row.isDraft = false;
+        if ('companyRate' in row) { row.companyRate = row.originalCompany; row.effectiveRate = row.companyRate ?? row.standardRate; }
+        else { row.companyQuote = row.originalCompany; row.effectiveQuote = row.companyQuote ?? row.standardQuote; }
+        row.source = (row.companyRate ?? row.companyQuote ?? row.originalCompany) !== null ? 'company' : 'standard';
+      });
+      this.showToast('All drafts cleared', 'warning');
+    },
+    affectedTabs() {
+      const t = [];
+      if (this.shippingData.some(r => r.isDraft)) t.push('Shipping');
+      if (this.surchargeData.some(r => r.isDraft)) t.push('Surcharge');
+      if (this.serviceQuoteData.some(r => r.isDraft)) t.push('Service Quote');
+      return t.length ? t.join(', ') : 'None';
+    },
+    getDraftDetails() {
+      const d = [];
+      this.shippingData.filter(r => r.isDraft).forEach(r => d.push({ tab: 'Shipping', label: 'Zone ' + r.zone + ' / ' + r.weight + 'lb', oldVal: r.originalCompany ?? r.standardRate, newVal: r.companyRate, key: 's-' + r.zone + '-' + r.weight }));
+      this.surchargeData.filter(r => r.isDraft).forEach(r => d.push({ tab: 'Surcharge', label: r.feeCode, oldVal: r.originalCompany ?? r.standardRate, newVal: r.companyRate, key: 'sc-' + r.feeCode }));
+      this.serviceQuoteData.filter(r => r.isDraft).forEach(r => d.push({ tab: 'Service', label: r.name, oldVal: r.originalCompany ?? r.standardQuote, newVal: r.companyQuote, key: 'sq-' + r.index }));
+      return d;
+    },
+    doPublish() {
+      const cnt = this.draftCount;
+      this.showPublishModal = false;
+      [...this.shippingData, ...this.surchargeData, ...this.serviceQuoteData].forEach(row => {
+        if (row.isDraft) { row.isDraft = false; row.originalCompany = row.companyRate ?? row.companyQuote; }
+      });
+      this.changelog.unshift({ id: Date.now(), type: 'publish', title: 'Version v4 Published', operator: 'Dennis', time: new Date().toLocaleString('sv-SE').replace(',', ''), summary: this.publishNote || (cnt + ' rate(s) updated') });
+      this.publishNote = '';
+      this.showToast('Published successfully! Snapshot generation triggered.', 'success');
+    },
+    showToast(msg, type) {
+      this.toast = { show: true, message: msg, type: type };
+      setTimeout(() => { this.toast.show = false; }, 3000);
+    }
+  };
+}
+</script>
+</body>
+</html>

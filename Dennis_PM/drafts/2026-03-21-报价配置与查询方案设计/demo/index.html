@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>报价配置管理优化 - Demo 导航</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --primary: #3B82F6;
+      --primary-dark: #2563EB;
+      --sidebar-bg: #1A1F2E;
+      --topbar-bg: #1E2330;
+      --page-bg: #F9FAFB;
+      --card-bg: #FFFFFF;
+      --border-color: #E5E7EB;
+      --success: #10B981;
+      --warning: #F59E0B;
+      --error: #EF4444;
+    }
+    body { font-family: -apple-system, 'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen" style="background-color: var(--page-bg);">
+  <!-- Header -->
+  <div class="text-white py-6 px-8" style="background-color: var(--topbar-bg);">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-sm opacity-70 mb-1">ShipSage Billing</div>
+      <h1 class="text-2xl font-medium">报价配置管理优化 & 客户报价自助查询</h1>
+      <p class="text-sm opacity-60 mt-2">PRD Demo - V2.0 | 2026-03-23</p>
+    </div>
+  </div>
+
+  <div class="max-w-5xl mx-auto px-8 py-10">
+    <!-- Project Overview -->
+    <div class="bg-white rounded-lg border p-6 mb-8" style="border-color: var(--border-color);">
+      <h2 class="text-lg font-medium text-gray-800 mb-3">项目概述</h2>
+      <p class="text-sm text-gray-600 leading-relaxed">
+        将 Admin 后台客户报价配置页从只读改为可直接编辑（含新增 Surcharge Tab），支持草稿发布流程和变更日志；
+        同时在 OMS 端新增「我的报价」页，让商家自助查询最终生效报价。
+      </p>
+      <div class="flex gap-6 mt-4">
+        <div class="flex items-center gap-2 text-sm text-gray-500">
+          <span class="w-2 h-2 rounded-full" style="background-color: var(--primary);"></span>
+          4 个核心任务（T1-T4）
+        </div>
+        <div class="flex items-center gap-2 text-sm text-gray-500">
+          <span class="w-2 h-2 rounded-full" style="background-color: var(--success);"></span>
+          8 个费用 Tab 可编辑
+        </div>
+        <div class="flex items-center gap-2 text-sm text-gray-500">
+          <span class="w-2 h-2 rounded-full" style="background-color: var(--warning);"></span>
+          快照机制解耦查询
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo Cards -->
+    <h2 class="text-lg font-medium text-gray-800 mb-4">Demo 页面</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Admin Demo Card -->
+      <a href="admin-quotation.html" class="block bg-white rounded-lg border hover:shadow-lg transition-shadow duration-200 overflow-hidden group" style="border-color: var(--border-color);">
+        <div class="p-1.5" style="background-color: var(--sidebar-bg);">
+          <div class="flex items-center gap-2 px-3 py-2">
+            <span class="text-white text-xs opacity-80">ShipSage Admin</span>
+            <span class="ml-auto flex gap-1">
+              <span class="w-2 h-2 rounded-full bg-red-400"></span>
+              <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+              <span class="w-2 h-2 rounded-full bg-green-400"></span>
+            </span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white" style="background-color: var(--primary);">
+              <span class="text-lg">&#9998;</span>
+            </div>
+            <div>
+              <h3 class="font-medium text-gray-800 group-hover:text-blue-600 transition-colors">运营端 - 客户报价配置</h3>
+              <p class="text-xs text-gray-500">T1 + T2：直编 + 发布流程 + 变更日志</p>
+            </div>
+          </div>
+          <p class="text-sm text-gray-600 mb-4">
+            Admin 后台客户报价配置页，8 个费用 Tab 单格直编，草稿发布流程，变更日志追溯。
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs px-2 py-1 rounded-full bg-blue-50 text-blue-700">Shipping Fee</span>
+            <span class="text-xs px-2 py-1 rounded-full bg-blue-50 text-blue-700">Surcharge (New)</span>
+            <span class="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600">Handling</span>
+            <span class="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600">Storage</span>
+            <span class="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600">+4 more</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- OMS Demo Card -->
+      <a href="oms-my-quotation.html" class="block bg-white rounded-lg border hover:shadow-lg transition-shadow duration-200 overflow-hidden group" style="border-color: var(--border-color);">
+        <div class="p-1.5" style="background-color: var(--sidebar-bg);">
+          <div class="flex items-center gap-2 px-3 py-2">
+            <span class="text-white text-xs opacity-80">ShipSage OMS</span>
+            <span class="ml-auto flex gap-1">
+              <span class="w-2 h-2 rounded-full bg-red-400"></span>
+              <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+              <span class="w-2 h-2 rounded-full bg-green-400"></span>
+            </span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center text-white" style="background-color: var(--success);">
+              <span class="text-lg">&#128269;</span>
+            </div>
+            <div>
+              <h3 class="font-medium text-gray-800 group-hover:text-blue-600 transition-colors">商家端 - 我的报价</h3>
+              <p class="text-xs text-gray-500">T4：自助查询 + Excel 导出</p>
+            </div>
+          </div>
+          <p class="text-sm text-gray-600 mb-4">
+            OMS 商家自助查看最终生效报价快照，按运费/附加费/服务报价分 Tab 展示，支持 Excel 导出。
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs px-2 py-1 rounded-full bg-green-50 text-green-700">只读展示</span>
+            <span class="text-xs px-2 py-1 rounded-full bg-green-50 text-green-700">数据隔离</span>
+            <span class="text-xs px-2 py-1 rounded-full bg-green-50 text-green-700">Excel 导出</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Task Coverage -->
+    <div class="mt-10 bg-white rounded-lg border p-6" style="border-color: var(--border-color);">
+      <h2 class="text-lg font-medium text-gray-800 mb-4">任务覆盖</h2>
+      <div class="space-y-3">
+        <div class="flex items-center gap-3">
+          <span class="w-7 h-7 rounded-md flex items-center justify-center text-xs font-bold text-white" style="background-color: var(--primary);">T1</span>
+          <span class="text-sm text-gray-700 flex-1">客户专属报价各 Tab 支持直接编辑</span>
+          <span class="text-xs px-2 py-1 rounded bg-blue-50 text-blue-700">Admin Demo</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="w-7 h-7 rounded-md flex items-center justify-center text-xs font-bold text-white" style="background-color: var(--primary);">T2</span>
+          <span class="text-sm text-gray-700 flex-1">报价版本发布流程 + 变更日志</span>
+          <span class="text-xs px-2 py-1 rounded bg-blue-50 text-blue-700">Admin Demo</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="w-7 h-7 rounded-md flex items-center justify-center text-xs font-bold text-white" style="background-color: #6B7280;">T3</span>
+          <span class="text-sm text-gray-700 flex-1">客户报价快照生成机制（后端逻辑，无 UI Demo）</span>
+          <span class="text-xs px-2 py-1 rounded bg-gray-100 text-gray-500">后端</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="w-7 h-7 rounded-md flex items-center justify-center text-xs font-bold text-white" style="background-color: var(--success);">T4</span>
+          <span class="text-sm text-gray-700 flex-1">商家自助查询「我的报价」页</span>
+          <span class="text-xs px-2 py-1 rounded bg-green-50 text-green-700">OMS Demo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

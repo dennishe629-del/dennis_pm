@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Quotation - ShipSage OMS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+  <style>
+    :root {
+      --primary: #3B82F6;
+      --primary-dark: #2563EB;
+      --sidebar-bg: #1A1F2E;
+      --sidebar-logo-bg: #0F1419;
+      --topbar-bg: #1E2330;
+      --page-bg: #F9FAFB;
+      --border-color: #E5E7EB;
+      --table-header-bg: #F9FAFB;
+      --table-row-hover: #F3F4F6;
+      --text-primary: #1F2937;
+      --text-secondary: #6B7280;
+      --success: #10B981;
+      --warning: #F59E0B;
+    }
+    body { font-family: -apple-system, 'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif; margin: 0; }
+    .sidebar { width: 220px; background-color: var(--sidebar-bg); min-height: 100vh; position: fixed; left: 0; top: 0; z-index: 200; }
+    .sidebar-logo { height: 64px; background-color: var(--sidebar-logo-bg); display: flex; align-items: center; padding: 0 16px; color: white; font-weight: 600; font-size: 16px; }
+    .sidebar-nav-item { display: flex; align-items: center; padding: 11px 16px; color: #E5E7EB; font-size: 13px; cursor: pointer; transition: background-color 0.15s; gap: 10px; }
+    .sidebar-nav-item:hover { background-color: rgba(255,255,255,0.05); }
+    .sidebar-nav-item.active { background-color: rgba(59,130,246,0.1); color: white; border-left: 3px solid var(--primary); padding-left: 13px; }
+    .sidebar-section { padding: 12px 16px 6px; font-size: 11px; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; }
+    .topbar { height: 64px; background-color: var(--topbar-bg); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: fixed; top: 0; left: 220px; right: 0; z-index: 100; }
+    .main-content { margin-left: 220px; margin-top: 64px; padding: 24px; background-color: var(--page-bg); min-height: calc(100vh - 64px); }
+    .tab-btn { padding: 10px 16px; font-size: 13px; font-weight: 500; color: var(--text-secondary); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; white-space: nowrap; }
+    .tab-btn:hover { color: var(--text-primary); }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+    .btn-secondary { background-color: white; color: #374151; border: 1px solid #D1D5DB; border-radius: 6px; padding: 8px 16px; font-weight: 500; font-size: 13px; cursor: pointer; }
+    .btn-secondary:hover { background-color: #F3F4F6; }
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table th { background-color: var(--table-header-bg); font-size: 11px; font-weight: 600; color: var(--text-secondary); text-align: left; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 14px; border-bottom: 1px solid var(--border-color); }
+    .data-table td { font-size: 13px; color: var(--text-primary); padding: 12px 14px; border-bottom: 1px solid var(--border-color); }
+    .data-table tbody tr:hover { background-color: var(--table-row-hover); }
+    .font-mono { font-family: 'SF Mono', 'Monaco', 'Consolas', monospace; }
+    .toast { position: fixed; top: 80px; right: 24px; z-index: 9999; padding: 12px 20px; border-radius: 6px; color: white; font-size: 13px; font-weight: 500; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 20px; color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+<div x-data="omsQuotation()">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-logo">&#128230;&nbsp;&nbsp;ShipSage OMS</div>
+    <div class="sidebar-section">Orders</div>
+    <div class="sidebar-nav-item">&#128196;&nbsp; Order List</div>
+    <div class="sidebar-nav-item">&#128666;&nbsp; Shipments</div>
+    <div class="sidebar-section">Billing</div>
+    <div class="sidebar-nav-item">&#128176;&nbsp; Fees</div>
+    <div class="sidebar-nav-item">&#128179;&nbsp; Statements</div>
+    <div class="sidebar-nav-item">&#128179;&nbsp; Balance</div>
+    <div class="sidebar-nav-item active">&#128269;&nbsp; My Quotation</div>
+    <div class="sidebar-section">Settings</div>
+    <div class="sidebar-nav-item">&#9881;&nbsp; Account</div>
+  </div>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="flex items-center gap-4">
+      <span class="text-white text-sm font-medium">ABC Logistics</span>
+      <span class="text-xs text-gray-500 bg-gray-700 px-2 py-0.5 rounded">SVIP+</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="text-gray-400 cursor-pointer hover:text-white text-lg">&#128276;</span>
+      <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium" style="background-color: var(--success);">A</div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="flex items-center gap-2 text-sm mb-4">
+      <a href="index.html" class="text-gray-500 hover:text-blue-600">Demo Home</a>
+      <span class="text-gray-400">&#8250;</span>
+      <span class="text-gray-500">Billing</span>
+      <span class="text-gray-400">&#8250;</span>
+      <span class="text-gray-800 font-medium">My Quotation</span>
+    </div>
+
+    <div class="flex items-center justify-between mb-5">
+      <div>
+        <h1 class="text-xl font-medium text-gray-800">My Quotation</h1>
+        <p class="text-sm text-gray-500 mt-1">View your current effective pricing</p>
+      </div>
+    </div>
+
+    <!-- Info Banner -->
+    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-5 flex items-start gap-3">
+      <span class="text-blue-500 text-lg mt-0.5">&#9432;</span>
+      <div class="text-sm">
+        <span class="text-blue-800">The following rates are your current effective quotation.</span>
+        <span class="text-blue-600">Last updated: <strong>2026-03-21 10:30:00</strong></span>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="flex items-center gap-3 mb-4">
+      <select x-model="selectedService" class="text-sm border rounded-md px-3 py-2" style="border-color: var(--border-color);">
+        <option value="3351">FedEx Ground S3</option>
+        <option value="3349">FedEx Ground S1</option>
+        <option value="3350">FedEx Ground S2</option>
+      </select>
+      <select x-show="activeTab === 0" x-model="selectedWarehouse" class="text-sm border rounded-md px-3 py-2" style="border-color: var(--border-color);">
+        <option value="1">NJ Warehouse</option>
+        <option value="2">CA Warehouse</option>
+      </select>
+      <div class="ml-auto">
+        <button class="btn-secondary" @click="exportExcel()">&#128196; Export Excel</button>
+      </div>
+    </div>
+
+    <!-- Tabs + Content -->
+    <div class="bg-white rounded-lg border overflow-hidden" style="border-color: var(--border-color);">
+      <div class="flex border-b overflow-x-auto" style="border-color: var(--border-color);">
+        <div class="tab-btn" :class="{'active': activeTab === 0}" @click="activeTab = 0">Shipping Fee</div>
+        <div class="tab-btn" :class="{'active': activeTab === 1}" @click="activeTab = 1">Surcharge</div>
+        <div class="tab-btn" :class="{'active': activeTab === 2}" @click="activeTab = 2">Handling Fee</div>
+        <div class="tab-btn" :class="{'active': activeTab === 3}" @click="activeTab = 3">Storage Fee</div>
+        <div class="tab-btn" :class="{'active': activeTab === 4}" @click="activeTab = 4">Receiving Fee</div>
+        <div class="tab-btn" :class="{'active': activeTab === 5}" @click="activeTab = 5">Return Fee</div>
+        <div class="tab-btn" :class="{'active': activeTab === 6}" @click="activeTab = 6">Packing Material</div>
+        <div class="tab-btn" :class="{'active': activeTab === 7}" @click="activeTab = 7">Misc Fee</div>
+      </div>
+
+      <!-- Shipping Tab -->
+      <div x-show="activeTab === 0">
+        <div class="overflow-x-auto">
+          <table class="data-table">
+            <thead><tr><th>Zone</th><th>Weight (lb)</th><th>Rate</th></tr></thead>
+            <tbody>
+              <tr x-for="(row, i) in shippingRates" :key="'sh'+i">
+                <td class="font-mono" x-text="row.zone"></td>
+                <td class="font-mono" x-text="row.weight"></td>
+                <td class="font-mono font-medium" x-text="'$' + row.rate.toFixed(2)"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="flex items-center justify-between px-4 py-3 border-t text-sm" style="border-color: var(--border-color);">
+          <span class="text-gray-500">Page 1 of 15 (150 total)</span>
+          <div class="flex gap-1">
+            <button class="px-3 py-1 border rounded text-gray-400 cursor-not-allowed" style="border-color: var(--border-color);">Prev</button>
+            <button class="px-3 py-1 border rounded text-white" style="background-color: var(--primary); border-color: var(--primary);">1</button>
+            <button class="px-3 py-1 border rounded hover:border-blue-400" style="border-color: var(--border-color);">2</button>
+            <button class="px-3 py-1 border rounded hover:border-blue-400" style="border-color: var(--border-color);">3</button>
+            <span class="px-2 py-1 text-gray-400">...</span>
+            <button class="px-3 py-1 border rounded hover:border-blue-400" style="border-color: var(--border-color);">15</button>
+            <button class="px-3 py-1 border rounded hover:border-blue-400" style="border-color: var(--border-color);">Next</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Surcharge Tab -->
+      <div x-show="activeTab === 1">
+        <div class="overflow-x-auto">
+          <table class="data-table">
+            <thead><tr><th>Fee Code</th><th>Description</th><th>Rate</th></tr></thead>
+            <tbody>
+              <tr x-for="(row, i) in surchargeRates" :key="'sc'+i">
+                <td class="font-mono font-medium" x-text="row.feeCode"></td>
+                <td>
+                  <div class="text-sm" x-text="row.descEn"></div>
+                  <div class="text-xs text-gray-400" x-text="row.descCn"></div>
+                </td>
+                <td class="font-mono font-medium" x-text="'$' + row.rate.toFixed(2)"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Service Quote Tabs (2-7) with data -->
+      <div x-show="activeTab >= 2 && currentServiceQuotes().length > 0">
+        <div class="overflow-x-auto">
+          <table class="data-table">
+            <thead><tr><th>Name</th><th>Rate</th><th>Unit</th></tr></thead>
+            <tbody>
+              <tr x-for="(row, i) in currentServiceQuotes()" :key="'sv'+i">
+                <td class="font-medium" x-text="row.name"></td>
+                <td class="font-mono font-medium" x-text="'$' + row.rate.toFixed(2)"></td>
+                <td class="text-gray-500" x-text="row.unit"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Empty state for service tabs with no data -->
+      <div x-show="activeTab >= 2 && currentServiceQuotes().length === 0">
+        <div class="empty-state">
+          <span class="text-4xl mb-3">&#128230;</span>
+          <span class="text-base font-medium text-gray-600">No quotation available</span>
+          <span class="text-sm text-gray-400 mt-1">Please contact customer service for pricing details.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div x-show="toast.show" x-transition.duration.300ms class="toast" style="background-color: var(--success); display:none;">
+    <span x-text="toast.message"></span>
+  </div>
+</div>
+
+<script>
+function omsQuotation() {
+  return {
+    activeTab: 0,
+    selectedService: '3351',
+    selectedWarehouse: '1',
+    toast: { show: false, message: '' },
+
+    shippingRates: [
+      { zone: 2, weight: 1, rate: 4.80 }, { zone: 2, weight: 2, rate: 5.85 },
+      { zone: 2, weight: 3, rate: 6.00 }, { zone: 2, weight: 4, rate: 6.90 },
+      { zone: 2, weight: 5, rate: 7.50 }, { zone: 3, weight: 1, rate: 6.10 },
+      { zone: 3, weight: 2, rate: 6.50 }, { zone: 3, weight: 3, rate: 7.60 },
+      { zone: 3, weight: 4, rate: 8.30 }, { zone: 3, weight: 5, rate: 9.00 },
+      { zone: 4, weight: 1, rate: 6.80 }, { zone: 4, weight: 2, rate: 8.10 },
+    ],
+    surchargeRates: [
+      { feeCode: 'FSC', descEn: 'Fuel Surcharge', descCn: '燃油附加费', rate: 2.00 },
+      { feeCode: 'RDC', descEn: 'Delivery Area Surcharge (Commercial)', descCn: '偏远地区配送费(商业)', rate: 4.00 },
+      { feeCode: 'RDR', descEn: 'Delivery Area Surcharge (Residential)', descCn: '偏远地区配送费(住宅)', rate: 4.50 },
+      { feeCode: 'RES', descEn: 'Residential Delivery', descCn: '住宅配送费', rate: 3.00 },
+      { feeCode: 'AHW-2', descEn: 'Additional Handling (Weight)', descCn: '超重处理费', rate: 15.00 },
+      { feeCode: 'AHL-2', descEn: 'Additional Handling (Length)', descCn: '超长处理费', rate: 12.00 },
+      { feeCode: 'OS', descEn: 'Oversize Package', descCn: '超尺寸包裹费', rate: 18.00 },
+      { feeCode: 'LLC', descEn: 'Large Package Surcharge (Commercial)', descCn: '大包裹费(商业)', rate: 25.00 },
+      { feeCode: 'DCS', descEn: 'Direct Signature', descCn: '直接签名确认', rate: 6.50 },
+    ],
+    serviceQuoteMap: {
+      2: [ // Handling
+        { name: '0-1 lb', rate: 3.00, unit: 'per order' }, { name: '1-2 lb', rate: 3.80, unit: 'per order' },
+        { name: '2-3 lb', rate: 3.80, unit: 'per order' }, { name: '3-5 lb', rate: 4.80, unit: 'per order' },
+        { name: '5-10 lb', rate: 5.00, unit: 'per order' }, { name: '10-20 lb', rate: 6.50, unit: 'per order' },
+        { name: 'Label per piece', rate: 0.10, unit: 'per piece' }, { name: 'Bubble wrap', rate: 0.30, unit: 'per piece' },
+      ],
+      3: [ // Storage
+        { name: '0-30 days', rate: 0.00, unit: 'per CBM/day' }, { name: '31-60 days', rate: 0.75, unit: 'per CBM/day' },
+        { name: '61-90 days', rate: 0.85, unit: 'per CBM/day' }, { name: '91-120 days', rate: 1.00, unit: 'per CBM/day' },
+        { name: '121-180 days', rate: 1.20, unit: 'per CBM/day' }, { name: '181-365 days', rate: 1.50, unit: 'per CBM/day' },
+        { name: '365+ days', rate: 2.00, unit: 'per CBM/day' },
+      ],
+      4: [ // Receiving
+        { name: 'Per pallet', rate: 15.00, unit: 'per pallet' }, { name: 'Per carton', rate: 1.00, unit: 'per carton' },
+        { name: 'Per piece (loose)', rate: 0.30, unit: 'per piece' }, { name: 'QC inspection', rate: 0.20, unit: 'per piece' },
+      ],
+      5: [ // Return
+        { name: 'Return processing', rate: 3.50, unit: 'per order' }, { name: 'QC & restock', rate: 1.50, unit: 'per piece' },
+        { name: 'Photo service', rate: 0.50, unit: 'per photo' },
+      ],
+      6: [ // Material
+        { name: 'Poly bag (small)', rate: 0.10, unit: 'per piece' }, { name: 'Poly bag (medium)', rate: 0.15, unit: 'per piece' },
+        { name: 'Box (10x8x6)', rate: 0.60, unit: 'per piece' }, { name: 'Box (14x10x8)', rate: 0.85, unit: 'per piece' },
+        { name: 'Tape', rate: 0.05, unit: 'per order' },
+      ],
+      7: [], // Misc - empty to demo empty state
+    },
+
+    currentServiceQuotes() {
+      return this.serviceQuoteMap[this.activeTab] || [];
+    },
+    exportExcel() {
+      this.toast = { show: true, message: 'Exporting Excel... (Demo: file download simulated)' };
+      setTimeout(() => { this.toast.show = false; }, 3000);
+    }
+  };
+}
+</script>
+</body>
+</html>

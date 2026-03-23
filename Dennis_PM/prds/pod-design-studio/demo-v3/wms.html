@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WMS - POD Design Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.6.15/dist/vuetify.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Roboto', sans-serif; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      <!-- App Bar -->
+      <v-app-bar app color="#1565C0" dark>
+        <v-toolbar-title>
+          <v-icon left>mdi-warehouse</v-icon>
+          WMS - Print Queue
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-chip x-small class="mr-2">Shift: Day</v-chip>
+        <v-chip x-small color="success" class="mr-2">Online</v-chip>
+        <v-btn icon>
+          <v-icon>mdi-account</v-icon>
+        </v-btn>
+      </v-app-bar>
+
+      <v-main>
+        <v-container fluid>
+          <!-- Stats -->
+          <v-row class="mb-4">
+            <v-col cols="12" md="3">
+              <v-card class="pa-4" color="primary" dark>
+                <div class="d-flex align-center">
+                  <v-icon size="40" class="mr-3">mdi-printer</v-icon>
+                  <div>
+                    <div class="text-h4 font-weight-bold">{{ stats.queued }}</div>
+                    <div class="caption">Queued Jobs</div>
+                  </div>
+                </div>
+              </v-card>
+            </v-col>
+            <v-col cols="12" md="3">
+              <v-card class="pa-4" color="success" dark>
+                <div class="d-flex align-center">
+                  <v-icon size="40" class="mr-3">mdi-check-all</v-icon>
+                  <div>
+                    <div class="text-h4 font-weight-bold">{{ stats.completed }}</div>
+                    <div class="caption">Completed Today</div>
+                  </div>
+                </div>
+              </v-card>
+            </v-col>
+            <v-col cols="12" md="3">
+              <v-card class="pa-4" color="warning" dark>
+                <div class="d-flex align-center">
+                  <v-icon size="40" class="mr-3">mdi-clock</v-icon>
+                  <div>
+                    <div class="text-h4 font-weight-bold">{{ stats.inProgress }}</div>
+                    <div class="caption">In Progress</div>
+                  </div>
+                </div>
+              </v-card>
+            </v-col>
+            <v-col cols="12" md="3">
+              <v-card class="pa-4" color="error" dark>
+                <div class="d-flex align-center">
+                  <v-icon size="40" class="mr-3">mdi-alert-circle</v-icon>
+                  <div>
+                    <div class="text-h4 font-weight-bold">{{ stats.issues }}</div>
+                    <div class="caption">Issues</div>
+                  </div>
+                </div>
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <!-- Print Queue -->
+          <v-row>
+            <v-col cols="12">
+              <v-card>
+                <v-card-title class="d-flex align-center">
+                  <v-icon left color="primary">mdi-file-document-multiple</v-icon>
+                  Print Queue
+                  <v-spacer></v-spacer>
+                  <v-btn-toggle v-model="statusFilter" mandatory dense class="mr-4">
+                    <v-btn small value="all">All</v-btn>
+                    <v-btn small value="queued">Queued</v-btn>
+                    <v-btn small value="printing">Printing</v-btn>
+                    <v-btn small value="qc">QC</v-btn>
+                    <v-btn small value="shipped">Shipped</v-btn>
+                  </v-btn-toggle>
+                  <v-btn color="primary" small @click="showClaimDialog = true">
+                    <v-icon left small>mdi-hand-pointing-right</v-icon>
+                    Claim Batch
+                  </v-btn>
+                </v-card-title>
+
+                <v-data-table
+                  :headers="headers"
+                  :items="printJobs"
+                  :items-per-page="15"
+                  class="elevation-0"
+                >
+                  <template v-slot:item.id="{ item }">
+                    <span class="font-weight-bold">{{ item.id }}</span>
+                  </template>
+
+                  <template v-slot:item.product="{ item }">
+                    <div class="d-flex align-center">
+                      <v-avatar size="32" :color="item.color" class="mr-2">
+                        <span style="font-size: 16px">{{ item.emoji }}</span>
+                      </v-avatar>
+                      <div>
+                        <div>{{ item.product }}</div>
+                        <div class="caption">{{ item.color }} / {{ item.size }}</div>
+                      </div>
+                    </div>
+                  </template>
+
+                  <template v-slot:item.design_preview="{ item }">
+                    <v-dialog max-width="400">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn x-small icon v-bind="attrs" v-on="on">
+                          <v-icon x-small>mdi-eye</v-icon>
+                        </v-btn>
+                      </template>
+                      <v-card>
+                        <v-card-title>Design Preview</v-card-title>
+                        <v-card-text class="text-center">
+                          <div style="background: {{item.color}}; padding: 40px; border-radius: 8px;">
+                            <span style="font-size: 80px">{{ item.emoji }}</span>
+                          </div>
+                          <v-divider class="my-4"></v-divider>
+                          <div class="text-left">
+                            <div><strong>Order:</strong> {{ item.id }}</div>
+                            <div><strong>Design:</strong> {{ item.design_type }}</div>
+                          </div>
+                        </v-card-text>
+                      </v-card>
+                    </v-dialog>
+                  </template>
+
+                  <template v-slot:item.status="{ item }">
+                    <v-chip x-small :color="getStatusColor(item.status)" dark>
+                      {{ item.status }}
+                    </v-chip>
+                  </template>
+
+                  <template v-slot:item.files="{ item }">
+                    <v-btn x-small outlined color="primary" class="mr-1" @click="downloadFile(item, 'png')">
+                      PNG
+                    </v-btn>
+                    <v-btn x-small outlined color="primary" @click="downloadFile(item, 'pdf')">
+                      PDF
+                    </v-btn>
+                  </template>
+
+                  <template v-slot:item.actions="{ item }">
+                    <v-menu>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn x-small icon v-bind="attrs" v-on="on">
+                          <v-icon x-small>mdi-dots-vertical</v-icon>
+                        </v-btn>
+                      </template>
+                      <v-list dense>
+                        <v-list-item @click="claimJob(item)" v-if="item.status === 'Queued'">
+                          <v-list-item-icon><v-icon small>mdi-hand-pointing-right</v-icon></v-list-item-icon>
+                          <v-list-item-title>Claim</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item @click="startPrint(item)" v-if="item.status === 'Claimed'">
+                          <v-list-item-icon><v-icon small>mdi-play</v-icon></v-list-item-icon>
+                          <v-list-item-title>Start Print</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item @click="completeQC(item)" v-if="item.status === 'QC'">
+                          <v-list-item-icon><v-icon small>mdi-check</v-icon></v-list-item-icon>
+                          <v-list-item-title>QC Pass</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item @click="markShipped(item)" v-if="item.status === 'Ready to Ship'">
+                          <v-list-item-icon><v-icon small>mdi-truck</v-icon></v-list-item-icon>
+                          <v-list-item-title>Mark Shipped</v-list-item-title>
+                        </v-list-item>
+                        <v-list-item @click="reportIssue(item)">
+                          <v-list-item-icon><v-icon small color="error">mdi-alert</v-icon></v-list-item-icon>
+                          <v-list-item-title class="error--text">Report Issue</v-list-item-title>
+                        </v-list-item>
+                      </v-list>
+                    </v-menu>
+                  </template>
+                </v-data-table>
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <!-- Active Job Detail -->
+          <v-row v-if="activeJob" class="mt-4">
+            <v-col cols="12">
+              <v-card color="primary" dark>
+                <v-card-title class="d-flex align-center">
+                  <v-icon left>mdi-printer</v-icon>
+                  Currently Printing: {{ activeJob.id }}
+                  <v-spacer></v-spacer>
+                  <v-chip color="warning" dark>Printing...</v-chip>
+                </v-card-title>
+                <v-card-text>
+                  <v-row>
+                    <v-col cols="12" md="4">
+                      <div class="caption">Product</div>
+                      <div class="title">{{ activeJob.product }}</div>
+                      <div>{{ activeJob.color }} / {{ activeJob.size }}</div>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                      <div class="caption">Quantity</div>
+                      <div class="title">{{ activeJob.quantity }}</div>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                      <div class="caption">Actions</div>
+                      <v-btn color="success" @click="activeJob.status = 'QC'">
+                        <v-icon left>mdi-check</v-icon>
+                        Complete & QC
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-main>
+
+      <!-- Claim Dialog -->
+      <v-dialog v-model="showClaimDialog" max-width="500">
+        <v-card>
+          <v-card-title>
+            <v-icon left color="primary">mdi-hand-pointing-right</v-icon>
+            Claim Print Batch
+          </v-card-title>
+          <v-card-text>
+            <p>Select the number of jobs to claim:</p>
+            <v-radio-group v-model="claimCount">
+              <v-radio label="1 job" :value="1"></v-radio>
+              <v-radio label="5 jobs" :value="5"></v-radio>
+              <v-radio label="10 jobs" :value="10"></v-radio>
+            </v-radio-group>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn text @click="showClaimDialog = false">Cancel</v-btn>
+            <v-btn color="primary" @click="claimBatch">Claim</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+      <!-- Issue Dialog -->
+      <v-dialog v-model="showIssueDialog" max-width="500">
+        <v-card>
+          <v-card-title>
+            <v-icon left color="error">mdi-alert</v-icon>
+            Report Issue
+          </v-card-title>
+          <v-card-text>
+            <v-select
+              v-model="issueType"
+              :items="['Low print quality', 'Wrong color', 'Damaged file', 'Other']"
+              label="Issue Type"
+              outlined
+            ></v-select>
+            <v-textarea
+              v-model="issueNotes"
+              label="Notes"
+              outlined
+              rows="3"
+              placeholder="Describe the issue..."
+            ></v-textarea>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn text @click="showIssueDialog = false">Cancel</v-btn>
+            <v-btn color="error" @click="submitIssue">Submit Issue</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+      <!-- Snackbar -->
+      <v-snackbar v-model="snackbar.show" :color="snackbar.color" timeout="3000">
+        {{ snackbar.message }}
+      </v-snackbar>
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.6.15/dist/vuetify.min.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data: {
+        statusFilter: 'all',
+        showClaimDialog: false,
+        showIssueDialog: false,
+        claimCount: 1,
+        issueType: null,
+        issueNotes: '',
+        snackbar: { show: false, message: '', color: 'success' },
+        stats: {
+          queued: 28,
+          completed: 145,
+          inProgress: 3,
+          issues: 2,
+        },
+        activeJob: null,
+        headers: [
+          { text: 'Job ID', value: 'id', width: '100px' },
+          { text: 'Product', value: 'product' },
+          { text: 'Preview', value: 'design_preview', width: '80px' },
+          { text: 'Qty', value: 'quantity', width: '80px' },
+          { text: 'Status', value: 'status', width: '120px' },
+          { text: 'Files', value: 'files', width: '160px' },
+          { text: 'Actions', value: 'actions', width: '80px' },
+        ],
+        printJobs: [
+          { id: '#45892', product: 'Classic Tee', color: '#1a1a1a', size: 'M', quantity: 2, emoji: '👕', design_type: 'Image', status: 'Queued' },
+          { id: '#45891', product: 'Classic Tee', color: '#f5f5f5', size: 'L', quantity: 1, emoji: '👕', design_type: 'Text', status: 'Queued' },
+          { id: '#45890', product: 'Phone Case', color: '#1565C0', size: 'iPhone 15', quantity: 3, emoji: '📱', design_type: 'Template', status: 'Claimed' },
+          { id: '#45889', product: 'Premium Hoodie', color: '#C62828', size: 'XL', quantity: 1, emoji: '🧥', design_type: 'Image', status: 'Printing' },
+          { id: '#45888', product: 'Classic Mug', color: '#f5f5f5', size: '11oz', quantity: 4, emoji: '☕', design_type: 'Text', status: 'QC' },
+          { id: '#45887', product: 'Classic Tee', color: '#2E7D32', size: 'S', quantity: 2, emoji: '👕', design_type: 'Image', status: 'Ready to Ship' },
+          { id: '#45886', product: 'Tote Bag', color: '#1a1a1a', size: 'Standard', quantity: 5, emoji: '👜', design_type: 'Template', status: 'Queued' },
+          { id: '#45885', product: 'Classic Tee', color: '#1565C0', size: 'M', quantity: 1, emoji: '👕', design_type: 'Image', status: 'Shipped' },
+        ],
+      },
+      methods: {
+        getStatusColor(status) {
+          const colors = {
+            'Queued': 'grey',
+            'Claimed': 'info',
+            'Printing': 'warning',
+            'QC': 'purple',
+            'Ready to Ship': 'success',
+            'Shipped': 'grey',
+          };
+          return colors[status] || 'grey';
+        },
+        claimJob(item) {
+          item.status = 'Claimed';
+          this.showSnackbar(`Claimed job ${item.id}`, 'success');
+        },
+        claimBatch() {
+          let claimed = 0;
+          for (let job of this.printJobs) {
+            if (job.status === 'Queued' && claimed < this.claimCount) {
+              job.status = 'Claimed';
+              claimed++;
+            }
+          }
+          this.showClaimDialog = false;
+          this.showSnackbar(`Claimed ${claimed} jobs`, 'success');
+        },
+        startPrint(item) {
+          item.status = 'Printing';
+          this.activeJob = item;
+          this.showSnackbar(`Started printing ${item.id}`, 'success');
+        },
+        completeQC(item) {
+          item.status = 'Ready to Ship';
+          this.showSnackbar(`QC passed for ${item.id}`, 'success');
+        },
+        markShipped(item) {
+          item.status = 'Shipped';
+          if (this.activeJob && this.activeJob.id === item.id) {
+            this.activeJob = null;
+          }
+          this.showSnackbar(`Marked ${item.id} as shipped`, 'success');
+        },
+        downloadFile(item, type) {
+          this.showSnackbar(`Downloading ${type.toUpperCase()} for ${item.id}`, 'info');
+        },
+        reportIssue(item) {
+          this.issueType = null;
+          this.issueNotes = '';
+          this.showIssueDialog = true;
+        },
+        submitIssue() {
+          this.showIssueDialog = false;
+          this.showSnackbar('Issue reported - will be reviewed by supervisor', 'warning');
+        },
+        showSnackbar(message, color) {
+          this.snackbar.message = message;
+          this.snackbar.color = color;
+          this.snackbar.show = true;
+        },
+      },
+    });
+  </script>
+</body>
+</html>

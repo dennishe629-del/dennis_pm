@@ -1,0 +1,14 @@
+rate_id,service_id,fee_group,fee_code,fee_code_carrier,fee_type,commercial,residential,additional,rate_shopping,fee,start_date,end_date,created_at,created_by,updated_at,updated_by
+,3368,Additional Handling Charge,AHW,AHW,{"min_weight":"560.01"},1,1,1,1,7.1,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3368,Additional Handling Charge,AHS,AHS,"[{""min_width"":""17.01""},{""min_height"":""17.01""}]",1,1,1,1,7.1,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3368,Additional Handling Charge,AHL,AHL,{"min_length":"27.01"},1,1,1,1,7.1,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3368,Additional Handling Charge,AHC,AHC,,1,1,1,0,7.1,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3368,Delivery Area Surcharge Commercial,RDC-1,RDC,"{""AreaSurchargeZip"":""RDC"",""min_billed_weight"":""0.01"",""max_billed_weight"":""640.00""}",1,0,1,1,3.3,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3368,Delivery Area Surcharge Commercial,RDC-2,RDC,"{""AreaSurchargeZip"":""RDC"",""min_billed_weight"":""640.01"",""max_billed_weight"":""2400.00""}",1,0,1,1,3.3,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3368,Delivery Area Surcharge Residential,RDR-1,RDR,"{""AreaSurchargeZip"":""RDR"",""min_billed_weight"":""0.01"",""max_billed_weight"":""640.00""}",0,1,1,1,3.3,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3368,Delivery Area Surcharge Residential,RDR-2,RDR,"{""AreaSurchargeZip"":""RDR"",""min_billed_weight"":""640.01"",""max_billed_weight"":""2400.00""}",0,1,1,1,3.3,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3368,Delivery Area Surcharge Commercial - Extended,LDC-1,LDC,"{""AreaSurchargeZip"":""LDC"",""min_billed_weight"":""0.01"",""max_billed_weight"":""640.00""}",1,0,1,1,4.41,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3368,Delivery Area Surcharge Commercial - Extended,LDC-2,LDC,"{""AreaSurchargeZip"":""LDC"",""min_billed_weight"":""640.01"",""max_billed_weight"":""2400.00""}",1,0,1,1,4.41,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3368,Delivery Area Surcharge Residential - Extended,LDR-1,LDR,"{""AreaSurchargeZip"":""LDR"",""min_billed_weight"":""0.01"",""max_billed_weight"":""640.00""}",0,1,1,1,4.41,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3368,Delivery Area Surcharge Residential - Extended,LDR-2,LDR,"{""AreaSurchargeZip"":""LDR"",""min_billed_weight"":""640.01"",""max_billed_weight"":""2400.00""}",0,1,1,1,4.41,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3368,Relable Surcharge,RLS,RLS,,1,1,1,0,1.05,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0

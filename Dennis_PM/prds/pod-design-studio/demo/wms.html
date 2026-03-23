@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>WMS Print Queue</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f0f2f5;color:#212121;display:flex;height:100vh;overflow:hidden}
+.sb{width:220px;background:#1B5E20;color:#fff;flex-shrink:0;display:flex;flex-direction:column}
+.sb-logo{padding:20px 18px;font-size:15px;font-weight:700;border-bottom:1px solid rgba(255,255,255,.15)}
+.sb-logo small{display:block;font-size:11px;font-weight:400;opacity:.6;margin-top:2px}
+.sb-item{padding:10px 18px;cursor:pointer;display:flex;align-items:center;gap:10px;opacity:.7;font-size:13px;border-left:3px solid transparent}
+.sb-item:hover{opacity:1;background:rgba(255,255,255,.08)}
+.sb-item.active{opacity:1;background:rgba(255,255,255,.12);border-left-color:#A5D6A7}
+.mytbox{margin:auto 12px 16px;background:rgba(255,255,255,.1);border-radius:8px;padding:12px}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.topbar{height:56px;background:#fff;border-bottom:1px solid #e0e0e0;display:flex;align-items:center;padding:0 24px;gap:12px}
+.tb-title{font-size:15px;font-weight:600;flex:1}
+.content{flex:1;overflow-y:auto;padding:24px}
+.page{display:none}.page.active{display:block}
+.card{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);margin-bottom:20px}
+.card-hd{padding:16px 20px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between}
+.card-title{font-size:14px;font-weight:600}
+.card-body{padding:20px}
+.filters{display:flex;gap:10px;margin-bottom:16px}
+select,input{background:#f5f5f5;border:1px solid #e0e0e0;color:#212121;padding:7px 10px;border-radius:6px;font-size:13px}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:10px 14px;color:#9e9e9e;font-size:12px;font-weight:600;border-bottom:1px solid #f0f0f0}
+td{padding:11px 14px;border-bottom:1px solid #fafafa;font-size:13px;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.b-blue{background:#E3F2FD;color:#1565C0}.b-green{background:#E8F5E9;color:#2E7D32}.b-orange{background:#FFF3E0;color:#E65100}.b-red{background:#FFEBEE;color:#C62828}
+.btn{padding:7px 14px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:5px}
+.btn-ghost{background:transparent;color:#616161;border:1px solid #e0e0e0}.btn-ghost:hover{background:#f5f5f5}
+.btn-primary{background:#2E7D32;color:#fff}.btn-primary:hover{background:#388E3C}
+.btn-success{background:#E8F5E9;color:#2E7D32;border:1px solid #C8E6C9}
+.btn-danger{background:#ffebee;color:#C62828;border:1px solid #ffcdd2}
+.btn-sm{padding:4px 10px;font-size:12px}
+.panel{display:none;position:fixed;top:0;right:0;width:500px;height:100vh;background:#fff;border-left:1px solid #e0e0e0;z-index:100;flex-direction:column;box-shadow:-4px 0 16px rgba(0,0,0,.1)}
+.panel.open{display:flex}
+.panel-hd{padding:18px 24px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between}
+.panel-body{flex:1;overflow-y:auto;padding:24px}
+.panel-ft{padding:16px 24px;border-top:1px solid #f0f0f0;display:flex;gap:10px;justify-content:flex-end}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:99}
+.overlay.open{display:block}
+.close-btn{background:none;border:none;font-size:20px;cursor:pointer;color:#9e9e9e}
+.snackbar{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#323232;color:#fff;border-radius:8px;padding:10px 24px;font-size:13px;z-index:9999;display:none}
+.snackbar.show{display:block}
+.ig{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.ig label{font-size:11px;color:#9e9e9e;font-weight:600;display:block;margin-bottom:2px}
+.ig span{font-size:13px}
+.qc-opt{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1.5px solid #e0e0e0;border-radius:8px;cursor:pointer;margin-bottom:8px}
+.qc-opt.sel{border-color:#2E7D32;background:#E8F5E9}
+</style></head><body>
+<nav class="sb">
+  <div class="sb-logo">ShipSage WMS<small>SG-ONT1 Warehouse</small></div>
+  <div style="padding:12px 0">
+    <div class="sb-item active" onclick="showPage('queue',this)">🖨 Print Queue</div>
+    <div class="sb-item" onclick="showPage('mine',this)">✅ My Tasks</div>
+  </div>
+  <div class="mytbox"><div style="font-size:11px;opacity:.7;margin-bottom:4px">My Active Tasks</div><div style="font-size:22px;font-weight:700">1</div></div>
+</nav>
+<div class="main">
+  <div class="topbar"><div class="tb-title" id="pt">Print Queue</div><button class="btn btn-ghost btn-sm" onclick="showSnackbar('Refreshed')">↻ Refresh</button></div>
+  <div class="content">
+
+    <!-- Queue -->
+    <div class="page active" id="page-queue">
+      <div class="card">
+        <div class="card-hd"><span class="card-title">Print Queue — Pending</span></div>
+        <div class="card-body">
+          <div class="filters"><select><option>Category: All</option></select><select><option>Status: Pending</option><option>All</option></select><input type="text" placeholder="Search..."></div>
+          <table><thead><tr><th>Job ID</th><th>Product / Size</th><th>Color</th><th>Waiting</th><th>Action</th></tr></thead><tbody>
+            <tr><td><b>#P1004</b></td><td>Tee / M</td><td>White</td><td>2h 15min</td><td><button class="btn btn-primary btn-sm" onclick="openPanel('claim')">+ Claim Task</button></td></tr>
+            <tr><td><b>#P1003</b></td><td>Tee / L</td><td>Black</td><td>3h 50min</td><td><button class="btn btn-primary btn-sm" onclick="openPanel('claim')">+ Claim Task</button></td></tr>
+            <tr style="background:#fff8f8"><td><b>#P1002</b></td><td>Tee / S</td><td>White</td><td style="color:#C62828;font-weight:600">4h 10min ⚠</td><td><button class="btn btn-primary btn-sm" onclick="openPanel('claim')">+ Claim Task</button></td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+    <!-- My Tasks -->
+    <div class="page" id="page-mine">
+      <div class="card"><div class="card-hd"><span class="card-title">My Active Tasks</span></div><div class="card-body">
+        <table><thead><tr><th>Job ID</th><th>Product</th><th>Status</th><th>Claimed</th><th>Action</th></tr></thead><tbody>
+          <tr><td><b>#P1001</b></td><td>Tee / M / White</td><td><span class="badge b-blue">In Progress</span></td><td>10:23 AM</td><td><button class="btn btn-success btn-sm" onclick="openPanel('exec')">Execute / QC</button></td></tr>
+        </tbody></table>
+      </div></div>
+    </div>
+    <!-- Panel: Claim -->
+    <div class="panel" id="panel-claim">
+      <div class="panel-hd"><div style="font-weight:600">Claim Print Job #P1004</div><button class="close-btn" onclick="closePanel()">×</button></div>
+      <div class="panel-body">
+        <div style="background:#E8F5E9;border-radius:8px;height:140px;display:flex;align-items:center;justify-content:center;font-size:56px;margin-bottom:16px">👕</div>
+        <div class="ig">
+          <div><label>JOB ID</label><span>#P1004</span></div>
+          <div><label>PRODUCT</label><span>Tee / M / White</span></div>
+          <div><label>PRINT AREA</label><span>28 × 32 cm</span></div>
+          <div><label>DPI</label><span style="color:#2E7D32;font-weight:600">300 ✓</span></div>
+          <div><label>COLOR MODE</label><span>RGB</span></div>
+          <div><label>FILE SIZE</label><span>2.4 MB</span></div>
+        </div>
+        <div style="background:#f5f5f5;border-radius:8px;padding:14px;font-size:13px;margin-bottom:16px"><b>Print File:</b> design_P1004_300dpi.png</div>
+      </div>
+      <div class="panel-ft"><button class="btn btn-ghost" onclick="closePanel()">Cancel</button><button class="btn btn-primary" onclick="showSnackbar('Task claimed! Check My Tasks.');closePanel()">+ Claim This Task</button></div>
+    </div>
+    <!-- Panel: Execute -->
+    <div class="panel" id="panel-exec">
+      <div class="panel-hd"><div style="font-weight:600">Print Job #P1001</div><button class="close-btn" onclick="closePanel()">×</button></div>
+      <div class="panel-body">
+        <div style="display:flex;gap:16px;margin-bottom:16px">
+          <div style="flex:1;background:#E3F2FD;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:56px;min-height:140px">👕</div>
+          <div style="flex:1">
+            <div style="font-size:11px;color:#9e9e9e;font-weight:600;margin-bottom:4px">PRODUCT</div><div style="font-size:13px;margin-bottom:8px">Tee / M / White</div>
+            <div style="font-size:11px;color:#9e9e9e;font-weight:600;margin-bottom:4px">CONSUMER</div><div style="font-size:13px;margin-bottom:8px">John Doe</div>
+            <div style="font-size:11px;color:#9e9e9e;font-weight:600;margin-bottom:4px">PRINT AREA</div><div style="font-size:13px;margin-bottom:8px">28 × 32 cm</div>
+            <div style="font-size:11px;color:#9e9e9e;font-weight:600;margin-bottom:4px">STATUS</div><span class="badge b-blue">In Progress</span>
+          </div>
+        </div>
+        <div style="font-size:13px;font-weight:600;margin-bottom:10px">QC Result</div>
+        <div class="qc-opt sel" id="qc-pass" onclick="selQC('pass')"><input type="radio" name="qc" checked><div><div style="font-size:13px;font-weight:500">Pass — proceed to shipping</div><div style="font-size:11px;color:#9e9e9e;margin-top:2px">Print quality meets standard</div></div></div>
+        <div class="qc-opt" id="qc-fail" onclick="selQC('fail')"><input type="radio" name="qc"><div><div style="font-size:13px;font-weight:500">Fail — reprint (0/3)</div><div style="font-size:11px;color:#9e9e9e;margin-top:2px">Print defect detected, reprint required</div></div></div>
+      </div>
+      <div class="panel-ft"><button class="btn btn-ghost" onclick="closePanel()">Cancel Claim</button><button class="btn btn-primary" onclick="submitQC()">Submit QC Result</button></div>
+    </div>
+    <div class="overlay" id="overlay" onclick="closeAll()"></div>
+    <div class="snackbar" id="snackbar"></div>
+  </div>
+</div>
+<script>
+const T={queue:'Print Queue',mine:'My Tasks'};
+function showPage(id,el){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.sb-item').forEach(n=>n.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');if(el)el.classList.add('active');document.getElementById('pt').textContent=T[id]||id;closeAll();}
+function openPanel(id){closeAll();document.getElementById('panel-'+id).classList.add('open');document.getElementById('overlay').classList.add('open');}
+function closePanel(){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));document.getElementById('overlay').classList.remove('open');}
+function closeAll(){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));document.getElementById('overlay').classList.remove('open');}
+function showSnackbar(m){const s=document.getElementById('snackbar');s.textContent=m;s.classList.add('show');clearTimeout(s._t);s._t=setTimeout(()=>s.classList.remove('show'),2500);}
+function selQC(v){document.getElementById('qc-pass').classList.toggle('sel',v==='pass');document.getElementById('qc-fail').classList.toggle('sel',v==='fail');}
+function submitQC(){const pass=document.getElementById('qc-pass').classList.contains('sel');showSnackbar(pass?'QC Passed! Proceeding to shipping...':'Reprint scheduled. Count: 1/3');closePanel();}
+</script></body></html>

@@ -1,0 +1,49 @@
+rate_id,service_id,fee_group,fee_code,fee_code_carrier,fee_type,commercial,residential,additional,rate_shopping,fee,start_date,end_date,created_at,created_by,updated_at,updated_by
+,3338,Non-Standard Extra Length Charge,NLL,NLL,{"min_length":"30.01"},1,1,1,1,10,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3338,Non-Standard Length Charge,NSL,NSL,"{""min_length"": ""22.01"", ""max_length"": ""30""}",1,1,1,1,4.5,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3338,Non-Standard Cube Charge,NPV,NPV,{"min_volume":"3456.01"},1,1,1,1,21,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3338,Dimension Non-complance Correction,DNC,DNC,,1,1,1,0,3,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3338,Additional Handling Charge,AHC,AHC,,1,1,1,0,3.5,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3338,Delivery Confirmation Signature,DCS,DCS,{"signature_type":"direct"},0,1,1,1,9.7,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3338,Delivery Confirmation Signature Commercial,CSG,CSG,{"signature_type":"direct"},1,0,1,1,9.7,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3338,Adult Signature Required,ADS,ADS,{"signature_type":"adult"},1,1,1,1,3.95,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3340,Non-Standard Extra Length Charge,NLL,NLL,{"min_length":"30.01"},1,1,1,1,10,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3340,Non-Standard Length Charge,NSL,NSL,"{""min_length"": ""22.01"", ""max_length"": ""30""}",1,1,1,1,4.5,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3340,Non-Standard Cube Charge,NPV,NPV,{"min_volume":"3456.01"},1,1,1,1,21,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3340,Dimension Non-complance Correction,DNC,DNC,,1,1,1,0,1.5,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3340,Additional Handling Charge,AHC,AHC,,1,1,1,0,4,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3340,Delivery Confirmation Signature,DCS,DCS,{"signature_type":"direct"},0,1,1,1,9.7,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3340,Delivery Confirmation Signature Commercial,CSG,CSG,{"signature_type":"direct"},1,0,1,1,9.7,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3340,Adult Signature Required,ADS,ADS,{"signature_type":"adult"},1,1,1,1,3.95,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3342,Non-Standard Extra Length Charge,NLL,NLL,{"min_length":"30.01"},1,1,1,1,10,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3342,Non-Standard Length Charge,NSL,NSL,"{""min_length"": ""22.01"", ""max_length"": ""30""}",1,1,1,1,4.5,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3342,Non-Standard Cube Charge,NPV,NPV,{"min_volume":"3456.01"},1,1,1,1,21,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3342,Dimension Non-complance Correction,DNC,DNC,,1,1,1,0,1.5,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3342,Additional Handling Charge,AHC,AHC,,1,1,1,0,4,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3342,Delivery Confirmation Signature,DCS,DCS,{"signature_type":"direct"},0,1,1,1,9.7,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3342,Delivery Confirmation Signature Commercial,CSG,CSG,{"signature_type":"direct"},1,0,1,1,9.7,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3342,Adult Signature Required,ADS,ADS,{"signature_type":"adult"},1,1,1,1,3.95,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3344,Non-Standard Extra Length Charge,NLL,NLL,{"min_length":"30.01"},1,1,1,1,10,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3344,Non-Standard Length Charge,NSL,NSL,"{""min_length"": ""22.01"", ""max_length"": ""30""}",1,1,1,1,4.5,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3344,Non-Standard Cube Charge,NPV,NPV,{"min_volume":"3456.01"},1,1,1,1,21,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3344,Dimension Non-complance Correction,DNC,DNC,,1,1,1,0,1.5,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3344,Additional Handling Charge,AHC,AHC,,1,1,1,0,4,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3344,Delivery Confirmation Signature,DCS,DCS,{"signature_type":"direct"},0,1,1,1,9.7,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3344,Delivery Confirmation Signature Commercial,CSG,CSG,{"signature_type":"direct"},1,0,1,1,9.7,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3344,Adult Signature Required,ADS,ADS,{"signature_type":"adult"},1,1,1,1,3.95,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3346,Non-Standard Extra Length Charge,NLL,NLL,{"min_length":"30.01"},1,1,1,1,10,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3346,Non-Standard Length Charge,NSL,NSL,"{""min_length"": ""22.01"", ""max_length"": ""30""}",1,1,1,1,4.5,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3346,Non-Standard Cube Charge,NPV,NPV,{"min_volume":"3456.01"},1,1,1,1,21,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3346,Dimension Non-complance Correction,DNC,DNC,,1,1,1,0,1.5,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3346,Additional Handling Charge,AHC,AHC,,1,1,1,0,4,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3346,Delivery Confirmation Signature,DCS,DCS,{"signature_type":"direct"},0,1,1,1,9.7,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3346,Delivery Confirmation Signature Commercial,CSG,CSG,{"signature_type":"direct"},1,0,1,1,9.7,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3346,Adult Signature Required,ADS,ADS,{"signature_type":"adult"},1,1,1,1,3.95,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3348,Non-Standard Extra Length Charge,NLL,NLL,{"min_length":"30.01"},1,1,1,1,10,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3348,Non-Standard Length Charge,NSL,NSL,"{""min_length"": ""22.01"", ""max_length"": ""30""}",1,1,1,1,4.5,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3348,Non-Standard Cube Charge,NPV,NPV,{"min_volume":"3456.01"},1,1,1,1,21,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3348,Dimension Non-complance Correction,DNC,DNC,,1,1,1,0,1.5,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3348,Additional Handling Charge,AHC,AHC,,1,1,1,0,4,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3348,Delivery Confirmation Signature,DCS,DCS,{"signature_type":"direct"},0,1,1,1,9.7,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3348,Delivery Confirmation Signature Commercial,CSG,CSG,{"signature_type":"direct"},1,0,1,1,9.7,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3348,Adult Signature Required,ADS,ADS,{"signature_type":"adult"},1,1,1,1,3.95,2026/1/18 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0

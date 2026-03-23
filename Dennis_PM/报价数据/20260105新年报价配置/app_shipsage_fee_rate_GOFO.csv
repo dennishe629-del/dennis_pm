@@ -1,0 +1,42 @@
+rate_id,service_id,fee_group,fee_code,fee_code_carrier,fee_type,commercial,residential,additional,rate_shopping,fee,start_date,end_date,created_at,created_by,updated_at,updated_by
+,3425,Additional Handling Charge,AHW-2,AHW,"{""min_weight"":""800.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,6.04,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHW-3T4,AHW,"{""min_weight"":""800.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,6.76,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHW-5T6,AHW,"{""min_weight"":""800.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,7.3,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHW-7T8,AHW,"{""min_weight"":""800.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,8.1,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHL-2,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":2,""max_zone"":2}",1,1,1,1,5.03,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHL-3T4,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":3,""max_zone"":4}",1,1,1,1,5.1,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHL-5T6,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":5,""max_zone"":6}",1,1,1,1,5.75,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHL-7T8,AHL,"{""min_length"":""48.01"",""max_length"":""96"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.48,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHS-2,AHS,"{""min_width"":""30.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,5.03,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHS-3T4,AHS,"{""min_width"":""30.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,5.1,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHS-5T6,AHS,"{""min_width"":""30.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,5.75,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHS-7T8,AHS,"{""min_width"":""30.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.48,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHG-2,AHG,"{""min_girth"":""105.01"",""min_zone"":2,""max_zone"":2}",1,1,1,1,5.03,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHG-3T4,AHG,"{""min_girth"":""105.01"",""min_zone"":3,""max_zone"":4}",1,1,1,1,5.1,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHG-5T6,AHG,"{""min_girth"":""105.01"",""min_zone"":5,""max_zone"":6}",1,1,1,1,5.75,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHG-7T8,AHG,"{""min_girth"":""105.01"",""min_zone"":7,""max_zone"":8}",1,1,1,1,6.48,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHC-2,AHC,"{""min_zone"":2,""max_zone"":2}",1,1,1,1,3.55,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHC-3T4,AHC,"{""min_zone"":3,""max_zone"":4}",1,1,1,1,4.42,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHC-5T6,AHC,"{""min_zone"":5,""max_zone"":6}",1,1,1,1,4.74,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Additional Handling Charge,AHC-7T8,AHC,"{""min_zone"":7,""max_zone"":8}",1,1,1,1,4.96,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Large Package Surcharge,LLC-2,LLC,"{""min_length"":""96.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,24.3,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Large Package Surcharge,LLC-3T4,LLC,"{""min_length"":""96.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,27.9,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Large Package Surcharge,LLC-5T6,LLC,"{""min_length"":""96.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,30.3,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Large Package Surcharge,LLC-7T8,LLC,"{""min_length"":""96.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,33.9,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Large Package Surcharge,LPS-2,LPS,"{""min_girth"":""130.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,24.3,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Large Package Surcharge,LPS-3T4,LPS,"{""min_girth"":""130.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,27.9,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Large Package Surcharge,LPS-5T6,LPS,"{""min_girth"":""130.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,30.3,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Large Package Surcharge,LPS-7T8,LPS,"{""min_girth"":""130.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,33.9,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Large Package Surcharge,LLR-2,LLR,"{""min_length"":""96.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,30.3,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Large Package Surcharge,LLR-3T4,LLR,"{""min_length"":""96.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,33.9,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Large Package Surcharge,LLR-5T6,LLR,"{""min_length"":""96.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,39.3,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Large Package Surcharge,LLR-7T8,LLR,"{""min_length"":""96.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,42.3,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Large Package Surcharge,LPR-2,LPR,"{""min_girth"":""130.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,30.3,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Large Package Surcharge,LPR-3T4,LPR,"{""min_girth"":""130.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,33.9,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Large Package Surcharge,LPR-5T6,LPR,"{""min_girth"":""130.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,39.3,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Large Package Surcharge,LPR-7T8,LPR,"{""min_girth"":""130.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,42.3,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Delivery Area Surcharge Commercial,RDC,RDC,{"AreaSurchargeZip":"RDC"},1,0,1,1,2.42,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Delivery Area Surcharge Residential,RDR,RDR,{"AreaSurchargeZip":"RDR"},0,1,1,1,3.58,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Delivery Area Surcharge Commercial - Extended,LDC,LDC,{"AreaSurchargeZip":"LDC"},1,0,1,1,3.02,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Delivery Area Surcharge Residential - Extended,LDR,LDR,{"AreaSurchargeZip":"LDR"},0,1,1,1,4.78,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0
+,3425,Residential Surcharge,RES,RES,,0,1,1,1,2.75,2026/1/5 0:00,2099/12/31 23:59,2026/1/5 0:00,0,2026/1/5 0:00,0

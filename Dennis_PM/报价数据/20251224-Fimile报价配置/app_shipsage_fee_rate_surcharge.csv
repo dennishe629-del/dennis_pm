@@ -1,0 +1,21 @@
+rate_id,service_id,fee_group,fee_code,fee_code_carrier,fee_type,commercial,residential,additional,rate_shopping,fee,start_date,end_date
+,3426,Delivery Confirmation Signature,DCS,DCS,{"signature_type":"direct"},0,1,1,1,6,2025/12/23 20:00:00,2099/12/31 23:59:59
+,3426,Delivery Confirmation Signature Commercial,CSG,CSG,{"signature_type":"direct"},1,0,1,1,6,2025/12/23 20:00:00,2099/12/31 23:59:59
+,3426,Adult Signature Required,ADS,ADS,{"signature_type":"adult"},1,1,1,1,6,2025/12/23 20:00:00,2099/12/31 23:59:59
+,3426,Large Package Surcharge,LLC-2,LLC,"{""min_length"":""96.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,18,2025/12/23 20:00:00,2099/12/31 23:59:59
+,3426,Large Package Surcharge,LLC-3T4,LLC,"{""min_length"":""96.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,18,2025/12/23 20:00:00,2099/12/31 23:59:59
+,3426,Large Package Surcharge,LLC-5T6,LLC,"{""min_length"":""96.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,18,2025/12/23 20:00:00,2099/12/31 23:59:59
+,3426,Large Package Surcharge,LLC-7T8,LLC,"{""min_length"":""96.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,18,2025/12/23 20:00:00,2099/12/31 23:59:59
+,3426,Large Package Surcharge,LPS-2,LPS,"{""min_girth"":""130.01"",""min_zone"":2,""max_zone"":2}",1,0,1,1,18,2025/12/23 20:00:00,2099/12/31 23:59:59
+,3426,Large Package Surcharge,LPS-3T4,LPS,"{""min_girth"":""130.01"",""min_zone"":3,""max_zone"":4}",1,0,1,1,18,2025/12/23 20:00:00,2099/12/31 23:59:59
+,3426,Large Package Surcharge,LPS-5T6,LPS,"{""min_girth"":""130.01"",""min_zone"":5,""max_zone"":6}",1,0,1,1,18,2025/12/23 20:00:00,2099/12/31 23:59:59
+,3426,Large Package Surcharge,LPS-7T8,LPS,"{""min_girth"":""130.01"",""min_zone"":7,""max_zone"":8}",1,0,1,1,18,2025/12/23 20:00:00,2099/12/31 23:59:59
+,3426,Large Package Surcharge,LLR-2,LLR,"{""min_length"":""96.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,18,2025/12/23 20:00:00,2099/12/31 23:59:00
+,3426,Large Package Surcharge,LLR-3T4,LLR,"{""min_length"":""96.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,18,2025/12/23 20:00:00,2099/12/31 23:59:00
+,3426,Large Package Surcharge,LLR-5T6,LLR,"{""min_length"":""96.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,18,2025/12/23 20:00:00,2099/12/31 23:59:00
+,3426,Large Package Surcharge,LLR-7T8,LLR,"{""min_length"":""96.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,18,2025/12/23 20:00:00,2099/12/31 23:59:00
+,3426,Large Package Surcharge,LPR-2,LPR,"{""min_girth"":""130.01"",""min_zone"":2,""max_zone"":2}",0,1,1,1,18,2025/12/23 20:00:00,2099/12/31 23:59:00
+,3426,Large Package Surcharge,LPR-3T4,LPR,"{""min_girth"":""130.01"",""min_zone"":3,""max_zone"":4}",0,1,1,1,18,2025/12/23 20:00:00,2099/12/31 23:59:00
+,3426,Large Package Surcharge,LPR-5T6,LPR,"{""min_girth"":""130.01"",""min_zone"":5,""max_zone"":6}",0,1,1,1,18,2025/12/23 20:00:00,2099/12/31 23:59:00
+,3426,Large Package Surcharge,LPR-7T8,LPR,"{""min_girth"":""130.01"",""min_zone"":7,""max_zone"":8}",0,1,1,1,18,2025/12/23 20:00:00,2099/12/31 23:59:00
+,3426,Address Correction,ADC,ADC,,1,1,1,0,12,2025/12/23 20:00:00,2099/12/31 23:59:00

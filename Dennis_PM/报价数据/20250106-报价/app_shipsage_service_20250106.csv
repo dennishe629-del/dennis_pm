@@ -1,0 +1,34 @@
+service_id,service_name,service_code,comments,hidden,disabled,deleted,deleted_at,created_at,created_by,updated_at,updated_by
+3337,SG Parcel-Shipping Fee-S1-2025010601-CN-VIP,SG Parcel,SG Parcel-Shipping Fee-S1-2025010601-CN-VIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3338,SG Parcel Plus-Shipping Fee-S1-2025010601-CN-VIP,SG Parcel,SG Parcel Plus-Shipping Fee-S1-2025010601-CN-VIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3339,SG Parcel-Shipping Fee-S2-2025010601-CN-SVIP,SG Parcel,SG Parcel-Shipping Fee-S2-2025010601-CN-SVIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3340,SG Parcel Plus-Shipping Fee-S2-2025010601-CN-SVIP,SG Parcel,SG Parcel Plus-Shipping Fee-S2-2025010601-CN-SVIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3341,SG Parcel-Shipping Fee-S3-2025010601-CN-SVIP-Plus,SG Parcel,SG Parcel-Shipping Fee-S3-2025010601-CN-SVIP-Plus,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3342,SG Parcel Plus-Shipping Fee-S3-2025010601-CN-SVIP-Plus,SG Parcel,SG Parcel Plus-Shipping Fee-S3-2025010601-CN-SVIP-Plus,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3343,SG Parcel-Shipping Fee-OE-2025010601-CN-SVIP-Plus,SG Parcel,SG Parcel-Shipping Fee-OE-2025010601-CN-SVIP-Plus,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3344,SG Parcel Plus-Shipping Fee-OE-2025010601-CN-SVIP-Plus,SG Parcel,SG Parcel Plus-Shipping Fee-OE-2025010601-CN-SVIP-Plus,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3345,SG Parcel-Shipping Fee-S1-2025010602-CN-VIP,SG Parcel,SG Parcel-Shipping Fee-S1-2025010602-CN-VIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3346,SG Parcel Plus-Shipping Fee-S1-2025010602-CN-VIP,SG Parcel,SG Parcel Plus-Shipping Fee-S1-2025010602-CN-VIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3347,SG Parcel-Shipping Fee-S2-2025010602-CN-SVIP,SG Parcel,SG Parcel-Shipping Fee-S2-2025010602-CN-SVIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3348,SG Parcel Plus-Shipping Fee-S2-2025010602-CN-SVIP,SG Parcel,SG Parcel Plus-Shipping Fee-S2-2025010602-CN-SVIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3349,SG Ground-Shipping Fee-S1-2025010601-CN-VIP,SG Ground,SG Ground-Shipping Fee-S1-2025010601-CN-VIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3350,SG Ground-Shipping Fee-S2-2025010601-CN-SVIP,SG Ground,SG Ground-Shipping Fee-S2-2025010601-CN-SVIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3351,SG Ground-Shipping Fee-S3-2025010601-CN-SVIP-Plus,SG Ground,SG Ground-Shipping Fee-S3-2025010601-CN-SVIP-Plus,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3352,SG Ground-Shipping Fee-OE-2025010601-CN-SVIP-Plus,SG Ground,SG Ground-Shipping Fee-OE-2025010601-CN-SVIP-Plus,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3353,SG Ground-Shipping Fee-S1-2025010602-CN-VIP,SG Ground,SG Ground-Shipping Fee-S1-2025010602-CN-VIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3354,SG Ground-Shipping Fee-S2-2025010602-CN-SVIP,SG Ground,SG Ground-Shipping Fee-S2-2025010602-CN-SVIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3355,Amazon Shipping-Shipping Fee-S1-2025010601-CN-VIP,Amazon Shipping,Amazon Shipping-Shipping Fee-S1-2025010601-CN-VIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3356,Amazon Shipping Plus-Shipping Fee-S1-2025010601-CN-VIP,Amazon Shipping,Amazon Shipping Plus-Shipping Fee-S1-2025010601-CN-VIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3357,Amazon Shipping-Shipping Fee-S2-2025010601-CN-SVIP,Amazon Shipping,Amazon Shipping-Shipping Fee-S2-2025010601-CN-SVIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3358,Amazon Shipping Plus-Shipping Fee-S2-2025010601-CN-SVIP,Amazon Shipping,Amazon Shipping Plus-Shipping Fee-S2-2025010601-CN-SVIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3359,Amazon Shipping-Shipping Fee-S3-2025010601-CN-SVIP-Plus,Amazon Shipping,Amazon Shipping-Shipping Fee-S3-2025010601-CN-SVIP-Plus,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3360,Amazon Shipping Plus-Shipping Fee-S3-2025010601-CN-SVIP-Plus,Amazon Shipping,Amazon Shipping Plus-Shipping Fee-S3-2025010601-CN-SVIP-Plus,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3361,Amazon Shipping-Shipping Fee-OE-2025010601-CN-SVIP-Plus,Amazon Shipping,Amazon Shipping-Shipping Fee-OE-2025010601-CN-SVIP-Plus,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3362,Amazon Shipping Plus-Shipping Fee-OE-2025010601-CN-SVIP-Plus,Amazon Shipping,Amazon Shipping Plus-Shipping Fee-OE-2025010601-CN-SVIP-Plus,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3363,Amazon Shipping-Shipping Fee-S1-2025010602-CN-VIP,Amazon Shipping,Amazon Shipping-Shipping Fee-S1-2025010602-CN-VIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3364,Amazon Shipping Plus-Shipping Fee-S1-2025010602-CN-VIP,Amazon Shipping,Amazon Shipping Plus-Shipping Fee-S1-2025010602-CN-VIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3365,Amazon Shipping-Shipping Fee-S2-2025010602-CN-SVIP,Amazon Shipping,Amazon Shipping-Shipping Fee-S2-2025010602-CN-SVIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3366,Amazon Shipping Plus-Shipping Fee-S2-2025010602-CN-SVIP,Amazon Shipping,Amazon Shipping Plus-Shipping Fee-S2-2025010602-CN-SVIP,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3367,Transfer UPS Ground-Shipping Fee-20250106,03,Transfer UPS Ground-Shipping Fee-20250106,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3368,FedEx Ground Economy-Shipping Fee-20250106-CN-SVIP-Plus,FEDEX_GROUND_ECONOMY_205,FedEx Ground Economy-Shipping Fee-20250106-CN-SVIP-Plus,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0
+3369,GlobalPost-Shipping Fee-20250106-CN,GlobalPostPriority,GlobalPost-Shipping Fee-20250106-CN,0,0,0,,2025/1/2 18:00,0,2025/1/2 18:00,0

@@ -1,0 +1,14 @@
+api_version = "2024-01"
+
+[[extensions]]
+type = "ui_extension"
+name = "Product Design Configuration"
+handle = "product-design-config"
+
+[extensions.capabilities]
+api_access = true
+network_access = true
+
+[[extensions.targeting]]
+module = "./src/index.jsx"
+target = "admin.product-details.block.render"

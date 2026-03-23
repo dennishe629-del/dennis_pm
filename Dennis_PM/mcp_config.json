@@ -1,0 +1,28 @@
+{
+  "mcpServers": {
+    "atlassian": {
+      "name": "Atlassian (Jira + Confluence)",
+      "transport": "sse",
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.atlassian.com/v1/sse"
+      ],
+      "autoApprove": [
+        "createConfluencePage",
+        "getConfluencePage"
+      ]
+    },
+    "mysql": {
+      "command": "npx",
+      "args": ["-y", "@f4ww4z/mcp-mysql-server"],
+      "env": {
+        "MYSQL_HOST": "production-ro-001.cvq1rh9zazcx.us-west-1.rds.amazonaws.com",
+        "MYSQL_PORT": "3306",
+        "MYSQL_USER": "dennis.he",
+        "MYSQL_PASSWORD": "US8lp6Ps4soqqh62C49U2Z52lQnfMC3o"
+      }
+    }
+  }
+}

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consumer Design Studio - POD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.6.15/dist/vuetify.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <style>
+    :root { --primary: #1976D2; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Roboto', sans-serif; background: #f5f5f5; }
+    .studio-app { display: flex; height: 100vh; overflow: hidden; }
+    .studio-toolbar { width: 280px; background: #fff; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; flex-shrink: 0; }
+    .toolbar-header { padding: 16px; border-bottom: 1px solid #e0e0e0; }
+    .tool-section { padding: 16px; border-bottom: 1px solid #e0e0e0; }
+    .tool-section-title { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: #757575; margin-bottom: 12px; }
+    .tool-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .tool-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px 8px; border-radius: 8px; cursor: pointer; transition: all 0.2s; background: #f5f5f5; border: 2px solid transparent; }
+    .tool-btn:hover { background: #E3F2FD; border-color: #1976D2; }
+    .tool-btn.active { background: #1976D2; color: #fff; }
+    .studio-canvas { flex: 1; background: #eceff1; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; min-width: 0; }
+    .canvas-wrapper { position: relative; width: 360px; height: 420px; background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); overflow: hidden; }
+    .product-base { width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+    .product-emoji { font-size: 220px; opacity: 0.85; }
+    .print-zone { position: absolute; top: 20%; left: 16%; width: 68%; height: 48%; border: 3px dashed #90CAF9; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; cursor: pointer; transition: all 0.2s; background: rgba(25, 118, 210, 0.05); }
+    .print-zone:hover { border-color: #1976D2; background: rgba(25, 118, 210, 0.1); }
+    .print-zone.has-design { border-style: solid; border-color: #4CAF50; background: transparent; }
+    .print-zone img { max-width: 95%; max-height: 95%; object-fit: contain; border-radius: 4px; }
+    .canvas-controls { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); padding: 8px 16px; display: flex; align-items: center; gap: 16px; z-index: 10; }
+    .canvas-toolbar-top { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); padding: 8px 16px; display: flex; gap: 16px; z-index: 10; }
+    .face-tabs { display: flex; gap: 4px; }
+    .face-tab { padding: 6px 16px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s; }
+    .face-tab.active { background: #1976D2; color: #fff; }
+    .face-tab:not(.active) { background: #f5f5f5; color: #757575; }
+    .studio-options { width: 320px; background: #fff; border-left: 1px solid #e0e0e0; display: flex; flex-direction: column; flex-shrink: 0; overflow-y: auto; }
+    .options-header { padding: 20px; border-bottom: 1px solid #e0e0e0; background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%); color: #fff; }
+    .options-body { flex: 1; padding: 20px; }
+    .option-group { margin-bottom: 24px; }
+    .option-label { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; color: #757575; margin-bottom: 12px; }
+    .color-options { display: flex; gap: 8px; flex-wrap: wrap; }
+    .color-swatch { width: 36px; height: 36px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .color-swatch:hover { transform: scale(1.1); }
+    .color-swatch.active { border-color: #1976D2; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #1976D2; }
+    .size-options { display: flex; gap: 8px; flex-wrap: wrap; }
+    .size-btn { min-width: 44px; height: 36px; border: 1px solid #e0e0e0; border-radius: 4px; background: #fff; cursor: pointer; font-weight: 500; transition: all 0.2s; }
+    .size-btn:hover { border-color: #1976D2; }
+    .size-btn.active { background: #1976D2; border-color: #1976D2; color: #fff; }
+    .qty-control { display: flex; align-items: center; gap: 12px; }
+    .qty-btn { width: 36px; height: 36px; border: 1px solid #e0e0e0; border-radius: 4px; background: #fff; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .qty-btn:hover { background: #f5f5f5; }
+    .qty-value { width: 48px; text-align: center; font-size: 16px; font-weight: 500; }
+    .price-display { text-align: center; padding: 20px; background: #f5f5f5; border-radius: 8px; margin-bottom: 16px; }
+    .price-main { font-size: 28px; font-weight: 700; color: #1976D2; }
+    .price-note { font-size: 12px; color: #757575; margin-top: 4px; }
+    .upload-zone { border: 2px dashed #90CAF9; border-radius: 8px; padding: 32px; text-align: center; cursor: pointer; transition: all 0.2s; background: #FAFAFA; }
+    .upload-zone:hover { border-color: #1976D2; background: #E3F2FD; }
+    .font-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+    .font-option { padding: 12px 8px; border: 1px solid #e0e0e0; border-radius: 4px; cursor: pointer; text-align: center; transition: all 0.2s; font-size: 14px; }
+    .font-option:hover { border-color: #1976D2; }
+    .font-option.active { background: #1976D2; border-color: #1976D2; color: #fff; }
+    .text-preview { padding: 24px; background: #f5f5f5; border-radius: 8px; text-align: center; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+    .template-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .template-item { aspect-ratio: 1; border: 1px solid #e0e0e0; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; transition: all 0.2s; }
+    .template-item:hover { border-color: #1976D2; background: #E3F2FD; }
+    .studio-stepper { display: flex; align-items: center; gap: 8px; padding: 6px 12px; background: rgba(255,255,255,0.15); border-radius: 20px; }
+    .step-item { display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.6); font-size: 11px; }
+    .step-item.active, .step-item.done { color: #fff; }
+    .step-circle { width: 22px; height: 22px; border-radius: 50%; border: 2px solid currentColor; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
+    .step-item.done .step-circle { background: rgba(255,255,255,0.25); border-color: transparent; }
+    .step-sep { width: 20px; height: 1px; background: rgba(255,255,255,0.25); }
+    .studio-snackbar { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: #323232; color: #fff; padding: 12px 24px; border-radius: 4px; font-size: 14px; z-index: 9999; transition: transform 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    .studio-snackbar.show { transform: translateX(-50%) translateY(0); }
+    .studio-snackbar.success { background: #4CAF50; }
+    .studio-snackbar.error { background: #FF5252; }
+    .print-specs { background: #E3F2FD; border-radius: 8px; padding: 12px; font-size: 12px; color: #1565C0; }
+    .print-specs strong { display: block; margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      <v-app-bar app color="primary" dark elevation="4">
+        <v-btn icon @click="goBack"><v-icon>mdi-arrow-left</v-icon></v-btn>
+        <v-toolbar-title class="d-flex align-center">
+          <span class="font-weight-light">PRINT</span><span style="font-weight: 500">DROP</span>
+          <v-chip x-small class="ml-2" style="opacity: 0.8">BETA</v-chip>
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
+        <div class="studio-stepper mr-4">
+          <div class="step-item" :class="{ active: currentStep === 1, done: currentStep > 1 }">
+            <div class="step-circle">1</div><span>Design</span>
+          </div>
+          <div class="step-sep"></div>
+          <div class="step-item" :class="{ active: currentStep === 2, done: currentStep > 2 }">
+            <div class="step-circle">2</div><span>Preview</span>
+          </div>
+          <div class="step-sep"></div>
+          <div class="step-item" :class="{ active: currentStep === 3, done: currentStep > 3 }">
+            <div class="step-circle">3</div><span>Cart</span>
+          </div>
+        </div>
+        <v-btn icon><v-icon>mdi-help-outline</v-icon></v-btn>
+      </v-app-bar>
+      <v-main>
+        <div class="studio-app">
+          <div class="studio-toolbar">
+            <div class="toolbar-header"><div class="text-subtitle-1 font-weight-medium">Tools</div></div>
+            <div class="tool-section">
+              <div class="tool-section-title">Add to Design</div>
+              <div class="tool-grid">
+                <div class="tool-btn" :class="{ active: activePanel === 'upload' }" @click="activePanel = 'upload'"><v-icon color="primary">mdi-image-plus</v-icon><span>Upload</span></div>
+                <div class="tool-btn" :class="{ active: activePanel === 'text' }" @click="activePanel = 'text'"><v-icon color="primary">mdi-format-text</v-icon><span>Text</span></div>
+              </div>
+            </div>
+            <div class="tool-section">
+              <div class="tool-section-title">Edit</div>
+              <v-btn-toggle v-model="editAction" class="mb-3" dense>
+                <v-btn small value="undo" :disabled="!canUndo" @click="undo"><v-icon small left>mdi-undo</v-icon> Undo</v-btn>
+                <v-btn small value="redo" :disabled="!canRedo" @click="redo"><v-icon small left>mdi-redo</v-icon> Redo</v-btn>
+              </v-btn-toggle>
+              <div class="tool-grid">
+                <div class="tool-btn" @click="alignCenter"><v-icon color="primary">mdi-align-horizontal-center</v-icon><span>Center</span></div>
+                <div class="tool-btn" @click="removeDesign"><v-icon color="error">mdi-delete</v-icon><span>Clear</span></div>
+              </div>
+            </div>
+            <div class="tool-section">
+              <div class="tool-section-title">Quick Templates</div>
+              <div class="template-grid">
+                <div class="template-item" v-for="emoji in templateEmojis" :key="emoji" @click="applyTemplate(emoji)">{{ emoji }}</div>
+              </div>
+            </div>
+            <div class="tool-section" style="margin-top: auto">
+              <div class="tool-section-title">Print Specifications</div>
+              <div class="print-specs"><strong>Area: 28 × 32 cm</strong><strong>Min DPI: 150 (300 recommended)</strong><strong>Tech: DTG Direct-to-Garment</strong></div>
+            </div>
+          </div>
+          <div class="studio-canvas">
+            <div class="canvas-toolbar-top">
+              <div class="face-tabs">
+                <div class="face-tab" :class="{ active: currentFace === 'Front' }" @click="switchFace('Front')">Front</div>
+                <div class="face-tab" :class="{ active: currentFace === 'Back' }" @click="switchFace('Back')">Back</div>
+              </div>
+              <v-divider vertical></v-divider>
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #757575">
+                <v-icon small>mdi-magnify-minus</v-icon>
+                <v-slider v-model="zoom" :min="50" :max="150" hide-details dense style="width: 80px"></v-slider>
+                <v-icon small>mdi-magnify-plus</v-icon><span>{{ zoom }}%</span>
+              </div>
+            </div>
+            <div class="canvas-wrapper" :style="{ transform: `scale(${zoom/100})` }">
+              <div class="product-base" :style="{ background: productColor }">
+                <div class="product-emoji">👕</div>
+                <div class="print-zone" :class="{ 'has-design': hasDesign }" @click="triggerUpload">
+                  <template v-if="!hasDesign">
+                    <v-icon color="primary" size="48">mdi-cloud-upload</v-icon>
+                    <div class="text-center mt-2" style="color: #757575; font-size: 12px">Click to upload<br>or use tools panel</div>
+                  </template>
+                  <template v-else>
+                    <img v-if="designType === 'image'" :src="designContent">
+                    <div v-else-if="designType === 'text'" class="text-content" :style="textPreviewStyle">{{ designContent.text }}</div>
+                    <div v-else-if="designType === 'template'" class="emoji-content">{{ designContent }}</div>
+                  </template>
+                </div>
+              </div>
+            </div>
+            <div class="canvas-controls">
+              <v-btn small outlined @click="rotate(-15)"><v-icon small>mdi-rotate-left</v-icon></v-btn>
+              <v-btn small outlined @click="rotate(15)"><v-icon small>mdi-rotate-right</v-icon></v-btn>
+              <v-divider vertical></v-divider>
+              <span style="font-size: 12px; color: #757575">{{ rotation }}°</span>
+            </div>
+          </div>
+          <div class="studio-options">
+            <div class="options-header"><h2 class="mb-1">Product Options</h2><p style="opacity: 0.8; font-size: 13px">Classic Unisex Tee</p></div>
+            <div class="options-body">
+              <div class="option-group">
+                <div class="option-label">Color</div>
+                <div class="color-options">
+                  <div v-for="color in colors" :key="color.name" class="color-swatch" :class="{ active: selectedColor === color.name }" :style="{ background: color.hex }" @click="selectColor(color)"></div>
+                </div>
+              </div>
+              <div class="option-group">
+                <div class="option-label">Size</div>
+                <div class="size-options">
+                  <button v-for="size in sizes" :key="size" class="size-btn" :class="{ active: selectedSize === size }" @click="selectedSize = size">{{ size }}</button>
+                </div>
+              </div>
+              <div class="option-group">
+                <div class="option-label">Quantity</div>
+                <div class="qty-control">
+                  <button class="qty-btn" @click="changeQty(-1)">-</button><span class="qty-value">{{ quantity }}</span><button class="qty-btn" @click="changeQty(1)">+</button>
+                </div>
+              </div>
+              <div class="price-display"><div class="price-main">${{ totalPrice }}</div><div class="price-note">Includes $5.00 customization fee</div></div>
+              <v-btn block color="primary" large class="mb-3" @click="showPreviewDialog = true"><v-icon left>mdi-eye</v-icon>Preview Design</v-btn>
+              <v-btn block color="success" large :disabled="!hasDesign" @click="addToCart"><v-icon left>mdi-cart-plus</v-icon>Add to Cart</v-btn>
+              <v-alert v-if="!hasDesign" dense outlined type="warning" class="mt-3" style="font-size: 12px">Please add a design first</v-alert>
+            </div>
+          </div>
+        </div>
+      </v-main>
+      <v-dialog v-model="showUploadDialog" max-width="500">
+        <v-card>
+          <v-card-title><v-icon left color="primary">mdi-image-plus</v-icon>Upload Artwork</v-card-title>
+          <v-card-text>
+            <div class="upload-zone" @click="triggerUpload">
+              <v-icon color="primary" size="48">mdi-cloud-upload</v-icon>
+              <div class="mt-2">Drag & drop or <strong>click to browse</strong></div>
+              <div style="color: #9E9E9E; font-size: 12px; margin-top: 8px">PNG, JPG, SVG • Max 20MB • 300dpi+ recommended</div>
+            </div>
+            <input type="file" ref="fileInput" accept="image/*" style="display: none" @change="handleFile">
+          </v-card-text>
+          <v-card-actions><v-spacer></v-spacer><v-btn text @click="showUploadDialog = false">Cancel</v-btn></v-card-actions>
+        </v-card>
+      </v-dialog>
+      <v-dialog v-model="showTextDialog" max-width="500">
+        <v-card>
+          <v-card-title><v-icon left color="primary">mdi-format-text</v-icon>Add Text</v-card-title>
+          <v-card-text>
+            <v-text-field v-model="textContent" label="Text Content" placeholder="Type your text here..." outlined dense></v-text-field>
+            <div class="option-label">Font Style</div>
+            <div class="font-options">
+              <div class="font-option" :class="{ active: selectedFont === 'serif' }" style="font-family: serif" @click="selectedFont = 'serif'">Serif</div>
+              <div class="font-option" :class="{ active: selectedFont === 'sans-serif' }" style="font-family: sans-serif" @click="selectedFont = 'sans-serif'">Sans</div>
+              <div class="font-option" :class="{ active: selectedFont === 'cursive' }" style="font-family: cursive" @click="selectedFont = 'cursive'">Script</div>
+              <div class="font-option" :class="{ active: selectedFont === 'monospace' }" style="font-family: monospace" @click="selectedFont = 'monospace'">Mono</div>
+            </div>
+            <div class="option-label">Text Color</div>
+            <div class="color-options mb-4">
+              <div v-for="c in textColors" :key="c" class="color-swatch" :class="{ active: textColor === c }" :style="{ background: c }" @click="textColor = c"></div>
+            </div>
+            <div class="text-preview" :style="textPreviewStyle">{{ textContent || 'Preview text' }}</div>
+          </v-card-text>
+          <v-card-actions><v-spacer></v-spacer><v-btn text @click="showTextDialog = false">Cancel</v-btn><v-btn color="primary" @click="applyText" :disabled="!textContent">Add Text</v-btn></v-card-actions>
+        </v-card>
+      </v-dialog>
+      <v-dialog v-model="showPreviewDialog" max-width="600">
+        <v-card>
+          <v-card-title class="d-flex align-center"><v-icon left color="primary">mdi-eye</v-icon>Design Preview<v-spacer></v-spacer><v-btn icon @click="showPreviewDialog = false"><v-icon>mdi-close</v-icon></v-btn></v-card-title>
+          <v-card-text class="text-center py-6">
+            <div style="position: relative; display: inline-block;">
+              <div :style="{ background: productColor, borderRadius: '12px', padding: '32px' }"><div style="font-size: 160px;">👕</div></div>
+              <div v-if="hasDesign" style="position: absolute; top: 24%; left: 20%; width: 60%; height: 40%; display: flex; align-items: center; justify-content: center;">
+                <img v-if="designType === 'image'" :src="designContent" style="max-width: 100%; max-height: 100%;">
+                <span v-else-if="designType === 'text'" :style="textPreviewStyle" style="font-size: 24px;">{{ designContent.text }}</span>
+                <span v-else-if="designType === 'template'" style="font-size: 48px;">{{ designContent }}</span>
+              </div>
+            </div>
+            <v-divider class="my-4"></v-divider>
+            <v-row>
+              <v-col cols="3"><div class="text-caption">Color</div><div class="font-weight-medium">{{ selectedColor }}</div></v-col>
+              <v-col cols="3"><div class="text-caption">Size</div><div class="font-weight-medium">{{ selectedSize }}</div></v-col>
+              <v-col cols="3"><div class="text-caption">Quantity</div><div class="font-weight-medium">{{ quantity }}</div></v-col>
+              <v-col cols="3"><div class="text-caption">Total</div><div class="font-weight-medium primary--text">${{ totalPrice }}</div></v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+      <div class="studio-snackbar" :class="[snackbar.type, { show: snackbar.show }]">{{ snackbar.message }}</div>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.6.15/dist/vuetify.min.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify({ theme: { themes: { light: { primary: '#1976D2', secondary: '#424242', accent: '#FF5252', success: '#4CAF50', warning: '#FFC107', error: '#FF5252' } } } }),
+      data: {
+        currentStep: 1, activePanel: 'upload', editAction: null,
+        colors: [{ name: 'Black', hex: '#1a1a1a' }, { name: 'White', hex: '#f5f5f5', border: '#e0e0e0' }, { name: 'Blue', hex: '#1565C0' }, { name: 'Red', hex: '#C62828' }, { name: 'Green', hex: '#2E7D32' }],
+        sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL'], selectedColor: 'Black', selectedSize: 'M', quantity: 1, basePrice: 29.99, customFee: 5.00,
+        hasDesign: false, designType: null, designContent: null, designHistory: [], historyIndex: -1,
+        showTextDialog: false, textContent: '', selectedFont: 'sans-serif', textColor: '#212121', textColors: ['#212121', '#FFFFFF', '#1976D2', '#C62828', '#2E7D32', '#F57F17'],
+        showUploadDialog: false, currentFace: 'Front', zoom: 100, rotation: 0, showPreviewDialog: false,
+        snackbar: { show: false, message: '', type: '' }, templateEmojis: ['☀️', '⚡', '🎉', '🔥', '🌈', '😄', '❤️', '⭐'],
+      },
+      computed: {
+        productColor() { const color = this.colors.find(c => c.name === this.selectedColor); return color ? color.hex : '#1a1a1a'; },
+        totalPrice() { return ((this.basePrice + this.customFee) * this.quantity).toFixed(2); },
+        canUndo() { return this.historyIndex > 0; },
+        canRedo() { return this.historyIndex < this.designHistory.length - 1; },
+        textPreviewStyle() { return { fontFamily: this.selectedFont, color: this.textColor }; }
+      },
+      methods: {
+        goBack() { this.showSnackbar('Redirecting to store...', 'info'); },
+        selectColor(color) { this.selectedColor = color.name; },
+        changeQty(delta) { this.quantity = Math.max(1, Math.min(99, this.quantity + delta)); },
+        switchFace(face) { this.currentFace = face; this.showSnackbar(`Editing: ${face} side`, 'info'); },
+        rotate(deg) { this.rotation = (this.rotation + deg) % 360; },
+        undo() { if (this.canUndo) { this.historyIndex--; this.restoreFromHistory(); this.showSnackbar('Undo', 'success'); } },
+        redo() { if (this.canRedo) { this.historyIndex++; this.restoreFromHistory(); this.showSnackbar('Redo', 'success'); } },
+        saveToHistory() { if (this.historyIndex < this.designHistory.length - 1) { this.designHistory = this.designHistory.slice(0, this.historyIndex + 1); } this.designHistory.push({ hasDesign: this.hasDesign, designType: this.designType, designContent: this.designContent }); this.historyIndex = this.designHistory.length - 1; },
+        restoreFromHistory() { const state = this.designHistory[this.historyIndex]; this.hasDesign = state.hasDesign; this.designType = state.designType; this.designContent = state.designContent; },
+        triggerUpload() { this.$refs.fileInput.click(); },
+        handleFile(event) {
+          const file = event.target.files[0]; if (!file) return;
+          if (file.size > 20 * 1024 * 1024) { this.showSnackbar('File too large. Max 20MB.', 'error'); return; }
+          const reader = new FileReader();
+          reader.onload = (e) => { this.hasDesign = true; this.designType = 'image'; this.designContent = e.target.result; this.saveToHistory(); this.showUploadDialog = false; this.showSnackbar('Image added to design!', 'success'); this.currentStep = 2; };
+          reader.readAsDataURL(file); event.target.value = '';
+        },
+        applyText() { if (!this.textContent) return; this.hasDesign = true; this.designType = 'text'; this.designContent = { text: this.textContent, font: this.selectedFont, color: this.textColor }; this.saveToHistory(); this.showTextDialog = false; this.showSnackbar('Text applied!', 'success'); this.currentStep = 2; },
+        applyTemplate(emoji) { this.hasDesign = true; this.designType = 'template'; this.designContent = emoji; this.saveToHistory(); this.showSnackbar('Template applied!', 'success'); this.currentStep = 2; },
+        alignCenter() { if (!this.hasDesign) { this.showSnackbar('No design to center.', 'warning'); return; } this.showSnackbar('Design centered.', 'success'); },
+        removeDesign() { this.hasDesign = false; this.designType = null; this.designContent = null; this.saveToHistory(); this.showSnackbar('Design cleared.'); },
+        addToCart() { if (!this.hasDesign) { this.showSnackbar('Please add your design first!', 'warning'); return; } const token = 'DSN_' + Date.now().toString(36).toUpperCase(); console.log('[POD] Design token:', token, '| Color:', this.selectedColor, '| Size:', this.selectedSize, '| Qty:', this.quantity); window.parent.postMessage({ type: 'pod_add_to_cart', design_id: token, color: this.selectedColor, size: this.selectedSize, qty: this.quantity }, '*'); this.currentStep = 3; this.showSnackbar('Added to cart! Token: ' + token, 'success'); },
+        showSnackbar(message, type = '') { this.snackbar.message = message; this.snackbar.type = type; this.snackbar.show = true; setTimeout(() => { this.snackbar.show = false; }, 3000); }
+      },
+      mounted() { this.saveToHistory(); }
+    });
+  </script>
+</body>
+</html>
