@@ -834,7 +834,255 @@ Step 5: 生产发货
     <p><strong>成本结论：</strong>在月产 1,000 件的规模下，DTF 的综合成本大约比 DTG 低 50%。尤其在深色件、混纺面料和配件类场景中，DTF 的成本优势和适配优势都更明显。</p>
   </div>
 
-  <h3>7.5 印刷排版与拼版方式推荐</h3>
+  <h3>7.5 Mockup效果图生成方案</h3>
+
+  <p>Mockup（效果图）是指将消费者上传的设计图案合成到商品实物照片上，展示最终印刷效果。这是消费者端定制体验的关键环节，直接影响转化率。</p>
+
+  <h4>7.5.1 Mockup的定义与作用</h4>
+
+  <table>
+    <tr>
+      <th>用途</th>
+      <th>重要性</th>
+      <th>说明</th>
+    </tr>
+    <tr>
+      <td>消费者端预览</td>
+      <td>🔴 必须</td>
+      <td>消费者需要看到"最终效果"才会下单，转化率直接相关</td>
+    </tr>
+    <tr>
+      <td>商家端商品主图</td>
+      <td>🔴 必须</td>
+      <td>Shopify商品页需要高质量效果图吸引浏览</td>
+    </tr>
+    <tr>
+      <td>订单确认邮件</td>
+      <td>🟡 重要</td>
+      <td>消费者收到订单确认时看到自己的设计，增强体验</td>
+    </tr>
+    <tr>
+      <td>品质管控</td>
+      <td>🟡 重要</td>
+      <td>生产前对比Mockup和实际印刷，发现问题</td>
+    </tr>
+    <tr>
+      <td>营销素材</td>
+      <td>🟢 可选</td>
+      <td>用于社交媒体推广</td>
+    </tr>
+  </table>
+
+  <h4>7.5.2 Mockup生成的两种技术方案</h4>
+
+  <p><strong>方案A：平面合成（快速、低成本）</strong></p>
+
+  <div class="highlight">
+    <p><strong>原理</strong>：设计图 + 商品底图 → 图像处理库（PIL/OpenCV）→ 平面合成图</p>
+    <ul>
+      <li><strong>速度</strong>：快（&lt;1秒）</li>
+      <li><strong>成本</strong>：低（无需第三方服务，$0/月）</li>
+      <li><strong>效果</strong>：一般（看起来像"贴纸"）</li>
+      <li><strong>适用</strong>：MVP阶段，快速验证</li>
+    </ul>
+  </div>
+
+  <p><strong>方案B：3D渲染（逼真、高成本）</strong></p>
+
+  <div class="highlight">
+    <p><strong>原理</strong>：设计图 + 3D商品模型 → 3D渲染引擎 → 逼真效果图</p>
+    <ul>
+      <li><strong>速度</strong>：慢（5-30秒）</li>
+      <li><strong>成本</strong>：高（需要第三方API或自建渲染服务）</li>
+      <li><strong>效果</strong>：逼真（看起来像真实商品）</li>
+      <li><strong>适用</strong>：P1阶段，提升转化率</li>
+    </ul>
+  </div>
+
+  <h4>7.5.3 主流Mockup服务商定价对比</h4>
+
+  <p><strong>POD 平台内置 Mockup（对比参考）：</strong>Printful、Printify、Gelato 等主流 POD 平台均<strong>内置免费 Mockup 生成器</strong>，商家使用其打印履约服务即可免费生成商品效果图。但这些 Mockup 工具绑定各自平台，无法独立调用或集成到自建系统中。我们自建 POD 系统，需要独立引入 Mockup 能力。</p>
+
+  <table>
+    <tr>
+      <th>服务商</th>
+      <th>定价模式</th>
+      <th>单价</th>
+      <th>月产1,000件成本</th>
+      <th>质量</th>
+      <th>API支持</th>
+      <th>推荐度</th>
+    </tr>
+    <tr>
+      <td><strong>Dynamic Mockups</strong></td>
+      <td>积分制（1积分 = 1张标准Mockup）</td>
+      <td>约 $0.05/张</td>
+      <td>$15-19/月（Pro套餐含300-3,600积分）</td>
+      <td>高（3D逼真）</td>
+      <td>有API，Pro及以上无水印</td>
+      <td>首推</td>
+    </tr>
+    <tr>
+      <td><strong>Placeit（Envato旗下）</strong></td>
+      <td>订阅制</td>
+      <td>约 $0.03-0.05/张（按订阅均摊）</td>
+      <td>$3.99-5.99/月 或 $47.99/年</td>
+      <td>高（模板丰富，160k+）</td>
+      <td><strong>无API</strong>，仅手动操作</td>
+      <td>不适合系统集成</td>
+    </tr>
+    <tr>
+      <td><strong>Smartmockups</strong></td>
+      <td>免费版 / 付费版</td>
+      <td>$0.01-0.02/张</td>
+      <td>$10-20/月</td>
+      <td>中（平面合成）</td>
+      <td>有限API</td>
+      <td>备选</td>
+    </tr>
+    <tr>
+      <td><strong>自研平面合成</strong></td>
+      <td>无API费</td>
+      <td>$0/张</td>
+      <td>$0/月（仅开发成本）</td>
+      <td>一般（平面贴图）</td>
+      <td>自有</td>
+      <td>MVP阶段用</td>
+    </tr>
+  </table>
+
+  <div class="highlight">
+    <p><strong>关键发现：</strong>Placeit 虽然模板库最丰富（160,000+），价格也便宜，但<strong>官方已确认不提供 API</strong>，所有操作必须在其网站手动完成，无法与我们的 POD 系统自动化集成。因此对于需要程序化生成 Mockup 的场景，Dynamic Mockups 是目前最合适的选择。</p>
+  </div>
+
+  <h4>7.5.4 Dynamic Mockups API详解（首推方案）</h4>
+
+  <table>
+    <tr>
+      <th>维度</th>
+      <th>说明</th>
+    </tr>
+    <tr>
+      <td>支持商品类型</td>
+      <td>100,000+ 模板库（T恤、手机壳、马克杯、帽子、鞋子、包包等），也支持上传自定义 Photoshop 模板</td>
+    </tr>
+    <tr>
+      <td>效果质量</td>
+      <td>3D逼真，专为 POD 行业设计，消费者转化率提升 33-40%（Shopify 官方数据）</td>
+    </tr>
+    <tr>
+      <td>响应速度</td>
+      <td>API 渲染 &lt;1秒/张；Web 端约 6秒/张（含模板选择和导出）</td>
+    </tr>
+    <tr>
+      <td>API集成</td>
+      <td>REST API，支持 JavaScript/Python/Laravel/Rails，文档完善，支持批量生成</td>
+    </tr>
+    <tr>
+      <td>免费版</td>
+      <td>50 次无水印导出（一次性）+ 每天 3 次免费 AI Mockup + 每天 1 次免费视频，无需信用卡</td>
+    </tr>
+    <tr>
+      <td>Pro 套餐</td>
+      <td>$15/月（年付）或 $19/月（月付），含 300-3,600 积分/月，1积分 = 1张标准 Mockup，约 $0.05/积分</td>
+    </tr>
+    <tr>
+      <td>企业套餐</td>
+      <td>定制价格，10,000+ 积分/月，含专属支持、白标工具和 SLA 保障</td>
+    </tr>
+    <tr>
+      <td>AI 高级功能</td>
+      <td>MockAnything AI 生成（5-15积分/张，约 $0.26-0.77）；AI 图片编辑（5积分/次）；AI 视频（40-160积分/条）</td>
+    </tr>
+    <tr>
+      <td>优势</td>
+      <td>POD 社区主流选择、API 完善、北美响应快、支持自定义 PSD 模板、积分制弹性付费</td>
+    </tr>
+    <tr>
+      <td>劣势</td>
+      <td>Free 版 API 导出带水印；AI 高级功能积分消耗快；需预先选择或上传模板</td>
+    </tr>
+  </table>
+
+  <h4>7.5.5 Mockup成本 vs 转化率ROI分析</h4>
+
+  <table>
+    <tr>
+      <th>方案</th>
+      <th>月度成本</th>
+      <th>转化率提升</th>
+      <th>月产1,000件时的收益</th>
+      <th>ROI</th>
+    </tr>
+    <tr>
+      <td>不用Mockup</td>
+      <td>$0</td>
+      <td>基准</td>
+      <td>$0</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>平面合成（自研）</td>
+      <td>$0</td>
+      <td>+10-15%</td>
+      <td>$500-750</td>
+      <td>∞</td>
+    </tr>
+    <tr>
+      <td>Dynamic Mockups</td>
+      <td>$15-19</td>
+      <td>+25-35%</td>
+      <td>$1,250-1,750</td>
+      <td>65-115倍</td>
+    </tr>
+    <tr>
+      <td>Placeit</td>
+      <td>$4-6（无API，需手动）</td>
+      <td>+20-30%</td>
+      <td>$1,000-1,500</td>
+      <td>不适合自动化集成</td>
+    </tr>
+  </table>
+
+  <div class="summary">
+    <p><strong>假设</strong>：每件商品利润$5，转化率提升10% = 额外100件销售 = $500收益</p>
+    <p><strong>结论</strong>：Dynamic Mockups API 的ROI最高，Pro 套餐 $15-19/月的成本极低，月产 300 件以上时完全值得。Placeit 虽然便宜但无 API，不适合自动化系统集成。</p>
+  </div>
+
+  <h4>7.5.6 分阶段Mockup策略建议</h4>
+
+  <table>
+    <tr>
+      <th>阶段</th>
+      <th>方案</th>
+      <th>成本</th>
+      <th>效果</th>
+      <th>目标</th>
+    </tr>
+    <tr>
+      <td><strong>MVP（0-3个月）</strong></td>
+      <td>平面合成（自研）</td>
+      <td>$0/月</td>
+      <td>基础</td>
+      <td>验证市场需求</td>
+    </tr>
+    <tr>
+      <td><strong>P1（3-6个月，月产>300件）</strong></td>
+      <td>Dynamic Mockups API</td>
+      <td>$15-19/月</td>
+      <td>逼真</td>
+      <td>提升转化率和商家满意度</td>
+    </tr>
+    <tr>
+      <td><strong>P2（6-12个月，月产>2,000件）</strong></td>
+      <td>自建3D渲染服务</td>
+      <td>$500-1,000/月</td>
+      <td>最佳</td>
+      <td>成为差异化竞争力</td>
+    </tr>
+  </table>
+
+  <h3>7.6 印刷排版与拼版方式推荐</h3>
 
   <p>原分析报告专门增加了“拼版印刷方案与软件选型”章节。其核心逻辑是：通过将多个订单的图案统一排布在同一张印刷介质上，可以显著提高耗材利用率，降低生产成本。</p>
 
