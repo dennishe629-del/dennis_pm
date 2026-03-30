@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -rn \"multi_serial_number\\\\|tote\\\\|Tote\\\\|multi serial\" d:/code/app.gaatu.com/app/Modules --include=*.php)",
+      "Bash(find 'Code Repository/app.gaatu.com' -type f -name *Split* -o -type f -name *split*)",
+      "Bash(find 'Code Repository/app.gaatu.com' -type f -name *TransactionStatus* -o -name *OrderStatus*)",
+      "Bash(grep -E \"\\\\.\\(php|php\\)$\")",
+      "Bash(grep -A 100 \"CREATE TABLE IF NOT EXISTS \\\\`GT_USPSShipping\\\\`\" \"Code Repository/app.gaatu.com/app/Modules/DB/ERP/database/migrations/2025/01/2025_01_01_01_ERP2025010101.php\")",
+      "Bash(grep -A 50 \"CREATE TABLE IF NOT EXISTS \\\\`GT_USPSShippingDetail\\\\`\" \"Code Repository/app.gaatu.com/app/Modules/DB/ERP/database/migrations/2025/01/2025_01_01_01_ERP2025010101.php\")",
+      "Bash(ls \"d:/code/Code Repository/app.gaatu.com/.env\"*)",
+      "Bash(ls \"d:/code/Code Repository/app.gaatu.com/.env.local\"*)",
+      "Bash(ls \"d:/code/Code Repository/app.gaatu.com/.env.staging\"*)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Program Files \\(x86\\)/**)",
+      "Read(//d//**)",
+      "Read(//c//**)",
+      "Bash(cmd.exe /c 'where mysql')",
+      "Bash(npm list:*)",
+      "Bash(node -e \"try{require\\(''mysql2''\\)}catch\\(e\\){console.log\\(''not found''\\)}\")",
+      "Bash(pip show:*)",
+      "Bash(python -c \"import pymysql\")",
+      "Bash(node -e \":*)",
+      "Bash(npm root:*)",
+      "Bash(NODE_PATH=\"C:\\\\nvm4w\\\\nodejs\\\\node_modules\" node -e \":*)",
+      "Bash(pip install:*)",
+      "Bash(python -c \":*)",
+      "Bash(where python:*)",
+      "Bash(powershell.exe -NoProfile -Command \"python --version\")",
+      "Bash(powershell.exe -Command \"python --version\")",
+      "Bash(powershell.exe -Command \"Get-ExecutionPolicy\")",
+      "Read(//d/code/$HOME/Documents/PowerShell/**)",
+      "Read(//d/code/$HOME/Documents/WindowsPowerShell/**)",
+      "Bash(powershell.exe -Command \"cd d:\\\\code; python read_pdf.py\")",
+      "mcp__claude_ai_firecrawl__firecrawl_scrape"
+    ]
+  }
+}
