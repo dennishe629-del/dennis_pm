@@ -1,0 +1,6 @@
+﻿<script>
+function applyFilter(){`; if($("editGroup")) $('editGroup').textContent=state.groupMapEditing?'完成编辑':'编辑产品组'; if($("groupAddBox")) $('groupAddBox').style.display=state.groupMapEditing?'block':'none'; $("groupBody").innerHTML=items.length?items.map(x=>`<tr><td>${x.sku}</td><td>${x.color}</td><td>${x.size}</td><td>${(p.sizes[x.size]||Object.values(p.sizes)[0]).front[0]} × ${(p.sizes[x.size]||Object.values(p.sizes)[0]).front[1]}cm</td><td style="text-align:right">${state.groupMapEditing?`<button class="btn txt" onclick="removeGroupSku('${x.sku}')">移除</button>`:`<button class="btn txt" onclick="toast('当前为只读预览，点击“编辑产品组”可增删 SKU')">查看</button>`}</td></tr>`).join(""):`<tr><td colspan="5"><div class="note">当前产品组暂无成员，请先添加 SKU。</div></td></tr>`; }
+</script>
+<script>
+function applyFilter(){
+  const q=$("search").value.trim().toLowerCase(), s=$("status").value, c=$("color").value;

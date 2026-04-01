@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ShipSage WMS Mobile Demo</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--p:#2E79F7;--ps:rgba(46,121,247,.08);--ok:#1FA971;--oks:rgba(31,169,113,.1);--warn:#F5A623;--warns:rgba(245,166,35,.1);--bad:#E24A4A;--bads:rgba(226,74,74,.1);--bg:#F3F6FA;--panel:#fff;--bd:#DCE2EA;--text:#2F3A4A;--sub:#6E7B8C;--r:12px;--shadow:0 2px 12px rgba(0,0,0,.07)}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue',sans-serif;font-size:14px;line-height:1.5;max-width:430px;margin:0 auto;position:relative;overflow-x:hidden}
+@keyframes fadeIn{from{opacity:0;transform:translateX(-50%) translateY(8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+.app{display:flex;flex-direction:column;height:100vh}
+.screen{flex:1;overflow-y:auto;overflow-x:hidden;padding-bottom:70px;-webkit-overflow-scrolling:touch}
+.sticky-header{position:sticky;top:0;z-index:50;background:var(--panel);border-bottom:1px solid var(--bd);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.header-title{font-size:16px;font-weight:700;color:var(--text)}
+.header-sub{font-size:12px;color:var(--sub);margin-top:1px}
+.header-badge{background:var(--ps);color:var(--p);font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px}
+.stats-row{display:flex;gap:8px;padding:14px 16px 0}
+.stat-card{flex:1;background:var(--panel);border-radius:var(--r);padding:10px 8px;text-align:center;box-shadow:var(--shadow)}
+.stat-val{font-size:17px;font-weight:800;color:var(--p)}
+.stat-lbl{font-size:11px;color:var(--sub);margin-top:2px}
+.sectionLabel{font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--p);text-transform:uppercase;padding:6px 12px;margin:16px 0 10px;border-left:3px solid var(--p);background:var(--ps);border-radius:0 8px 8px 0}
+.card{background:var(--panel);border-radius:var(--r);box-shadow:var(--shadow);padding:14px 16px;margin:0 16px}
+.card+.card{margin-top:10px}
+.scan-row{display:flex;gap:8px;align-items:center}
+.scan-input{flex:1;height:48px;border:1.5px solid var(--bd);border-radius:10px;padding:0 14px;font-size:15px;color:var(--text);background:#fff;outline:none;transition:border-color .2s}
+.scan-input:focus{border-color:var(--p)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;border-radius:10px;border:none;cursor:pointer;font-size:14px;font-weight:600;transition:opacity .15s,transform .1s;user-select:none}
+.btn:active{opacity:.82;transform:scale(.97)}
+.btn-primary{background:var(--p);color:#fff;padding:0 20px}
+.btn-secondary{background:var(--ps);color:var(--p);padding:0 16px}
+.btn-danger{background:var(--bad);color:#fff;padding:0 20px}
+.btn-ghost{background:transparent;color:var(--sub);padding:0 12px;border:1.5px solid var(--bd)}
+.btn-full{width:100%}
+.btn-sm{min-height:36px;font-size:13px;padding:0 14px;border-radius:8px}
+.sim-btn{display:block;width:100%;margin-top:10px;height:40px;border-radius:8px;border:1.5px dashed var(--p);background:transparent;color:var(--p);font-size:13px;font-weight:600;cursor:pointer;transition:background .15s}
+.sim-btn:active{background:var(--ps)}
+.result-card{animation:slideUp .3s}
+.kv-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.kv-row{display:flex;justify-content:space-between;align-items:center}
+.kv-key{font-size:12px;color:var(--sub)}
+.kv-val{font-size:13px;font-weight:600;color:var(--text)}
+.bin-hero{background:linear-gradient(135deg,var(--p) 0%,#1a5fd4 100%);border-radius:12px;padding:16px;text-align:center;margin-bottom:14px}
+.bin-hero-label{font-size:12px;color:rgba(255,255,255,.8);margin-bottom:4px}
+.bin-hero-id{font-size:36px;font-weight:900;color:#fff;letter-spacing:.03em;animation:pulse 2s infinite}
+.bin-hero-sub{font-size:12px;color:rgba(255,255,255,.75);margin-top:4px}
+.shirt-mockup{margin:0 auto 14px;width:120px;height:140px;position:relative;display:flex;align-items:center;justify-content:center}
+.shirt-body{width:100%;height:100%;background:#e8e0d8;border-radius:8px 8px 12px 12px;position:relative;display:flex;align-items:center;justify-content:center}
+.shirt-body.dark{background:#2a2a2a}
+.shirt-body.grey{background:#c8c8c8}
+.shirt-body.red{background:#c0392b}
+.shirt-body.navy{background:#1a2a5e}
+.shirt-body.green{background:#1e6b3c}
+.shirt-body.pink{background:#e07099}
+.shirt-design{width:60px;height:60px;border:2px dashed rgba(255,255,255,.6);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.shirt-body:not(.dark) .shirt-design{border-color:rgba(0,0,0,.25)}
+.shirt-design-text{font-size:10px;color:rgba(255,255,255,.7);font-weight:600}
+.shirt-body:not(.dark) .shirt-design-text{color:rgba(0,0,0,.35)}
+.bin-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px}
+.bin-card{background:var(--panel);border-radius:var(--r);box-shadow:var(--shadow);padding:12px;border:1.5px solid var(--bd);transition:border-color .2s,background .2s}
+.bin-card.done{border-color:var(--ok);background:var(--oks)}
+.bin-card.active{border-color:var(--p);background:var(--ps);animation:pulse .6s}
+.bin-card-id{font-size:16px;font-weight:800;color:var(--text);margin-bottom:4px}
+.bin-card.done .bin-card-id{color:var(--ok)}
+.bin-card-order{font-size:11px;color:var(--sub);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bin-status{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px}
+.bin-status.done{background:var(--oks);color:var(--ok)}
+.bin-status.pending{background:#f0f0f0;color:var(--sub)}
+.check-icon{display:inline-block;width:14px;height:14px;line-height:14px;text-align:center;background:var(--ok);border-radius:50%;color:#fff;font-size:9px;font-weight:900}
+.task-list{display:flex;flex-direction:column;gap:10px;padding:0 16px}
+.task-card{background:var(--panel);border-radius:var(--r);box-shadow:var(--shadow);padding:14px;border:1.5px solid var(--bd)}
+.task-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.task-id{font-size:15px;font-weight:800;color:var(--text)}
+.priority-tag{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
+.priority-tag.p0{background:var(--warns);color:var(--warn)}
+.priority-tag.p1{background:#f0f0f0;color:var(--sub)}
+.task-meta{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.task-meta-row{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--sub)}
+.task-meta-label{color:var(--sub)}
+.task-meta-val{color:var(--text);font-weight:600}
+.face-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.face-chip{font-size:12px;padding:4px 10px;border-radius:20px;background:var(--ps);color:var(--p);font-weight:600}
+.detail-back{display:inline-flex;align-items:center;gap:4px;font-size:14px;font-weight:600;color:var(--p);background:none;border:none;cursor:pointer;padding:4px 0;min-height:44px}
+.task-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:0}
+.info-cell{background:var(--bg);border-radius:8px;padding:10px 12px}
+.info-cell-label{font-size:11px;color:var(--sub);margin-bottom:2px}
+.info-cell-val{font-size:13px;font-weight:700;color:var(--text)}
+.face-progress{display:flex;flex-direction:column;gap:8px;margin:0 16px}
+.face-row{background:var(--panel);border-radius:10px;padding:12px 14px;border:1.5px solid var(--bd);transition:border-color .2s,background .2s}
+.face-row.current{border-color:var(--p);background:var(--ps)}
+.face-row.done{border-color:var(--ok);background:var(--oks)}
+.face-row-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.face-name{font-size:14px;font-weight:700;color:var(--text)}
+.face-row.current .face-name{color:var(--p)}
+.face-row.done .face-name{color:var(--ok)}
+.face-params{font-size:11px;color:var(--sub);display:flex;gap:8px;flex-wrap:wrap}
+.face-param{background:#f0f0f0;border-radius:4px;padding:2px 6px}
+.status-tag{font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px}
+.status-tag.ready{background:#f0f0f0;color:var(--sub)}
+.status-tag.current{background:var(--ps);color:var(--p)}
+.status-tag.done{background:var(--oks);color:var(--ok)}
+.status-tag.fail{background:var(--bads);color:var(--bad)}
+.scan-op-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px}
+.scan-op-btn{min-height:52px;border-radius:10px;border:1.5px solid var(--bd);background:var(--panel);color:var(--sub);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;user-select:none}
+.scan-op-btn.scanned{background:var(--oks);border-color:var(--ok);color:var(--ok)}
+.scan-op-btn:active{transform:scale(.97)}
+.scan-op-icon{font-size:18px}
+.qc-list{display:flex;flex-direction:column;gap:0;margin:0 16px;background:var(--panel);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.qc-item{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .15s;min-height:48px}
+.qc-item:last-child{border-bottom:none}
+.qc-item:active{background:var(--bg)}
+.qc-checkbox{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--bd);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.qc-checkbox.checked{background:var(--ok);border-color:var(--ok)}
+.qc-check-mark{width:10px;height:6px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translateY(-1px);display:none}
+.qc-checkbox.checked .qc-check-mark{display:block}
+.qc-label{font-size:14px;color:var(--text)}
+.qc-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px 16px 0}
+.tab-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:var(--panel);border-top:1px solid var(--bd);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:100;box-shadow:0 -2px 12px rgba(0,0,0,.06)}
+.tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 0;cursor:pointer;transition:color .15s;min-height:54px;border:none;background:none;user-select:none}
+.tab-icon{font-size:20px;margin-bottom:2px;transition:transform .15s}
+.tab-label{font-size:11px;font-weight:600;color:var(--sub);transition:color .15s}
+.tab-item.active .tab-label{color:var(--p)}
+.tab-item.active .tab-icon{transform:scale(1.1)}
+.tab-active-bar{position:absolute;bottom:0;height:2px;background:var(--p);border-radius:2px 2px 0 0;transition:left .25s,width .25s}
+.tab-bar-inner{position:relative;display:flex;flex:1}
+.section-spacer{height:16px}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<script>
+const pickRun = { id: 'PR-240328-001', cart: 'Cart-A' };
+const bins = [
+  { id: 'BIN-A1', order: 'SO-20260328-018', sku: 'CT-WHT-M', size: 'M', faces: [{key:'front',barcode:'FILM-240328-018-F',status:'pre_picked'},{key:'back',barcode:'FILM-240328-018-B',status:'pre_picked'}], done: true },
+  { id: 'BIN-A2', order: 'SO-20260328-019', sku: 'CT-GRY-M', size: 'M', faces: [{key:'front',barcode:'FILM-240328-019-F',status:'film_ready'},{key:'back',barcode:'FILM-240328-019-B',status:'film_ready'}], done: false },
+  { id: 'BIN-A3', order: 'SO-20260328-020', sku: 'CT-BLK-L', size: 'L', faces: [{key:'front',barcode:'FILM-240328-020-F',status:'pre_picked'}], done: true },
+  { id: 'BIN-A4', order: 'SO-20260328-021', sku: 'CT-WHT-XL', size: 'XL', faces: [{key:'front',barcode:'FILM-240328-021-F',status:'film_ready'},{key:'back',barcode:'FILM-240328-021-B',status:'film_ready'}], done: false },
+  { id: 'BIN-B1', order: 'SO-20260328-022', sku: 'CT-RED-S', size: 'S', faces: [{key:'front',barcode:'FILM-240328-022-F',status:'film_ready'}], done: false },
+  { id: 'BIN-B2', order: 'SO-20260328-023', sku: 'CT-NVY-L', size: 'L', faces: [{key:'front',barcode:'FILM-240328-023-F',status:'pre_picked'},{key:'back',barcode:'FILM-240328-023-B',status:'pre_picked'}], done: true },
+  { id: 'BIN-B3', order: 'SO-20260328-024', sku: 'CT-GRN-M', size: 'M', faces: [{key:'front',barcode:'FILM-240328-024-F',status:'film_ready'}], done: false },
+  { id: 'BIN-B4', order: 'SO-20260328-025', sku: 'CT-PNK-S', size: 'S', faces: [{key:'front',barcode:'FILM-240328-025-F',status:'film_ready'},{key:'back',barcode:'FILM-240328-025-B',status:'film_ready'}], done: false }
+];
+const heatTasks = [
+  { id: 'HT-001', order: 'SO-20260328-018', sku: 'CT-WHT-M', bin: 'BIN-A1', press: 'HP-01', priority: 'P0', scheme: 'Classic Tee - A 方案',
+    faces: [{key:'front',label:'正面',barcode:'FILM-240328-018-F',size:'25.4×33.0cm',heat:'165°C / 15s / 中压',status:'ready'},{key:'back',label:'背面',barcode:'FILM-240328-018-B',size:'25.4×33.0cm',heat:'165°C / 15s / 中压',status:'ready'}] },
+  { id: 'HT-002', order: 'SO-20260328-020', sku: 'CT-BLK-L', bin: 'BIN-A3', press: 'HP-01', priority: 'P1', scheme: 'Brand Slogan - B 方案',
+    faces: [{key:'front',label:'正面',barcode:'FILM-240328-020-F',size:'27.0×35.0cm',heat:'165°C / 15s / 中压',status:'ready'}] },
+  { id: 'HT-003', order: 'SO-20260328-023', sku: 'CT-NVY-L', bin: 'BIN-B2', press: 'HP-02', priority: 'P0', scheme: 'Summer Logo - C 方案',
+    faces: [{key:'front',label:'正面',barcode:'FILM-240328-023-F',size:'27.0×35.0cm',heat:'170°C / 12s / 中压',status:'ready'},{key:'back',label:'背面',barcode:'FILM-240328-023-B',size:'27.0×35.0cm',heat:'170°C / 12s / 中压',status:'ready'}] },
+  { id: 'HT-004', order: 'SO-20260328-022', sku: 'CT-RED-S', bin: 'BIN-B1', press: 'HP-02', priority: 'P1', scheme: 'Holiday Edition - D 方案',
+    faces: [{key:'front',label:'正面',barcode:'FILM-240328-022-F',size:'23.0×30.0cm',heat:'160°C / 15s / 中压',status:'ready'}] }
+];
+
+const state = {
+  activeTab: 0,
+  scanInput: '',
+  scanResult: null,
+  justConfirmed: null,
+  binsState: bins.map(b => ({ ...b, done: b.done })),
+  htView: 'list',
+  htActiveTask: null,
+  htTasks: heatTasks.map(t => ({
+    ...t,
+    faces: t.faces.map(f => ({ ...f })),
+    currentFaceIdx: 0,
+    orderScanned: false,
+    filmScanned: false,
+    qc: [false, false, false, false, false, false]
+  })),
+  qcLabels: ['图案位置', '颜色饱和度', '图案完整', 'PET 膜揭除', '衣物状态', '条码匹配']
+};
+
+function toast(msg) {
+  const t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);padding:10px 20px;border-radius:20px;background:rgba(0,0,0,.78);color:#fff;font-size:14px;z-index:999;animation:fadeIn .3s';
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2000);
+}
+
+function skuColor(sku) {
+  if (!sku) return '';
+  const u = sku.toUpperCase();
+  if (u.includes('WHT')) return '';
+  if (u.includes('BLK')) return 'dark';
+  if (u.includes('GRY')) return 'grey';
+  if (u.includes('RED')) return 'red';
+  if (u.includes('NVY')) return 'navy';
+  if (u.includes('GRN')) return 'green';
+  if (u.includes('PNK')) return 'pink';
+  return '';
+}
+
+function shirtMockup(sku) {
+  const cls = skuColor(sku);
+  return `<div class="shirt-mockup"><div class="shirt-body ${cls}"><div class="shirt-design"><span class="shirt-design-text">DESIGN</span></div></div></div>`;
+}
+
+function renderApp() {
+  document.getElementById('app').innerHTML = `
+    <div class="screen" id="screen">${state.activeTab === 0 ? renderPickTab() : renderHeatTab()}</div>
+    <div class="tab-bar">
+      <div class="tab-bar-inner">
+        <button class="tab-item ${state.activeTab===0?'active':''}" onclick="switchTab(0)">
+          <span class="tab-icon">${state.activeTab===0?'&#9632;':'&#9633;'}</span>
+          <span class="tab-label">膜预拣</span>
+        </button>
+        <button class="tab-item ${state.activeTab===1?'active':''}" onclick="switchTab(1)">
+          <span class="tab-icon">${state.activeTab===1?'&#9632;':'&#9633;'}</span>
+          <span class="tab-label">热压作业</span>
+        </button>
+      </div>
+    </div>`;
+}
+
+function renderPickTab() {
+  const doneCount = state.binsState.filter(b => b.done).length;
+  const total = state.binsState.length;
+  const totalFaces = state.binsState.reduce((s, b) => s + b.faces.length, 0);
+  const scannedFaces = state.binsState.filter(b => b.done).reduce((s, b) => s + b.faces.length, 0);
+  const pct = Math.round(doneCount / total * 100);
+
+  return `
+    <div class="sticky-header">
+      <div>
+        <div class="header-title">ShipSage WMS</div>
+        <div class="header-sub">${pickRun.cart}</div>
+      </div>
+      <div class="header-badge">${pickRun.id}</div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-val">${doneCount}/${total}</div><div class="stat-lbl">已完成</div></div>
+      <div class="stat-card"><div class="stat-val">${totalFaces - scannedFaces}</div><div class="stat-lbl">待扫码</div></div>
+      <div class="stat-card"><div class="stat-val">${pct}%</div><div class="stat-lbl">进度</div></div>
+    </div>
+    <div class="sectionLabel" style="margin-top:18px">扫码操作</div>
+    <div class="card">
+      <div class="scan-row">
+        <input class="scan-input" id="scanInput" type="text" placeholder="扫描膜条码" value="${state.scanInput}" oninput="state.scanInput=this.value" />
+        <button class="btn btn-primary" onclick="doScan()">扫码</button>
+      </div>
+      <button class="sim-btn" onclick="simScan()">模拟扫码</button>
+    </div>
+    ${state.scanResult ? renderScanResult() : ''}
+    <div class="sectionLabel">Bin 进度</div>
+    <div class="bin-grid">
+      ${state.binsState.map(b => `
+        <div class="bin-card ${b.done ? 'done' : ''} ${state.justConfirmed === b.id ? 'active' : ''}">
+          <div class="bin-card-id">${b.id}</div>
+          <div class="bin-card-order">${b.order}</div>
+          <div class="bin-status ${b.done ? 'done' : 'pending'}">${b.done ? '<span class="check-icon">&#10003;</span> 膜齐' : '待补'}</div>
+        </div>`).join('')}
+    </div>
+    <div class="section-spacer"></div>`;
+}
+
+function renderScanResult() {
+  const r = state.scanResult;
+  const faceLabelMap = { front: '正面', back: '背面' };
+  return `
+    <div class="sectionLabel">扫码结果</div>
+    <div class="card result-card">
+      <div class="kv-list">
+        <div class="kv-row"><span class="kv-key">订单号</span><span class="kv-val">${r.order}</span></div>
+        <div class="kv-row"><span class="kv-key">SKU</span><span class="kv-val">${r.sku}</span></div>
+        <div class="kv-row"><span class="kv-key">印刷面</span><span class="kv-val">${faceLabelMap[r.face] || r.face}</span></div>
+        <div class="kv-row"><span class="kv-key">膜条码</span><span class="kv-val" style="font-size:11px;color:var(--sub)">${r.barcode}</span></div>
+      </div>
+      <div class="bin-hero">
+        <div class="bin-hero-label">请放入</div>
+        <div class="bin-hero-id">${r.binId}</div>
+        <div class="bin-hero-sub">${r.order} · ${r.size}</div>
+      </div>
+      ${shirtMockup(r.sku)}
+      <button class="btn btn-primary btn-full" onclick="confirmBin('${r.binId}')">确认放入</button>
+    </div>`;
+}
+
+function doScan() {
+  const code = state.scanInput.trim();
+  if (!code) { toast('请输入膜条码'); return; }
+  processScan(code);
+}
+
+function simScan() {
+  state.scanInput = 'FILM-240328-022-F';
+  processScan('FILM-240328-022-F');
+  const el = document.getElementById('scanInput');
+  if (el) el.value = state.scanInput;
+}
+
+function processScan(code) {
+  let found = null;
+  let foundFaceKey = null;
+  for (const b of state.binsState) {
+    for (const f of b.faces) {
+      if (f.barcode === code) {
+        found = b;
+        foundFaceKey = f.key;
+        break;
+      }
+    }
+    if (found) break;
+  }
+  if (!found) { toast('未找到该条码对应的 Bin'); return; }
+  state.scanResult = { binId: found.id, order: found.order, sku: found.sku, size: found.size, face: foundFaceKey, barcode: code };
+  state.justConfirmed = null;
+  renderApp();
+  const screen = document.getElementById('screen');
+  if (screen) setTimeout(() => { screen.scrollTo({ top: 300, behavior: 'smooth' }); }, 50);
+}
+
+function confirmBin(binId) {
+  const bin = state.binsState.find(b => b.id === binId);
+  if (bin) bin.done = true;
+  state.justConfirmed = binId;
+  state.scanResult = null;
+  state.scanInput = '';
+  toast('已确认放入 ' + binId);
+  renderApp();
+  setTimeout(() => { state.justConfirmed = null; renderApp(); }, 1200);
+}
+
+function renderHeatTab() {
+  if (state.htView === 'detail' && state.htActiveTask !== null) {
+    return renderHeatDetail();
+  }
+  return renderHeatList();
+}
+
+function renderHeatList() {
+  return `
+    <div class="sticky-header">
+      <div>
+        <div class="header-title">ShipSage WMS</div>
+        <div class="header-sub">热压作业</div>
+      </div>
+      <div class="header-badge">${state.htTasks.length} 任务</div>
+    </div>
+    <div class="sectionLabel" style="margin-top:14px">待处理任务</div>
+    <div class="task-list">
+      ${state.htTasks.map((t, idx) => {
+        const allDone = t.faces.every(f => f.status === 'done');
+        const faceLabels = t.faces.map(f => f.label).join(' / ');
+        return `
+          <div class="task-card">
+            <div class="task-card-top">
+              <div class="task-id">${t.id}</div>
+              <span class="priority-tag ${t.priority.toLowerCase()}">${t.priority}</span>
+            </div>
+            <div class="task-meta">
+              <div class="task-meta-row"><span class="task-meta-label">订单：</span><span class="task-meta-val">${t.order}</span></div>
+              <div class="task-meta-row"><span class="task-meta-label">SKU：</span><span class="task-meta-val">${t.sku}</span></div>
+              <div class="task-meta-row"><span class="task-meta-label">方案：</span><span class="task-meta-val">${t.scheme}</span></div>
+            </div>
+            <div class="face-chips">
+              ${t.faces.map(f => `<span class="face-chip">${f.label}</span>`).join('')}
+            </div>
+            <button class="btn ${allDone ? 'btn-ghost' : 'btn-primary'} btn-full btn-sm" ${allDone ? 'disabled' : ''} onclick="enterTask(${idx})">${allDone ? '已完成' : '进入作业'}</button>
+          </div>`;
+      }).join('')}
+    </div>
+    <div class="section-spacer"></div>`;
+}
+
+function enterTask(idx) {
+  state.htActiveTask = idx;
+  state.htView = 'detail';
+  const t = state.htTasks[idx];
+  t.orderScanned = false;
+  t.filmScanned = false;
+  t.qc = [false, false, false, false, false, false];
+  const ci = t.faces.findIndex(f => f.status !== 'done');
+  t.currentFaceIdx = ci >= 0 ? ci : 0;
+  renderApp();
+  document.getElementById('screen').scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderHeatDetail() {
+  const t = state.htTasks[state.htActiveTask];
+  const cf = t.faces[t.currentFaceIdx];
+  const bothScanned = t.orderScanned && t.filmScanned;
+  const allQcDone = t.qc.every(Boolean);
+
+  return `
+    <div class="sticky-header">
+      <div>
+        <div class="header-title">ShipSage WMS</div>
+        <div class="header-sub">热压作业 · ${t.id}</div>
+      </div>
+      <span class="priority-tag ${t.priority.toLowerCase()}" style="font-size:12px">${t.priority}</span>
+    </div>
+    <div style="padding:10px 16px 0">
+      <button class="detail-back" onclick="backToList()">&#8592; 返回列表</button>
+    </div>
+    <div class="sectionLabel">任务信息</div>
+    <div class="card" style="padding:14px">
+      <div class="task-info-grid">
+        <div class="info-cell"><div class="info-cell-label">任务 ID</div><div class="info-cell-val">${t.id}</div></div>
+        <div class="info-cell"><div class="info-cell-label">订单</div><div class="info-cell-val" style="font-size:11px">${t.order}</div></div>
+        <div class="info-cell"><div class="info-cell-label">SKU</div><div class="info-cell-val">${t.sku}</div></div>
+        <div class="info-cell"><div class="info-cell-label">Bin</div><div class="info-cell-val">${t.bin}</div></div>
+        <div class="info-cell"><div class="info-cell-label">热压机</div><div class="info-cell-val">${t.press}</div></div>
+        <div class="info-cell"><div class="info-cell-label">方案</div><div class="info-cell-val" style="font-size:11px">${t.scheme}</div></div>
+      </div>
+    </div>
+    <div style="margin-top:14px">${shirtMockup(t.sku)}</div>
+    <div class="sectionLabel">面热压进度</div>
+    <div class="face-progress">
+      ${t.faces.map((f, fi) => {
+        const isCurrent = fi === t.currentFaceIdx && f.status !== 'done';
+        const isDone = f.status === 'done';
+        let tagClass = isDone ? 'done' : (isCurrent ? 'current' : 'ready');
+        let tagText = isDone ? '已完成' : (isCurrent ? '进行中' : '待处理');
+        return `
+          <div class="face-row ${isDone ? 'done' : (isCurrent ? 'current' : '')}">
+            <div class="face-row-top">
+              <span class="face-name">${f.label}</span>
+              <span class="status-tag ${tagClass}">${tagText}</span>
+            </div>
+            <div class="face-params">
+              <span class="face-param">${f.barcode}</span>
+              <span class="face-param">${f.size}</span>
+              <span class="face-param">${f.heat}</span>
+            </div>
+          </div>`;
+      }).join('')}
+    </div>
+    <div class="sectionLabel">热压操作</div>
+    <div class="scan-op-row">
+      <button class="scan-op-btn ${t.orderScanned ? 'scanned' : ''}" onclick="toggleOrderScan()">
+        <span class="scan-op-icon">&#128248;</span>
+        <span>${t.orderScanned ? '订单已扫' : '扫订单码'}</span>
+      </button>
+      <button class="scan-op-btn ${t.filmScanned ? 'scanned' : ''}" onclick="toggleFilmScan()">
+        <span class="scan-op-icon">&#127974;</span>
+        <span>${t.filmScanned ? '膜已扫' : '扫膜条码'}</span>
+      </button>
+    </div>
+    <div style="padding:10px 16px 0">
+      <button class="btn btn-primary btn-full" style="${bothScanned ? '' : 'opacity:.45;pointer-events:none'}" onclick="completeFace()">完成当前面</button>
+    </div>
+    <div class="sectionLabel">质检操作</div>
+    <div class="qc-list">
+      ${state.qcLabels.map((lbl, qi) => `
+        <div class="qc-item" onclick="toggleQC(${qi})">
+          <div class="qc-checkbox ${t.qc[qi] ? 'checked' : ''}"><div class="qc-check-mark"></div></div>
+          <span class="qc-label">${lbl}</span>
+        </div>`).join('')}
+    </div>
+    <div class="qc-actions">
+      <button class="btn btn-danger btn-full" onclick="qcFail()">Fail（重印）</button>
+      <button class="btn btn-primary btn-full" style="${allQcDone ? '' : 'opacity:.45;pointer-events:none'}" onclick="qcPass()">Pass</button>
+    </div>
+    <div class="section-spacer"></div>`;
+}
+
+function backToList() {
+  state.htView = 'list';
+  state.htActiveTask = null;
+  renderApp();
+}
+
+function toggleOrderScan() {
+  const t = state.htTasks[state.htActiveTask];
+  t.orderScanned = !t.orderScanned;
+  if (t.orderScanned) toast('订单码扫描成功');
+  renderHeatDetailInPlace();
+}
+
+function toggleFilmScan() {
+  const t = state.htTasks[state.htActiveTask];
+  t.filmScanned = !t.filmScanned;
+  if (t.filmScanned) toast('膜条码扫描成功');
+  renderHeatDetailInPlace();
+}
+
+function completeFace() {
+  const t = state.htTasks[state.htActiveTask];
+  const cf = t.faces[t.currentFaceIdx];
+  cf.status = 'done';
+  t.orderScanned = false;
+  t.filmScanned = false;
+  const next = t.faces.findIndex(f => f.status !== 'done');
+  if (next >= 0) {
+    t.currentFaceIdx = next;
+    toast('面已完成，继续下一面');
+  } else {
+    toast('所有面已完成');
+  }
+  renderHeatDetailInPlace();
+}
+
+function toggleQC(qi) {
+  const t = state.htTasks[state.htActiveTask];
+  t.qc[qi] = !t.qc[qi];
+  renderHeatDetailInPlace();
+}
+
+function qcFail() {
+  toast('已标记重印，返回列表');
+  setTimeout(() => backToList(), 600);
+}
+
+function qcPass() {
+  const t = state.htTasks[state.htActiveTask];
+  t.faces.forEach(f => f.status = 'done');
+  toast('质检通过，任务完成');
+  setTimeout(() => backToList(), 600);
+}
+
+function renderHeatDetailInPlace() {
+  const screen = document.getElementById('screen');
+  if (!screen) return;
+  const scrollTop = screen.scrollTop;
+  screen.innerHTML = renderHeatDetail();
+  screen.scrollTop = scrollTop;
+}
+
+function switchTab(idx) {
+  if (state.activeTab === idx) return;
+  state.activeTab = idx;
+  state.scanResult = null;
+  state.scanInput = '';
+  state.htView = 'list';
+  state.htActiveTask = null;
+  renderApp();
+}
+
+renderApp();
+</script>
+</body>
+</html>

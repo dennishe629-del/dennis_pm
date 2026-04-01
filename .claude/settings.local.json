@@ -3,7 +3,19 @@
     "allow": [
       "WebFetch(domain:riin.com)",
       "WebFetch(domain:www.jijiaerp.com)",
-      "WebFetch(domain:pod.riin.com)"
+      "WebFetch(domain:pod.riin.com)",
+      "Bash(ls \"d:/code/Dennis_PM/prds/pod-design-studio/\"5-PRD*)",
+      "Bash(FILE=\"d:/code/Dennis_PM/prds/pod-design-studio/5-PRD-20260324-v5-ShipSage-卖家设计器.md\")",
+      "Bash(find C:/Users/h1978/AppData/Roaming/Code/User/History -name entries.json -exec grep -l \"卖家设计器\\\\|v5-ShipSage\" {})",
+      "Bash(2)",
+      "Bash(for f:*)",
+      "Bash(do cat:*)",
+      "Bash(done)",
+      "Bash(do if:*)",
+      "Bash(then echo:*)",
+      "Bash(fi)",
+      "Bash(for dir:*)",
+      "Read(//d/code/**)"
     ]
   }
 }
