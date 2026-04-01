@@ -21,7 +21,7 @@ alwaysApply: true
 | 收到新需求 | `.agent/workflows/1-analyze-requirement.md` |
 | 设计方案/数据建模 | `.agent/workflows/2-design-solution.md` |
 | 生成 PRD / Demo | `.agent/workflows/3-generate-specs.md` |
-| 前端 Demo / UI 设计 | `design/frontend-standards.md` + `design/01-brief.md` |
+| 前端 Demo / UI 设计 | `design/frontend-standards.md` |
 | 自检/验收 | `.agent/workflows/4-verify-iterate.md` |
 | 涉及具体业务模块 | 参考 `context/docs-index.md` 按需加载对应文档 |
 | 需要工具（Zone Chart/费用导入等）| 对应 `tools/*/SKILL.md` |
