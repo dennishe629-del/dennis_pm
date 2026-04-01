@@ -183,6 +183,13 @@ flowchart LR
 
 ```mermaid
 flowchart TD
+    subgraph Phase0 ["阶段零：店铺授权与基础配置"]
+        S1["<b>卖家注册/登录 ShipSage OMS</b><br>开通 POD 功能"]
+        S2["<b>店铺授权</b><br>授权 TEMU/TK/Amazon/Shopify 店铺<br>建立订单拉取通道"]
+        S3["<b>Admin 配置试点仓库</b><br>标记 pod_enabled=1<br>配置 DTF 设备信息"]
+        S1 --> S2 --> S3
+    end
+
     subgraph Phase1 ["阶段一：底板 + 底衫准备"]
         A0["<b>Admin 配置试点仓库</b><br>标记 pod_enabled=1<br>配置 DTF 设备信息<br><i>角色: ShipSage Admin</i>"]
         A1["<b>准备底衫 SKU</b><br>卖家自有底衫 / ShipSage 公共底衫<br>（company_id in 卖家自己, 2）<br>创建「POD底衫」分类商品<br><i>角色: Seller</i>"]
@@ -243,6 +250,7 @@ flowchart TD
     end
 
     A2 --> B1
+    S3 --> A1
     B3 --> C0
     C4 --> D1
     C6 -.-> D3
@@ -254,6 +262,13 @@ flowchart TD
 ### 2.2 系统截图对照
 
 > 按流程阶段，在下方粘贴系统实际截图。
+
+#### 阶段零：店铺授权
+
+> **[截图位置]**
+>
+> - [ ] OMS 店铺授权页面
+> - [ ] TEMU/TK/Amazon 授权配置
 
 #### 阶段一：底板 + 底衫准备
 
